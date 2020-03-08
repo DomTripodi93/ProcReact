@@ -1,0 +1,17 @@
+using System.Collections.Generic;
+
+namespace backend.Models
+{
+    public class Objective
+    {
+        public User User { get; set; }
+        public int userId { get; set; }
+        public Department Department { get; set; }
+        public string deptName { get; set; }
+        public string ObjectiveName { get; set; }
+        public string Goal { get; set; }
+        public int Time { get; set; }
+        public ICollection<Step> Step { get; set; }
+        
+    }
+}
