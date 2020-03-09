@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './shared/header/header';
 import Home from './containers/home/home';
+import Register from './containers/registration/registration'
 
 const App = () => {
   return (

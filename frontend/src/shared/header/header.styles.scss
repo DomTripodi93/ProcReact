@@ -12,7 +12,7 @@
     }
 
     .route {
-      padding: 10px 15px;
+      padding: 10px 10px;
     }
 
     .arrow:after{
@@ -20,7 +20,7 @@
     }
 
     .routes{
-        width: 66%;
+        width: 59%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -28,11 +28,12 @@
     }
 
     .edge{
-        width: 10%;
+        width: 17%;
         height: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-end;
+        padding: 0px 10px;
     }
 
 }
