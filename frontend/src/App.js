@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
+import Header from './shared/header/header';
+
+const App = () => {
   return (
-    <div className="App">
-    working
+    <div>
+      <Header />
     </div>
   );
-}
+};
 
 export default App;
