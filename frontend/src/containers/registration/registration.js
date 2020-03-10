@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import FormInput from '../../shared/form-input/form-input.component';
+
 
 const Registration = () => {
     const [userCredentials, setUserCredentials] = useState({
@@ -30,37 +32,43 @@ const Registration = () => {
     return (
         <div className="border">
             <form onSubmit={handleSubmit}>
-                <label>Email</label>
-                <input 
+                <FormInput
+                    label='Email'
                     type='email' 
                     name='email'
                     value={email}
                     onChange={handleChange}
-                    required/>
-                <label>Name</label>
-                <input 
+                    required
+                    />
+                <FormInput
+                    label='Name'
                     type='name' 
                     name='name'
                     value={name}
                     onChange={handleChange}
-                    required/>
-                <label>Password</label>
-                <input 
+                    required
+                    />
+                <FormInput
+                    label='Password'
                     type='password' 
                     name='password'
                     value={password}
                     onChange={handleChange}
-                    required/>
-                <label>Confirm Password</label>
-                <input 
+                    required
+                    />
+                <FormInput
+                    label='Confirm Password'
                     type='password' 
                     name='confirmPassword'
                     value={confirmPassword}
                     onChange={handleChange}
-                    required/>
-                <button 
-                    type="submit"
-                    >Submit</button>
+                    required
+                    />
+                <div className="input-width">
+                    <button 
+                        type="submit"
+                        >Submit</button>
+                </div>
             </form>
         </div>
     )
