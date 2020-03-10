@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import FormInput from '../../shared/form-input/form-input.component';
+import FormInput from '../../shared/form-input/form-input.component.jsx';
+import CustomButton from '../../shared/button/custom-button.component.jsx';
 
 
 const Registration = () => {
@@ -30,7 +31,7 @@ const Registration = () => {
     };
 
     return (
-        <div className="border">
+        <div>
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Email'
@@ -65,9 +66,11 @@ const Registration = () => {
                     required
                     />
                 <div className="input-width">
-                    <button 
+                    <CustomButton
+                        style="blue round"
                         type="submit"
-                        >Submit</button>
+                        label="submit"
+                        />
                 </div>
             </form>
         </div>

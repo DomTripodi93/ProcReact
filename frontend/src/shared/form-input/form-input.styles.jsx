@@ -21,7 +21,7 @@ export const FormInputContainer = styled.input`
   background: none;
   background-color: white;
   color: ${subColor};
-  font-size: 18px;
+  font-size: 16x;
   padding: 10px 10px 10px 5px;
   display: block;
   width: 100%;
@@ -43,7 +43,7 @@ FormInputContainer.displayName = 'FormInputContainer';
 
 export const FormInputLabel = styled.label`
   color: ${subColor};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
