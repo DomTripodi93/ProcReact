@@ -5,8 +5,8 @@ import {
     ButtonText
 } from './custom-button.styles';
 
-const CustomButton = ({ label, style }) => (
-  <CustomizedButton className={style}>
+const CustomButton = ({ label, buttonStyle }) => (
+  <CustomizedButton className={buttonStyle}>
     <ButtonText>{label}</ButtonText>
   </CustomizedButton>
 );

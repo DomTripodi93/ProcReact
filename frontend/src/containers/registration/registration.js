@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import FormInput from '../../shared/form-input/form-input.component.jsx';
-import CustomButton from '../../shared/button/custom-button.component.jsx';
+import FormInput from '../../shared/elements/form-input/form-input.component';
+import CustomButton from '../../shared/elements/button/custom-button.component';
+import { regiserUser } from '../../reducers/user/user.actions';
+
+
 
 
 const Registration = () => {
@@ -21,7 +24,7 @@ const Registration = () => {
             return;
         }
 
-        console.log(email + ": " + name + " passwords match");
+        regiserUser(userCredentials);
     };
 
     const handleChange = event => {
@@ -31,7 +34,12 @@ const Registration = () => {
     };
 
     return (
-        <div>
+        <div className='size-holder middle'>
+            <h3 className='centered'>
+                Fill out the form below to register your Scheduling 
+                and Direction account!
+            </h3>
+            <br />
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Email'
@@ -67,7 +75,7 @@ const Registration = () => {
                     />
                 <div className="input-width">
                     <CustomButton
-                        style="blue round"
+                        buttonStyle="blue round"
                         type="submit"
                         label="submit"
                         />
