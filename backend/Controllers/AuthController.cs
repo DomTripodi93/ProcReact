@@ -39,6 +39,9 @@ namespace backend.Controllers
             if (await _repo.UserExists(userForRegisterDto.Email))
                 return BadRequest("Email already exists");
 
+            if (userForRegisterDto.Password != userForRegisterDto.ConfirmPassword)
+                return BadRequest("Passwords do not match!");
+
             var userToCreate = new User
             {
                 Email = userForRegisterDto.Email,

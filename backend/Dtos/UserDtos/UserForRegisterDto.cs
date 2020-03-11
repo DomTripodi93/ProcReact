@@ -15,5 +15,7 @@ namespace backend.Dtos
         [StringLength(25, MinimumLength=6, ErrorMessage="Password must be at least 6 characters")]
 
         public string Password { get; set; }
+
+        public string ConfirmPassword { get; set; }
     }
 }
