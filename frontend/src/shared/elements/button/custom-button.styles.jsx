@@ -2,14 +2,17 @@ import styled from 'styled-components';
 
 
 export const CustomizedButton = styled.button`
-  height: 20px
   color:  rgb(85, 0, 195);
   border: none;
   border-radius: 0;
   margin: 25px 0;
 
   &:hover {
-    height: 17px
+    transform: scale(0.95);
+  }
+
+  &:focus {
+    transform: scale(0.88);
   }
 
   &.round {
