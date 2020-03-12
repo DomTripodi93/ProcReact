@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,7 +11,15 @@ import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
 
-const App = props => {
+const App = (props) => {
+  const [authValue, setAuthValue] = useState(props.isAuthenticated);
+
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    let userId = localStorage.getItem('id');
+    props.checkUser(userId, token);
+  }, [props]);
+
   return (
     <div>
       <Header />
@@ -25,14 +33,14 @@ const App = props => {
   );
 };
 
-(function (){
-  let token = localStorage.getItem('token');
-  let userId = localStorage.getItem('id');
-  checkUser(userId, token);
-})();
+const mapDispatchToProps = dispatch => {
+  return {
+    checkUser: (userId, token) => dispatch( checkUser(userId, token))
+  }
+}
 
 const mapStateToProps = state => ({
   isAuthenticated: state.user.isAuthenticated
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

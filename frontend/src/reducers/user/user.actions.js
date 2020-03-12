@@ -37,18 +37,24 @@ export const signOutUser = () => ({
 });
 
 export const checkUser = (id, token) => {
-    axios.get(`${ROOT_URL}/user/${id}`, {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(()=>{
-        setUserData({
-            token: token,
-            id: id
+    return dispatch => {
+        axios.get(`${ROOT_URL}/user/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
-    })
-    .catch(()=>{
-            signOutUser();
-    });
+        .then(()=>{
+            dispatch(
+                setUserData({
+                    token: token,
+                    id: id
+                })
+            )
+        })
+        .catch(()=>{
+            dispatch(
+                signOutUser()
+            )
+        });
+    }
 }
