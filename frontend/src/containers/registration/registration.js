@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import FormInput from '../../shared/elements/form-input/form-input.component';
 import CustomButton from '../../shared/elements/button/custom-button.component';
-import { regiserUser } from '../../reducers/user/user.actions';
+import { registerUser } from '../../reducers/user/user.actions';
+import { connect } from "react-redux";
 
 
 
 
-const Registration = () => {
+const Registration = (props) => {
     const [userCredentials, setUserCredentials] = useState({
       email: '',
       name: '',
@@ -24,7 +25,7 @@ const Registration = () => {
             return;
         }
 
-        regiserUser(userCredentials);
+        props.registerUser(userCredentials, ()=>{props.history.push('/signin')} );
     };
 
     const handleChange = event => {
@@ -85,4 +86,10 @@ const Registration = () => {
     )
 }
 
-export default Registration;
+const mapDispatchToProps = dispatch => ({
+        registerUser: (userCredentials, callback) => {
+            dispatch(registerUser(userCredentials, callback))
+        }
+});
+
+export default connect(null, mapDispatchToProps)(Registration);

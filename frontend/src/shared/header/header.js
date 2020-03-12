@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import logo from '../../assets/favicon.png';
 import './header.styles.scss';
 
@@ -22,7 +23,7 @@ const Header = () => {
                 </Link>
             </div>
             <div className='edge'>
-                <Link to='/logout' className='route'>
+                <Link to='/signout' className='route'>
                     Log Out
                 </Link>            
             </div>
@@ -30,4 +31,10 @@ const Header = () => {
     )
 }
 
-export default Header;
+
+const mapStateToProps = state => ({
+    isAuthenticated: state.user.isAuthenticated
+  });
+
+
+export default connect(mapStateToProps)(Header);

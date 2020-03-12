@@ -1,27 +1,31 @@
 import UserActionTypes from './user.types';
-import { Redirect } from 'react-router-dom';
 
 const INITIAL_STATE ={
     userToken: null,
-    userId: null
+    userId: null,
+    isAuthenticated: false
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case UserActionTypes.REGISTER_USER:
-            return Redirect("/signin")
+            return state;
         case UserActionTypes.SIGNIN_USER:
             return {
                 ...state,
                 userToken: action.payload.token,
-                userId: action.payload.id
-            }
+                userId: action.payload.id,
+                isAuthenticated: true
+            };
         case UserActionTypes.SIGNOUT_USER:
             return {
                 ...state,
                 userToken: null,
-                userId: null
-            }
+                userId: null,
+                isAuthenticated: false
+            };
+        default:
+            return state;
     }
 }
 
