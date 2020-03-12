@@ -12,7 +12,17 @@ export const registerUser = (user, callback) => {
     }
 };
 
-export const signInUser = (user) => ({
+export const signInUser = (user, callback) => {
+    return dispatch => {
+        axios.post(`${ROOT_URL}/auth/login`, user)
+            .then( response =>{
+                dispatch(setUserData(response.data)); 
+                callback();
+            })
+        }
+};
+
+export const setUserData = (user) => ({
     type: UserActionTypes.SIGNIN_USER,
     payload: user
 });

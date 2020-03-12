@@ -78,7 +78,7 @@ const Registration = (props) => {
                     <CustomButton
                         buttonStyle="blue round"
                         type="submit"
-                        label="submit"
+                        label="Register"
                         />
                 </div>
             </form>
