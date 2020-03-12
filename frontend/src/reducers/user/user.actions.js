@@ -22,11 +22,33 @@ export const signInUser = (user, callback) => {
         }
 };
 
-export const setUserData = (user) => ({
-    type: UserActionTypes.SIGNIN_USER,
-    payload: user
-});
+export const setUserData = (user) => {
+    localStorage.setItem('token', user.token);
+    localStorage.setItem('id', user.id);
+
+    return{
+        type: UserActionTypes.SIGNIN_USER,
+        payload: user
+    };
+};
 
 export const signOutUser = () => ({
     type: UserActionTypes.SIGNOUT_USER
 });
+
+export const checkUser = (id, token) => {
+    axios.get(`${ROOT_URL}/user/${id}`, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(()=>{
+        setUserData({
+            token: token,
+            id: id
+        })
+    })
+    .catch(()=>{
+            signOutUser();
+    });
+}
