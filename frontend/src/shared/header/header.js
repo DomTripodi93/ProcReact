@@ -1,15 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import logo from '../../assets/favicon.png';
 import './header.styles.scss';
 
+import { toggleDropDown } from '../../reducers/drop-down/drop-down.reducer';
+
 const Header = props => {
     const [authValue, setAuthValue] = useState(props.isAuthenticated);
+    const [dropDownHidden, toggleDropDownHidden] = useState(props.hidden);
+
+    const toggleDropDown = () => {
+        props.toggleDropDown();
+    };
   
     useEffect(() => {
-      setAuthValue(props.isAuthenticated)
+      setAuthValue(props.isAuthenticated);
+      toggleDropDownHidden(props.hidden);
     }, [props]);
+
+    const scheduleItems = [
+            (<Link to='/schedule' className='drop-down-item' key='1'>
+                Schedule
+            </Link>),
+            (<Link to='/employees' className='drop-down-item' key='2'>
+                Employees
+            </Link>)
+    ]
 
     return (
         <div>
@@ -22,9 +40,14 @@ const Header = props => {
                         <Link to='/' className='route'>
                             Home
                         </Link>
-                        <Link to='/schedule' className='route'>
-                            Schedule &#x21af;
-                        </Link>
+                        <ul onClick={toggleDropDown} className='route'>
+                            &#x21af; Schedule &#x21af;
+                            {!dropDownHidden ? 
+                                <div className='drop-down grid100'>{scheduleItems}</div>
+                                :
+                                null
+                            }
+                        </ul>
                         <Link to='/departments' className='route'>
                             Departments
                         </Link>
@@ -58,8 +81,13 @@ const Header = props => {
     )
 }
 
-const mapStateToProps = state => ({
-    isAuthenticated: state.user.isAuthenticated
+const mapDispatchToProps = dispatch => ({
+    toggleDropDown: () => dispatch(toggleDropDown())
 });
 
-export default connect(mapStateToProps)(Header);
+const mapStateToProps = state => ({
+    isAuthenticated: state.user.isAuthenticated,
+    hidden: state.dropDown.hidden
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

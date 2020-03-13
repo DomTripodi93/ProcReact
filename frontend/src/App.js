@@ -42,7 +42,7 @@ const App = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkUser: (userId, token) => dispatch( checkUser(userId, token))
+    checkUser: (userId, token) => dispatch(checkUser(userId, token))
   }
 }
 

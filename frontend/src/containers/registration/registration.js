@@ -25,7 +25,7 @@ const Registration = (props) => {
             return;
         }
 
-        props.registerUser(userCredentials, ()=>{props.history.push('/signin')} );
+        props.registerUser(userCredentials, ()=>{props.history.push('/signin')});
     };
 
     const handleChange = event => {
@@ -83,8 +83,8 @@ const Registration = (props) => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
 const mapDispatchToProps = dispatch => ({
         registerUser: (userCredentials, callback) => {

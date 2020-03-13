@@ -15,8 +15,12 @@
       padding: 10px 10px;
     }
 
+    .route:hover {
+        cursor: pointer;
+    }
+
     .routes{
-        width: 59%;
+        width: 61%;
         height: 100%;
         display: flex;
         align-items: center;
@@ -32,10 +36,26 @@
         padding: 0px 10px;
     }
 
+    .drop-down{
+        position: absolute;
+        border: 1px solid black;
+        top: 62px;
+        padding:5px 0px 5px 0px;
+        background-color:  rgb(70, 181, 255);
+
+        .drop-down-item{
+            text-align: center;
+            margin: 10px 10px 10px 10px;
+        }
+    }
+
 
     @media only screen and (max-width: 500px){
-        a{
+        a, ul{
           font-size: 10px;
+        }
+        .drop-down-item{
+            font-size: 8.5px;
         }
       }
 }

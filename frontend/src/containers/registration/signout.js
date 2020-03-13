@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 
 const Signout = props => {
-
     const handleCancel = () => {
         props.history.push('/');
     };

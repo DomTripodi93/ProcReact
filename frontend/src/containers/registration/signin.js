@@ -17,8 +17,8 @@ const Signin = props => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-
-        props.signInUser(userCredentials, ()=>{props.history.push('/')} );
+        
+        props.signInUser(userCredentials, ()=>{props.history.push('/')});
     };
 
     const handleChange = event => {
@@ -60,8 +60,8 @@ const Signin = props => {
                 </div>
             </form>
         </div>
-    )
-}
+    );
+};
 
 const mapDispatchToProps = dispatch => ({
         signInUser: (userCredentials, callback) => {
