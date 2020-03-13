@@ -18,17 +18,24 @@ const App = (props) => {
     let token = localStorage.getItem('token');
     let userId = localStorage.getItem('id');
     props.checkUser(userId, token);
+    setAuthValue(props.isAuthenticated)
   }, [props]);
 
   return (
     <div>
       <Header />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/signin' component={Signin} />
-        <Route exact path='/signout' component={Signout} />
-      </Switch>
+      {authValue ? 
+        <Switch>
+          <Route exact path='/' component={Home} />
+        </Switch>
+        :
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/signin' component={Signin} />
+          <Route exact path='/signout' component={Signout} />
+        </Switch>
+      }
     </div>
   );
 };
