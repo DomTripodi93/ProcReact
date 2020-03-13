@@ -15,10 +15,6 @@
       padding: 10px 10px;
     }
 
-    .arrow:after{
-        content: ' \21AF';
-    }
-
     .routes{
         width: 59%;
         height: 100%;
@@ -37,7 +33,7 @@
     }
 
 
-    @media only screen and (max-width: 760px){
+    @media only screen and (max-width: 500px){
         a{
           font-size: 10px;
         }
