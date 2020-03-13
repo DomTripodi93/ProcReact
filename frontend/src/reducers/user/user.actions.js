@@ -26,15 +26,21 @@ export const setUserData = (user) => {
     localStorage.setItem('token', user.token);
     localStorage.setItem('id', user.id);
 
-    return{
+    return {
         type: UserActionTypes.SIGNIN_USER,
         payload: user
     };
 };
 
-export const signOutUser = () => ({
-    type: UserActionTypes.SIGNOUT_USER
-});
+export const signOutUser = (callback) => {
+    localStorage.setItem('token', "");
+    localStorage.setItem('id', "");
+    callback();
+
+    return {
+        type: UserActionTypes.SIGNOUT_USER
+    };
+};
 
 export const checkUser = (id, token) => {
     return dispatch => {
@@ -53,7 +59,7 @@ export const checkUser = (id, token) => {
         })
         .catch(()=>{
             dispatch(
-                signOutUser()
+                signOutUser(()=>{})
             )
         });
     }

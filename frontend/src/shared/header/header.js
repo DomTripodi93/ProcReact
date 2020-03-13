@@ -41,7 +41,10 @@ const Header = props => {
                         <img className='logo-holder' alt='logo' src={logo}></img>
                     </Link>
                     <div className='routes'>
-                        <Link to='/signup' className='route'>
+                        <Link to='/' className='route'>
+                            Home
+                        </Link>
+                        <Link to='/register' className='route'>
                             Sign Up
                         </Link>
                         <Link to='/signin' className='route'>
