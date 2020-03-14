@@ -22,21 +22,21 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 employees: state.employees.push(action.payload)
             };
-        case EmployeeActionTypes.UPDATE_EMPLOYEE_EMPLOYEE:
+        case EmployeeActionTypes.UPDATE_EMPLOYEE:
             return {
                 ...state,
                 employees: state.employees
                     .filter((value)=>{
-                        return value.employeeId != action.payload.employeeId 
+                        return value.employeeId !== action.payload.employeeId 
                     })
                     .push(action.payload)
             };
-        case EmployeeActionTypes.UPDATE_EMPLOYEE_EMPLOYEE:
+        case EmployeeActionTypes.DELETE_EMPLOYEE:
             return {
                 ...state,
                 employees: state.employees
                     .filter((value)=>{
-                        return value.employeeId != action.payload
+                        return value.employeeId !== action.payload
                     })
             };
         default:

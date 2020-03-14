@@ -2,73 +2,70 @@ import helpers from '../shared/helpers';
 import axios from 'axios';
 
 
-const helper = new helpers;
-
-const headers = {
-    'Authorization': `Bearer ${localStorage.getItem('token')}`
-}
-
-const rootUrl = 'http://localhost:5000/api/' + localStorage.getItem('id');
-
 class rootHttp{
+    rootUrl = 'http://localhost:5000/api/' + localStorage.getItem('id');
+    headers = {'Authorization': `Bearer ${localStorage.getItem('token')}`}
+    helper = new helpers;
+    
+    constructor(){}
 
     fetchByValue(model, value) {
-      value = helper.slashToDash(value);
+      value = this.helper.slashToDash(value);
       return axios.get(
-          rootUrl + '/' + model + '/' + value, {headers}
+          this.rootUrl + '/' + model + '/' + value, {headers: this.headers}
       );
     }
     //Gets specific model by defining value(s)
   
     fetchById(model, id) {
       return axios.get(
-          rootUrl + '/' + model + '/' + id, {headers}
+          this.rootUrl + '/' + model + '/' + id, {headers: this.headers}
       )
     }
     //Gets specific model by id
   
     fetchAll(model) {
       return axios.get(
-          rootUrl + '/' + model, {headers}
+          this.rootUrl + '/' + model, {headers: this.headers}
       );
     }
     //Gets all of an item for user
   
     addItem(model, data){
       return axios.post(
-          rootUrl + '/' + model, data, {headers}
+          this.rootUrl + '/' + model, data, {headers: this.headers}
       );
     }
     //Posts new item to API
   
     updateItem(model, data, value){
-      value = helper.slashToDash(value);
+      value = this.helper.slashToDash(value);
       return axios.put(
-          rootUrl  + '/' + model + '/' + value, data, {headers}
+          this.rootUrl  + '/' + model + '/' + value, data, {headers: this.headers}
       );
     }
     //Updates selected item
   
     updateItemById(model, data, id){
       return axios.put(
-          rootUrl  + '/' + model + '/' + id, data, {headers}
+          this.rootUrl  + '/' + model + '/' + id, data, {headers: this.headers}
       );
     }
     //Updates selected item
   
     deleteItem(model, value){
-      value = helper.slashToDash(value);
+      value = this.helper.slashToDash(value);
       return axios.delete(
-          rootUrl  + '/' + model + '/' + value,
-          {responseType: 'text'}, {headers}
+          this.rootUrl  + '/' + model + '/' + value,
+          {responseType: 'text'}, {headers: this.headers}
       );
     }
     //Deletes selected item
   
     deleteItemById(model, id){
       return axios.delete(
-          rootUrl  + '/' + model + '/' + id,
-          {responseType: 'text'}, {headers}
+          this.rootUrl  + '/' + model + '/' + id,
+          {responseType: 'text'}, {headers: this.headers}
       );
     }
     //Deletes selected item by id
@@ -78,4 +75,4 @@ export default rootHttp;
 
 
 
-// `${rootUrl}/${model}`
+// `${this.rootUrl}/${model}`

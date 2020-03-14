@@ -10,7 +10,7 @@ import Home from './containers/home/home';
 import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
-import Employees from './components/schedule/employees/employees';
+import EmployeeContainer from './containers/schedule/employee-container';
 
 
 const App = (props) => {
@@ -30,7 +30,7 @@ const App = (props) => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signout' component={Signout} />
-          <Route exact path='/employees' component={Employees} />
+          <Route exact path='/employees' component={EmployeeContainer} />
         </Switch>
         :
         <Switch>

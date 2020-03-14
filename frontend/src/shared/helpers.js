@@ -1,5 +1,7 @@
+
 class helpers{
-    
+    constructor(){}
+
     capitalize(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
@@ -21,7 +23,7 @@ class helpers{
     }
 
     async removeSpaceAtEnd(string){
-        if (string.charAt(string.length -1) == " "){
+        if (string.charAt(string.length -1) === " "){
             string = string.substring(0, string.length -1);
             string = await this.removeSpaceAtEnd(string);
         }
