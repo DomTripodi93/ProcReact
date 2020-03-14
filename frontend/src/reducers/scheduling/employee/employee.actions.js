@@ -1,31 +1,41 @@
 import rootHttp from '../../root-http';
 import EmployeeActionTypes from './employee.types';
 
+
+const http = new rootHttp;
+
 export function fetchSingleEmployee(id){
-    rootHttp.fetchById("employee", id)
-        .then((responseData) => {
-                dispatch(setSingleEmployee(responseData));
-            }
-        )
+    return dispatch => {
+        http.fetchById("employee", id)
+            .then((employee) => {
+                    dispatch(setSingleEmployee(employee));
+                }
+            )
+    }
     
 }
 //Gets specific employee by name
 
 export function fetchEmployees(){
-    rootHttp.fetchAll("employee/byUser")
-        .then((responseData) => {
-                dispatch(setEmployees(responseData));
-            }
-        )
+    return dispatch => {
+
+        http.fetchAll("employee/byUser")
+            .then((employees) => {
+                    dispatch(setEmployees(employees));
+                }
+            )
+    }
 }
 //Gets all employees
 
 export function fetchEmployeesByDepartment(department){
-    rootHttp.fetchAll("employee/byDepartment/" + department)
-        .then((responseData) => {
-                dispatch(setEmployees(responseData));
-            }
-        )
+    return dispatch => {
+        http.fetchAll("employee/byDepartment/" + department)
+            .then((employees) => {
+                    dispatch(setEmployees(employees));
+                }
+            )
+    }
 }
 //Gets all employees for a department
 
@@ -43,28 +53,28 @@ export function setSingleEmployee(employee){
     }
 }
 
-export function addEmployee(data){
-    rootHttp.addItem("employee", data);
+export function addEmployee(employee){
+    http.addItem("employee", employee);
 
     return {
         type: EmployeeActionTypes.ADD_EMPLOYEE,
-        payload: data
+        payload: employee
     }
 }
 //Posts new employee to API
 
-export function updateEmployee(data, id){
-    rootHttp.updateItemById("employee", data, id);
+export function updateEmployee(employee, id){
+    http.updateItemById("employee", employee, id);
 
     return {
         type: EmployeeActionTypes.UPDATE_EMPLOYEE,
-        payload: data
+        payload: employee
     }
 }
 //Updates function for employee
 
 export function deleteEmployee(id){
-    rootHttp.deleteItemById("employee", id);
+    http.deleteItemById("employee", id);
 
     return {
         type: EmployeeActionTypes.DELETE_EMPLOYEE,

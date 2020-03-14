@@ -10,6 +10,8 @@ import Home from './containers/home/home';
 import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
+import Employees from './components/schedule/employees/employees';
+
 
 const App = (props) => {
   const [authValue, setAuthValue] = useState(props.isAuthenticated);
@@ -28,6 +30,7 @@ const App = (props) => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/signout' component={Signout} />
+          <Route exact path='/employees' component={Employees} />
         </Switch>
         :
         <Switch>

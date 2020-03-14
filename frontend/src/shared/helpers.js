@@ -1,26 +1,26 @@
-const helpers = () => {
+class helpers{
     
-    function capitalize(string){
+    capitalize(string){
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
-    function slashToDash(string){
+    slashToDash(string){
         return string.split("/").join("-");
     }
 
-    function dashToSlash(string){
+    dashToSlash(string){
         return string.split("-").join("/");
     }
 
-    function gapToDash(string){
+    gapToDash(string){
         return string.split(" ").join("-");
     }
 
-    function dashToGap(string){
+    dashToGap(string){
         return string.split("-").join(" ");
     }
 
-    async function removeSpaceAtEnd(string){
+    async removeSpaceAtEnd(string){
         if (string.charAt(string.length -1) == " "){
             string = string.substring(0, string.length -1);
             string = await this.removeSpaceAtEnd(string);
@@ -28,7 +28,7 @@ const helpers = () => {
             return string;
     }
 
-    function getCurrentTimeAndDate(){
+    getCurrentTimeAndDate(){
         let date = new Date().toISOString().slice(0, 11);
         let hour = "" + new Date().getHours();
         let minute = "" + new Date().getMinutes();
@@ -41,7 +41,7 @@ const helpers = () => {
             return date + hour + ":" + minute;
     }
 
-    function setDateForIso(year, month, day){
+    setDateForIso(year, month, day){
         if (month < 10){
             month = "0" + month;
         }
@@ -51,11 +51,11 @@ const helpers = () => {
             return year + "-" + month + "-" + day;
     }
 
-    function timeFromDate(date){
+    timeFromDate(date){
         return date.split("T")[1].substring(0,5);
     }
 
-    function timeForDisplay(time){
+    timeForDisplay(time){
         if (+time[0] > 0){
         if (+time[0] > 1){
             let hour = +time.substring(0,2) - 12;
