@@ -1,13 +1,20 @@
 import helpers from '../shared/helpers';
 import axios from 'axios';
+import store from './store';
 
 
 class rootHttp{
+    store = store;
     rootUrl = 'http://localhost:5000/api/' + localStorage.getItem('id');
     headers = {'Authorization': `Bearer ${localStorage.getItem('token')}`}
-    helper = new helpers;
+    helper = new helpers();
     
-    constructor(){}
+    constructor() {
+        store.subscribe(()=>{
+            this.headers = {'Authorization': `Bearer ${this.store.getState().user.userToken}`};
+            this.rootUrl = 'http://localhost:5000/api/' + this.store.getState().user.userId;
+        })
+    }
 
     fetchByValue(model, value) {
       value = this.helper.slashToDash(value);

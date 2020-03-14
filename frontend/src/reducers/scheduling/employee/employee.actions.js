@@ -2,7 +2,7 @@ import rootHttp from '../../root-http';
 import EmployeeActionTypes from './employee.types';
 
 
-const http = new rootHttp;
+const http = new rootHttp();
 
 export function fetchSingleEmployee(id){
     return dispatch => {

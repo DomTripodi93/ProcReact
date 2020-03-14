@@ -5,14 +5,13 @@ import EmployeeNew from '../../components/schedule/employees/employee-new';
 import Employees from '../../components/schedule/employees/employees';
 
 
-
 const EmployeeContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
     const fetchEmployees = props.fetchEmployees;
 
     useEffect(()=>{
         fetchEmployees();
-    },[]);
+    },[fetchEmployees]);
 
     const showEmployeeForm = () =>{
         setAddMode(!addMode)

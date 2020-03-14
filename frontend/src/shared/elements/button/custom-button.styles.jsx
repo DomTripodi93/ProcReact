@@ -6,6 +6,7 @@ export const CustomizedButton = styled.button`
   border: none;
   border-radius: 0;
   margin: 25px 0;
+  font-size: 16px;
 
   &:hover {
     transform: scale(0.95);
@@ -38,12 +39,15 @@ export const CustomizedButton = styled.button`
   &.red {
     background-color: rgb(200, 0, 0);
   }
+
+  @media (max-width: 400px) {
+    font-size: 4vw;
+  }
 `;
 
 CustomizedButton.displayName = 'CustomizedButton';
 
 export const ButtonText = styled.h5`
-  font-size: 16px;
   color:  rgb(62, 0, 143);
   margin: 10px 10px 10px 10px
 `;
