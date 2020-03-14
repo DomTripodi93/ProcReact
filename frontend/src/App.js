@@ -11,6 +11,8 @@ import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
 import EmployeeContainer from './containers/schedule/employee-container';
+import store from './reducers/store';
+import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
 
 
 const App = (props) => {
@@ -23,29 +25,38 @@ const App = (props) => {
     setAuthValue(props.isAuthenticated)
   }, [props]);
 
+  const checkDropDown = () => {
+    if (!store.getState().dropDown.hidden){
+      props.toggleDropDown();
+    }
+  }
+
   return (
-    <div>
+    <div id="page" onClick={checkDropDown}>
       <Header />
-      {authValue ? 
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/signout' component={Signout} />
-          <Route exact path='/employees' component={EmployeeContainer} />
-        </Switch>
-        :
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/register' component={Register} />
-          <Route exact path='/signin' component={Signin} />
-        </Switch>
+      <div>
+        {authValue ? 
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/signout' component={Signout} />
+            <Route exact path='/employees' component={EmployeeContainer} />
+          </Switch>
+          :
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/signin' component={Signin} />
+          </Switch>
       }
+      </div>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    checkUser: (userId, token) => dispatch(checkUser(userId, token))
+    checkUser: (userId, token) => dispatch(checkUser(userId, token)),
+    toggleDropDown: () => dispatch(toggleDropDown())
   }
 }
 

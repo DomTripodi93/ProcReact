@@ -12,7 +12,11 @@ const Header = props => {
     const [dropDownHidden, toggleDropDownHidden] = useState(props.hidden);
 
     const toggleDropDown = () => {
-        props.toggleDropDown();
+        if (dropDownHidden){
+            setTimeout(()=>{props.toggleDropDown()},1);
+        } else {
+            props.toggleDropDown();
+        }
     };
   
     useEffect(() => {
