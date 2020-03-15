@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addEmployee } from '../../../reducers/scheduling/employee/employee.actions';
+import { addEmployee, updateEmployee } from '../../../reducers/scheduling/employee/employee.actions';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import FormInput from '../../../shared/elements/form-input/form-input.component';
 
@@ -8,7 +8,7 @@ import FormInput from '../../../shared/elements/form-input/form-input.component'
 const EmployeeForm = props => {
     const [employeeInfo, setEmployeeInfo] = useState({
       name: '',
-      daptName: '',
+      deptName: '',
       canEdit: '',
       title: '',
     });
@@ -18,8 +18,8 @@ const EmployeeForm = props => {
     useEffect(()=>{
         if (props.editMode){
             Object.keys(props.employeeInput).forEach(key =>{
-                if (props.employeeInput[key] == null){
-                    props.employeeInput[key] = "";
+                if (props.employeeInput[key] !== null){
+                    setEmployeeInfo({[key]: props.employeeInput[key]});
                 }
             })
             setEmployeeInfo(props.employeeInput);
@@ -28,8 +28,11 @@ const EmployeeForm = props => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-
-        props.addEmployee(employeeInfo, props.callback);
+        if (props.editMode){
+            props.updateEmployee(employeeInfo, props.callback);
+        } else {
+            props.addEmployee(employeeInfo, props.callback);
+        }
     };
 
     const handleChange = event => {
@@ -107,9 +110,12 @@ const EmployeeForm = props => {
 
 
 const mapDispatchToProps = dispatch => ({
-        addEmployee: (employee, callback) => {
-            dispatch(addEmployee(employee, callback))
-        }
+    addEmployee: (employee, callback) => {
+        dispatch(addEmployee(employee, callback))
+    },
+    updateEmployee: (employee, callback) => {
+        dispatch(updateEmployee(employee, callback))
+    }
 });
 
 

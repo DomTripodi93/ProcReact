@@ -49,8 +49,8 @@ export function addEmployee(employee, callback){
 export function updateEmployee(employee, callback){
     return dispatch =>{
         http.updateItemById("employee", employee, employee.employeeId)
-            .then(updatedEmployee =>{
-                dispatch(updateEmployeeInState(updatedEmployee.data));
+            .then(() =>{
+                dispatch(updateEmployeeInState(employee));
                 callback();
             });
     }

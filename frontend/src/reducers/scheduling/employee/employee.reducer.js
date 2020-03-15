@@ -25,11 +25,19 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
         case EmployeeActionTypes.UPDATE_EMPLOYEE:
             return {
                 ...state,
-                employees: state.employees
-                    .filter((value)=>{
-                        return value.employeeId !== action.payload.employeeId 
-                    })
-                    .push(action.payload)
+                employees: [
+                    action.payload,
+                    ...state.employees
+                        .filter((value)=>{
+                            return value.employeeId !== action.payload.employeeId 
+                        })]
+                        .sort((first, second)=>{
+                            if(first.employeeId > second.employeeId){
+                                return 1
+                            } else {
+                                return -1
+                            }}
+                        )
             };
         case EmployeeActionTypes.DELETE_EMPLOYEE:
             return {

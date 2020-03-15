@@ -33,7 +33,7 @@ const SingleEmployee = props =>{
                         </div>
                     </div>
                 :
-                    null
+                    <EmployeeForm editMode={true} employeeInput={props.employee} callback={setEditMode} />
                 }
             </div>
             {!props.inFull ?
