@@ -53,7 +53,7 @@ const Signin = props => {
                     />
                 <div className="input-width">
                     <CustomButton
-                        buttonStyle="blue round"
+                        buttonStyle="blue round form-button"
                         type="submit"
                         label="Sign In"
                         />

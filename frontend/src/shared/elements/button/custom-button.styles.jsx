@@ -5,7 +5,6 @@ export const CustomizedButton = styled.button`
   color:  rgb(85, 0, 195);
   border: none;
   border-radius: 0;
-  margin: 25px 0;
   font-size: 16px;
 
   &:hover {

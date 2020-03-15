@@ -15,8 +15,8 @@ const Signout = props => {
 
     return(
         <div className='border'>
-            <h1 className='centered'>Are you sure you want to log out?</h1>
-            <div className='grid50'>
+            <h1 className='centered spaced'>Are you sure you want to log out?</h1>
+            <div className='grid50 spaced'>
                 <div className='middle'>
                     <CustomButton action={handleConfirm} buttonStyle='green round' label="Yes" />
                 </div>

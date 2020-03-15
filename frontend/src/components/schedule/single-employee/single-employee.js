@@ -35,8 +35,11 @@ const SingleEmployee = props =>{
                 }
             </div>
             {!props.inFull ?
-                <div className='size-holder grid100 middle'>
-                    <CustomButton buttonStyle='green' label="View Schedule" action={viewSchedule} />
+                <div className='grid100 spaced'>
+                    <CustomButton 
+                        buttonStyle='green' 
+                        label="View Schedule" 
+                        action={viewSchedule} />
                 </div>
             :
                 null
