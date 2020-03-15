@@ -1,8 +1,10 @@
 import rootHttp from '../../root-http';
 import EmployeeActionTypes from './employee.types';
+import helpers from '../../../shared/helpers';
 
 
 const http = new rootHttp();
+const helper = new helpers();
 
 export function fetchSingleEmployee(id){
     return dispatch => {
@@ -36,6 +38,7 @@ export function fetchEmployeesByDepartment(department){
 //Gets all employees for a department
 
 export function addEmployee(employee, callback){
+    employee = prepEmployeeValues(employee);
     return dispatch =>{
         http.addItem("employee", employee)
             .then(addedEmployee =>{
@@ -47,6 +50,7 @@ export function addEmployee(employee, callback){
 //Posts new employee to API
 
 export function updateEmployee(employee, callback){
+    employee = prepEmployeeValues(employee);
     return dispatch =>{
         http.updateItemById("employee", employee, employee.employeeId)
             .then(() =>{
@@ -107,3 +111,12 @@ export function deleteEmployeeInState(id){
     }
 }
 //Deletes selected employee
+
+function prepEmployeeValues(employee){
+    employee.name = helper.capitalize(employee.name);
+    if (employee.title){
+        employee.title = helper.capitalizeAll(employee.title);
+    }
+
+    return employee;
+}

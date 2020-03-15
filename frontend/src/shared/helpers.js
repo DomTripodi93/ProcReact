@@ -5,6 +5,14 @@ class helpers{
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    capitalizeAll(string){
+        let words = string.split(" ");
+        for (let i = 0; i < words.length; i++){
+            words[i] = this.capitalize(words[i]);
+        }
+        return words.join(" ");
+    }
+
     slashToDash(string){
         return string.split("/").join("-");
     }
