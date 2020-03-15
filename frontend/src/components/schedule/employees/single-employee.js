@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import { Link } from 'react-router-dom';
 import EmployeeForm from './employee-form';
+import { deleteEmployee } from '../../../reducers/scheduling/employee/employee.actions';
+import { connect } from 'react-redux';
 
 
 const SingleEmployee = props =>{
@@ -9,6 +11,14 @@ const SingleEmployee = props =>{
 
     const setEditMode = () => {
         updateEditMode(!editMode)
+    }
+
+    const handleDelete = () => {
+        if (window.confirm(
+          "Are you sure you want to delete this employee: " +props.employee.name+ "?"
+          )){
+            props.deleteEmployee(props.employee.employeeId);
+        }
     }
 
     return(
@@ -29,7 +39,7 @@ const SingleEmployee = props =>{
                         }
                         <div className="grid50">
                             <CustomButton action={setEditMode} buttonStyle="blue" label="Edit" />
-                            <CustomButton action={setEditMode} buttonStyle="red" label="Delete" />
+                            <CustomButton action={handleDelete} buttonStyle="red" label="Delete" />
                         </div>
                     </div>
                 :
@@ -49,4 +59,11 @@ const SingleEmployee = props =>{
     )
 }
 
-export default SingleEmployee;
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteEmployee: (id) => dispatch(deleteEmployee(id))
+    }
+}
+
+
+export default connect(null, mapDispatchToProps)(SingleEmployee);

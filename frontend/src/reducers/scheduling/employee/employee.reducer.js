@@ -42,10 +42,10 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
         case EmployeeActionTypes.DELETE_EMPLOYEE:
             return {
                 ...state,
-                employees: state.employees
+                employees: [...state.employees
                     .filter((value)=>{
                         return value.employeeId !== action.payload
-                    })
+                    })]
             };
         default:
             return state;

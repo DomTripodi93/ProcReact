@@ -61,12 +61,11 @@ export function updateEmployee(employee, callback){
 }
 //Updates employee in database
 
-export function deleteEmployee(id, callback){
+export function deleteEmployee(id){
     return dispatch =>{
         http.deleteItemById("employee", id)
             .then(()=>{
                 dispatch(deleteEmployeeInState(id));
-                callback();
             });
     }
 }

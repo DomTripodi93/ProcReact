@@ -63,16 +63,14 @@ class rootHttp{
     deleteItem(model, value){
       value = this.helper.slashToDash(value);
       return axios.delete(
-          this.rootUrl  + '/' + model + '/' + value,
-          {responseType: 'text'}, {headers: this.headers}
+          this.rootUrl  + '/' + model + '/' + value, {headers: this.headers}
       );
     }
     //Deletes selected item
   
     deleteItemById(model, id){
       return axios.delete(
-          this.rootUrl  + '/' + model + '/' + id,
-          {responseType: 'text'}, {headers: this.headers}
+          this.rootUrl  + '/' + model + '/' + id, {headers: this.headers}
       );
     }
     //Deletes selected item by id
