@@ -1,12 +1,17 @@
 import React from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
+import EmployeeForm from './employee-form';
 
 const EmployeeNew = (props) =>{
     return(
         <div>
             {props.addMode ?
-                <div>addMode</div>
-                :
+                <div className='border'>
+                    <EmployeeForm 
+                        callback={props.action} 
+                        editMode={false}/>
+                </div>
+            :
                 <div className='top'>
                     <CustomButton 
                         buttonStyle="blue"

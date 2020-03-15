@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import EmployeeForm from './employee-form';
 
 
 const SingleEmployee = props =>{
@@ -32,7 +33,7 @@ const SingleEmployee = props =>{
                         </div>
                     </div>
                 :
-                    <div>editMode</div>
+                    null
                 }
             </div>
             {!props.inFull ?

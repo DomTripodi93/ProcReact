@@ -39,7 +39,7 @@ export function addEmployee(employee, callback){
     return dispatch =>{
         http.addItem("employee", employee)
             .then(addedEmployee =>{
-                dispatch(addEmployeeToState(addedEmployee));
+                dispatch(addEmployeeToState(addedEmployee.data));
                 callback();
             });
     }
@@ -50,7 +50,7 @@ export function updateEmployee(employee, callback){
     return dispatch =>{
         http.updateItemById("employee", employee, employee.employeeId)
             .then(updatedEmployee =>{
-                dispatch(updateEmployeeInState(updatedEmployee));
+                dispatch(updateEmployeeInState(updatedEmployee.data));
                 callback();
             });
     }

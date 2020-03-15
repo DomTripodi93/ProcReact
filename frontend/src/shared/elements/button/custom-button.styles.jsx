@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 export const CustomizedButton = styled.button`
-  color:  rgb(85, 0, 195);
+  color: rgb(62, 0, 143);
   border: none;
   border-radius: 0;
   font-size: 16px;
@@ -36,7 +36,7 @@ export const CustomizedButton = styled.button`
   }
 
   &.red {
-    background-color: rgb(200, 0, 0);
+    background-color: rgb(200, 55, 10);
   }
 
   @media (max-width: 400px) {
@@ -47,8 +47,7 @@ export const CustomizedButton = styled.button`
 CustomizedButton.displayName = 'CustomizedButton';
 
 export const ButtonText = styled.h5`
-  color:  rgb(62, 0, 143);
-  margin: 10px 10px 10px 10px
+  margin: 10px 10px 10px 10px;
 `;
 
 ButtonText.displayName = 'ButtonText'

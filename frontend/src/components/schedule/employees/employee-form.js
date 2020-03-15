@@ -1,50 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { addEmployee } from '../../../reducers/scheduling/employee/employee.actions';
+import CustomButton from '../../../shared/elements/button/custom-button.component';
+import FormInput from '../../../shared/elements/form-input/form-input.component';
+
 
 const EmployeeForm = props => {
-    const [userCredentials, setUserCredentials] = useState({
-      email: '',
+    const [employeeInfo, setEmployeeInfo] = useState({
       name: '',
-      password: '',
-      confirmPassword: ''
+      daptName: '',
+      canEdit: '',
+      title: '',
     });
   
-    const { email, name, password, confirmPassword } = userCredentials;
+    const { name, deptName, canEdit, title } = employeeInfo;
+
+    useEffect(()=>{
+        if (props.editMode){
+            Object.keys(props.employeeInput).forEach(key =>{
+                if (props.employeeInput[key] == null){
+                    props.employeeInput[key] = "";
+                }
+            })
+            setEmployeeInfo(props.employeeInput);
+        }
+    },[props])
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        if (password !== confirmPassword) {
-            alert("passwords don't match");
-            return;
-        }
-
-        props.registerUser(userCredentials, ()=>{props.history.push('/signin')});
+        props.addEmployee(employeeInfo, props.callback);
     };
 
     const handleChange = event => {
       const { name, value } = event.target;
   
-      setUserCredentials({ ...userCredentials, [name]: value });
+      setEmployeeInfo({ ...employeeInfo, [name]: value });
     };
 
     return (
-        <div className='size-holder middle'>
-            <h3 className='centered'>
-                Fill out the form below to register your Scheduling 
-                and Direction account!
-            </h3>
-            <br />
+        <div className='middle'>
+            {!props.editMode?
+                <h3 className='centered'>
+                    Fill out the form below to add an Employee
+                </h3>
+            :
+                <h3 className='centered'>
+                    {props.employeeInput.employeeId}: {props.employeeInput.name}
+                </h3>
+            }
             <form onSubmit={handleSubmit}>
-                <FormInput
-                    label='Email'
-                    type='email' 
-                    name='email'
-                    value={email}
-                    onChange={handleChange}
-                    required
-                    />
                 <FormInput
                     label='Name'
                     type='name' 
@@ -54,28 +59,47 @@ const EmployeeForm = props => {
                     required
                     />
                 <FormInput
-                    label='Password'
-                    type='password' 
-                    name='password'
-                    value={password}
+                    label='Department'
+                    type='deptName' 
+                    name='deptName'
+                    value={deptName}
+                    onChange={handleChange}
+                    />
+                <FormInput
+                    label='Process Admin'
+                    type='canEdit' 
+                    name='canEdit'
+                    value={canEdit}
                     onChange={handleChange}
                     required
                     />
                 <FormInput
-                    label='Confirm Password'
-                    type='password' 
-                    name='confirmPassword'
-                    value={confirmPassword}
+                    label='Job Title'
+                    type='title' 
+                    name='title'
+                    value={title}
                     onChange={handleChange}
-                    required
                     />
-                <div className="input-width">
-                    <CustomButton
-                        buttonStyle="blue round form-button"
-                        type="submit"
-                        label="Register"
+                    <div className="grid50">
+                        {!props.editMode ?
+                            <CustomButton
+                                buttonStyle="blue"
+                                type="submit"
+                                label="Add Employee"
+                                />
+                        :
+                            <CustomButton
+                                buttonStyle="blue"
+                                type="submit"
+                                label="Update Employee"
+                                />
+                        }
+                        <CustomButton
+                            buttonStyle="red"
+                            action={props.callback}
+                            label="Cancel"
                         />
-                </div>
+                    </div>
             </form>
         </div>
     );

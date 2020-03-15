@@ -20,7 +20,7 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
         case EmployeeActionTypes.ADD_EMPLOYEE:
             return {
                 ...state,
-                employees: state.employees.push(action.payload)
+                employees: [...state.employees, action.payload]
             };
         case EmployeeActionTypes.UPDATE_EMPLOYEE:
             return {
