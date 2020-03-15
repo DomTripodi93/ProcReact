@@ -1,17 +1,19 @@
-import React from 'react';
-import CustomButton from '../../../shared/elements/button/custom-button.component';
-
-
+import React, { useEffect } from 'react';
+import SingleEmployee from '../single-employee/single-employee';
 
 const Employees = props => {
+
     return(
         <div>
             {props.employees.length > 0 ?
-                <div>
+                <div className='flex'>
                     {props.employees.map(employee=>(
-                        <h5 key={employee.employeeId}>
-                            {employee.name}
-                        </h5>
+                        <div className='sized30'>
+                        <SingleEmployee
+                            employee={employee}
+                            key={employee.employeeId}
+                            className='sized30' />
+                        </div>
                     ))}
                 </div>
                 :
