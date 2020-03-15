@@ -1,12 +1,14 @@
 import UserActionTypes from './user.types';
 import axios from 'axios';
+import helpers from '../../shared/helpers';
 
-
+const helper = new helpers();
 const ROOT_URL = 'http://localhost:5000/api';
 
 export const registerUser = (user, callback) => {
-    axios.post(`${ROOT_URL}/auth/register`, user).then(()=>callback());
+    user.name = helper.capitalize(user.name);
 
+    axios.post(`${ROOT_URL}/auth/register`, user).then(()=>callback());
     return {
         type: UserActionTypes.REGISTER_USER
     }

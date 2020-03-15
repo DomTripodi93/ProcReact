@@ -113,7 +113,7 @@ export function deleteEmployeeInState(id){
 //Deletes selected employee
 
 function prepEmployeeValues(employee){
-    employee.name = helper.capitalize(employee.name);
+    employee.name = helper.capitalizeAll(employee.name);
     if (employee.title){
         employee.title = helper.capitalizeAll(employee.title);
     }
