@@ -8,9 +8,8 @@ export function fetchSingleEmployee(id){
     return dispatch => {
         http.fetchById("employee", id)
             .then((employee) => {
-                    dispatch(setSingleEmployee(employee));
-                }
-            )
+                dispatch(setSingleEmployee(employee));
+            });
     }
     
 }
@@ -18,12 +17,10 @@ export function fetchSingleEmployee(id){
 
 export function fetchEmployees(){
     return dispatch => {
-
         http.fetchAll("employee/byUser")
             .then((employees) => {
-                    dispatch(setEmployees(employees));
-                }
-            )
+                dispatch(setEmployees(employees));
+            });
     }
 }
 //Gets all employees
@@ -32,12 +29,52 @@ export function fetchEmployeesByDepartment(department){
     return dispatch => {
         http.fetchAll("employee/byDepartment/" + department)
             .then((employees) => {
-                    dispatch(setEmployees(employees));
-                }
-            )
+                dispatch(setEmployees(employees));
+            });
     }
 }
 //Gets all employees for a department
+
+export function addEmployee(employee, callback){
+    return dispatch =>{
+        http.addItem("employee", employee)
+            .then(addedEmployee =>{
+                dispatch(addEmployeeToState(addedEmployee));
+                callback();
+            });
+    }
+}
+//Posts new employee to API
+
+export function updateEmployee(employee, callback){
+    return dispatch =>{
+        http.updateItemById("employee", employee, employee.employeeId)
+            .then(updatedEmployee =>{
+                dispatch(updateEmployeeInState(updatedEmployee));
+                callback();
+            });
+    }
+}
+//Updates employee in database
+
+export function deleteEmployee(id, callback){
+    return dispatch =>{
+        http.deleteItemById("employee", id)
+            .then(()=>{
+                dispatch(deleteEmployeeInState(id));
+                callback();
+            });
+    }
+}
+//Deletes selected employee
+
+export function addEmployeeToState(employee){
+    return {
+        type: EmployeeActionTypes.ADD_EMPLOYEE,
+        payload: employee
+    }
+}
+//Adds new employee from post to state
 
 export function setEmployees(employees){
     return {
@@ -45,6 +82,7 @@ export function setEmployees(employees){
         payload: employees
     }
 }
+//Sets all employees in state
 
 export function setSingleEmployee(employee){
     return {
@@ -52,20 +90,9 @@ export function setSingleEmployee(employee){
         payload: employee
     }
 }
+//Sets selected employee in state
 
-export function addEmployee(employee){
-    http.addItem("employee", employee);
-
-    return {
-        type: EmployeeActionTypes.ADD_EMPLOYEE,
-        payload: employee
-    }
-}
-//Posts new employee to API
-
-export function updateEmployee(employee, id){
-    http.updateItemById("employee", employee, id);
-
+export function updateEmployeeInState(employee){
     return {
         type: EmployeeActionTypes.UPDATE_EMPLOYEE,
         payload: employee
@@ -73,9 +100,7 @@ export function updateEmployee(employee, id){
 }
 //Updates function for employee
 
-export function deleteEmployee(id){
-    http.deleteItemById("employee", id);
-
+export function deleteEmployeeInState(id){
     return {
         type: EmployeeActionTypes.DELETE_EMPLOYEE,
         payload: id

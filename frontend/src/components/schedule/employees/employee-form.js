@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import FormInput from '../../shared/elements/form-input/form-input.component';
-import CustomButton from '../../shared/elements/button/custom-button.component';
-import { registerUser } from '../../reducers/user/user.actions';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
+import { addEmployee } from '../../../reducers/scheduling/employee/employee.actions';
 
-
-
-
-const Registration = (props) => {
+const EmployeeForm = props => {
     const [userCredentials, setUserCredentials] = useState({
       email: '',
       name: '',
@@ -76,7 +71,7 @@ const Registration = (props) => {
                     />
                 <div className="input-width">
                     <CustomButton
-                        buttonStyle="blue round"
+                        buttonStyle="blue round form-button"
                         type="submit"
                         label="Register"
                         />
@@ -84,12 +79,14 @@ const Registration = (props) => {
             </form>
         </div>
     );
-};
+}
+
 
 const mapDispatchToProps = dispatch => ({
-        registerUser: (userCredentials, callback) => {
-            dispatch(registerUser(userCredentials, callback))
+        addEmployee: (employee, callback) => {
+            dispatch(addEmployee(employee, callback))
         }
 });
 
-export default connect(null, mapDispatchToProps)(Registration);
+
+export default connect(null, mapDispatchToProps)(EmployeeForm);

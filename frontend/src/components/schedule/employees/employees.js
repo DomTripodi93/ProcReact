@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import SingleEmployee from '../single-employee/single-employee';
+import React from 'react';
+import SingleEmployee from './single-employee';
 
 const Employees = props => {
 
@@ -8,11 +8,12 @@ const Employees = props => {
             {props.employees.length > 0 ?
                 <div className='flex'>
                     {props.employees.map(employee=>(
-                        <div className='sized30'>
-                        <SingleEmployee
-                            employee={employee}
+                        <div 
                             key={employee.employeeId}
-                            className='sized30' />
+                            className='sized30'>
+                            <SingleEmployee
+                                employee={employee}
+                                className='sized30' />
                         </div>
                     ))}
                 </div>
@@ -22,7 +23,7 @@ const Employees = props => {
                         You currently don't have any employees! 
                     </h4>
                     <h4 className="spaced">
-                        <a href={null} onClick={props.action}>Add some employees</a> to see them here.
+                        Add some employees using the button above to see them here.
                     </h4>
                 </div>
             }

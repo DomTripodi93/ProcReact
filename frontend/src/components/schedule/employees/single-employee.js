@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
+import { Redirect, Link } from 'react-router-dom';
 
 
 const SingleEmployee = props =>{
@@ -9,17 +10,17 @@ const SingleEmployee = props =>{
         updateEditMode(!editMode)
     }
 
-    const viewSchedule = () => {
-        props.history.push('/' + props.employee.employeeId);
-    }
-
     return(
         <div>
             <div className='border centered'>
                 {!editMode ?
                     <div>
                         <h3>{props.employee.employeeId}: {props.employee.name}</h3>
-                        <h4>Title: {props.employee.title}</h4>
+                        {props.employee.title ?
+                            <h4>Title: {props.employee.title}</h4>
+                        :
+                            null
+                        }
                         {props.employee.deptName ?
                             <h4>Department: {props.employee.deptName}</h4>
                         :
@@ -35,12 +36,11 @@ const SingleEmployee = props =>{
                 }
             </div>
             {!props.inFull ?
-                <div className='grid100 spaced'>
+                <Link to={'schedule/' + props.employee.employeeId} className='grid100 spaced'>
                     <CustomButton 
                         buttonStyle='green' 
-                        label="View Schedule" 
-                        action={viewSchedule} />
-                </div>
+                        label="View Schedule" />
+                </Link>
             :
                 null
             }
