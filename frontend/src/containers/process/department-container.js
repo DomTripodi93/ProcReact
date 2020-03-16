@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchDepartments } from '../../reducers/process/department/department.actions';
 import DepartmentNew from '../../components/process/department/department-new';
+import Departments from '../../components/process/department/departments';
 
 
 const DepartmentContainer = (props) => {
@@ -23,7 +24,9 @@ const DepartmentContainer = (props) => {
                 action={showDepartmentForm}/>
             <h2 className='centered'>Departments</h2>
             <br />
-            {props.departments.length}
+            <Departments 
+                action={showDepartmentForm} 
+                departments={props.departments}/>
         </div>
     )
 }

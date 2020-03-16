@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchEmployees } from '../../reducers/scheduling/employee/employee.actions';
-import EmployeeNew from '../../components/schedule/employees/employee-new';
-import Employees from '../../components/schedule/employees/employees';
+import { fetchEmployees } from '../../reducers/schedule/employee/employee.actions';
+import EmployeeNew from '../../components/schedule/employee/employee-new';
+import Employees from '../../components/schedule/employee/employees';
 
 
 const EmployeeContainer = (props) => {

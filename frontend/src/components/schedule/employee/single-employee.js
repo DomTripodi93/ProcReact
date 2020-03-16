@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import { Link } from 'react-router-dom';
 import EmployeeForm from './employee-form';
-import { deleteEmployee } from '../../../reducers/scheduling/employee/employee.actions';
+import { deleteEmployee } from '../../../reducers/schedule/employee/employee.actions';
 import { connect } from 'react-redux';
 
 

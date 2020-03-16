@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addEmployee, updateEmployee } from '../../../reducers/scheduling/employee/employee.actions';
+import { addEmployee, updateEmployee } from '../../../reducers/schedule/employee/employee.actions';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import FormInput from '../../../shared/elements/form-input/form-input.component';
 
