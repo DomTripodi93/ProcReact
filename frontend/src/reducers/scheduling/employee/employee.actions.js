@@ -13,7 +13,6 @@ export function fetchSingleEmployee(id){
                 dispatch(setSingleEmployee(employee));
             });
     }
-    
 }
 //Gets specific employee by name
 
@@ -65,7 +64,7 @@ export function deleteEmployee(id){
     return dispatch =>{
         http.deleteItemById("employee", id)
             .then(()=>{
-                dispatch(deleteEmployeeInState(id));
+                dispatch(deleteEmployeeFromState(id));
             });
     }
 }
@@ -103,7 +102,7 @@ export function updateEmployeeInState(employee){
 }
 //Updates function for employee
 
-export function deleteEmployeeInState(id){
+export function deleteEmployeeFromState(id){
     return {
         type: EmployeeActionTypes.DELETE_EMPLOYEE,
         payload: id
