@@ -1,13 +1,15 @@
 import React from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
-
+import DepartmentForm from './department-form';
 
 const DepartmentNew = (props) =>{
     return(
         <div>
             {props.addMode ?
                 <div className='border'>
-                    addMode
+                    <DepartmentForm 
+                        callback={props.action} 
+                        editMode={false}/>
                 </div>
             :
                 <div className='top'>

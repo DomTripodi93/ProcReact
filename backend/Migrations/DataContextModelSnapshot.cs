@@ -120,7 +120,7 @@ namespace backend.Migrations
                     b.Property<string>("DeptName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Function")
+                    b.Property<string>("FuncName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("userId", "DeptName");

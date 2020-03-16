@@ -42,7 +42,7 @@ namespace backend.Migrations
                 {
                     userId = table.Column<int>(nullable: false),
                     DeptName = table.Column<string>(nullable: false),
-                    Function = table.Column<string>(nullable: true)
+                    FuncName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

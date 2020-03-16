@@ -6,7 +6,7 @@ namespace backend.Dtos
     {
         [Required]
         public string DeptName { get; set; }
-        public string Function { get; set; }
+        public string FuncName { get; set; }
         
     }
 }

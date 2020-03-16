@@ -9,7 +9,7 @@ const Departments = props => {
                 <div className='flex'>
                     {props.departments.map(department=>(
                         <div 
-                            key={department.departmentId}
+                            key={department.deptName}
                             className='sized30'>
                             <SingleDepartment
                                 department={department}

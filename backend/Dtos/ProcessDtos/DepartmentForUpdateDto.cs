@@ -2,7 +2,7 @@ namespace backend.Dtos
 {
     public class DepartmentForUpdateDto
     {
-        public string Function { get; set; }
+        public string FuncName { get; set; }
         
     }
 }

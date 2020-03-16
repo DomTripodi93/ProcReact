@@ -101,7 +101,10 @@ export function deleteDepartmentFromState(id){
 //Deletes selected department
 
 function prepDepartmentValues(department){
-    department.name = helper.capitalizeAll(department.deptName);
+    department.deptName = helper.capitalizeAll(department.deptName);
+    if (department.funcName){
+        department.funcName = helper.capitalize(department.funcName);
+    }
 
     return department;
 }
