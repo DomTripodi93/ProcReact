@@ -31,7 +31,11 @@ const EmployeeContainer = (props) => {
     )
 }
 
-const mapDispatchToProps = { fetchEmployees }
+const mapDispatchToProps = dispatch => { 
+    return {
+        fetchEmployees: () => dispatch(fetchEmployees()) 
+    }
+}
 
 const mapStateToProps = state => ({
   employees: state.employee.employees

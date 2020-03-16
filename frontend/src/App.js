@@ -11,6 +11,8 @@ import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
 import EmployeeContainer from './containers/schedule/employee-container';
+import DepartmentContainer from './containers/process/department-container';
+
 import store from './reducers/store';
 import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
 
@@ -21,7 +23,9 @@ const App = (props) => {
   useEffect(() => {
     let token = localStorage.getItem('token');
     let userId = localStorage.getItem('id');
-    props.checkUser(userId, token);
+    if (!props.isAuthenticated){
+      props.checkUser(userId, token);
+    }
     setAuthValue(props.isAuthenticated)
   }, [props]);
 
@@ -40,6 +44,7 @@ const App = (props) => {
             <Route exact path='/' component={Home} />
             <Route exact path='/signout' component={Signout} />
             <Route exact path='/employees' component={EmployeeContainer} />
+            <Route exact path='/departments' component={DepartmentContainer} />
           </Switch>
           :
           <Switch>
