@@ -1,8 +1,8 @@
 import ObjectiveActionTypes from './objective.types';
 
 const INITIAL_STATE = {
-    objectives: [],
-    selectedObjective: {},
+    objectives: {},
+    selectedObjective: {}
 }
 
 const objectiveReducer = (state = INITIAL_STATE, action) => {
@@ -13,9 +13,15 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 selectedObjective: action.payload
             };
         case ObjectiveActionTypes.SET_OBJECTIVES:
+            let objectiveHold = { ...state.objectives };
+            if (action.payload.data.length > 0){
+                objectiveHold[action.deptName] = action.payload.data;
+            } else {
+                objectiveHold[action.deptName] = [];
+            }
             return {
                 ...state,
-                objectives: action.payload.data
+                objectives: objectiveHold
             };
         case ObjectiveActionTypes.ADD_OBJECTIVE:
             return {

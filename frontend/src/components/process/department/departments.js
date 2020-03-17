@@ -12,8 +12,7 @@ const Departments = props => {
                             key={department.deptName}
                             className='sized30'>
                             <SingleDepartment
-                                department={department}
-                                className='sized30' />
+                                department={department} />
                         </div>
                     ))}
                 </div>

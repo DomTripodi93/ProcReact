@@ -6,8 +6,9 @@ import { connect } from 'react-redux';
 import ObjectiveContainer from '../../../containers/process/objective-container';
 
 
+
 const SingleDepartment = props =>{
-    const [editMode, updateEditMode] = useState(false)
+    const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
         updateEditMode(!editMode)
@@ -52,6 +53,5 @@ const mapDispatchToProps = dispatch => {
         deleteDepartment: (id) => dispatch(deleteDepartment(id))
     }
 }
-
 
 export default connect(null, mapDispatchToProps)(SingleDepartment);

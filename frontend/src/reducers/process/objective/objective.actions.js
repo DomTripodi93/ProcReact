@@ -20,7 +20,7 @@ export function fetchObjectivesByDepartment(deptName){
     return dispatch => {
         http.fetchAll("objective/byDepartment/"+deptName)
             .then((objectives) => {
-                dispatch(setObjectives(objectives));
+                dispatch(setObjectives(objectives, deptName));
             });
     }
 }
@@ -68,10 +68,11 @@ export function addObjectiveToState(objective){
 }
 //Adds new objective from post to state
 
-export function setObjectives(objectives){
+export function setObjectives(objectives, deptName){
     return {
         type: ObjectiveActionTypes.SET_OBJECTIVES,
-        payload: objectives
+        payload: objectives,
+        deptName: deptName
     }
 }
 //Sets all objectives in state

@@ -2,7 +2,6 @@ import React from 'react';
 import SingleObjective from './single-objective';
 
 const Objectives = props => {
-
     return(
         <div>
             {props.objectives.length > 0 ?
@@ -10,10 +9,9 @@ const Objectives = props => {
                     {props.objectives.map(objective=>(
                         <div 
                             key={objective.objectiveName}
-                            className='sized30'>
+                            className='border'>
                             <SingleObjective
-                                objective={objective}
-                                className='sized30' />
+                                objective={objective} />
                         </div>
                     ))}
                 </div>
