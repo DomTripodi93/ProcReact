@@ -5,15 +5,18 @@ const Objectives = props => {
     return(
         <div>
             {props.objectives.length > 0 ?
-                <div className='flex'>
-                    {props.objectives.map(objective=>(
-                        <div 
-                            key={objective.objectiveName}
-                            className='border'>
-                            <SingleObjective
-                                objective={objective} />
-                        </div>
-                    ))}
+                <div>
+                    <h3 className='centered'>{props.deptName}</h3>
+                    <div className='grid50'>
+                        {props.objectives.map(objective=>(
+                            <div 
+                                key={objective.objectiveName}
+                                >
+                                <SingleObjective
+                                    objective={objective} />
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 :
                 <div className="border centered">

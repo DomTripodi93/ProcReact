@@ -20,7 +20,6 @@ const ObjectiveContainer = (props) => {
 
     return(
         <div>
-        {props.deptName}
             <div className="grid100">
                 <ObjectiveNew 
                     addMode={addMode} 
