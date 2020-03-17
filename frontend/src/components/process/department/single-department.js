@@ -3,6 +3,7 @@ import CustomButton from '../../../shared/elements/button/custom-button.componen
 import DepartmentForm from './department-form';
 import { deleteDepartment } from '../../../reducers/process/department/department.actions';
 import { connect } from 'react-redux';
+import ObjectiveContainer from '../../../containers/process/objective-container';
 
 
 const SingleDepartment = props =>{
@@ -40,6 +41,8 @@ const SingleDepartment = props =>{
                     <DepartmentForm editMode={true} departmentInput={props.department} callback={setEditMode} />
                 }
             </div>
+            <br />
+            <ObjectiveContainer deptName={props.department.deptName} />
         </div>
     )
 }

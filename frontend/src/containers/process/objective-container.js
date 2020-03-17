@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchObjectives } from '../../reducers/process/objective/objective.actions';
+import { fetchObjectivesByDepartment } from '../../reducers/process/objective/objective.actions';
 import ObjectiveNew from '../../components/process/objective/objective-new';
 import Objectives from '../../components/process/objective/objectives';
 
@@ -10,7 +10,7 @@ const ObjectiveContainer = (props) => {
     const fetchObjectives = props.fetchObjectives;
 
     useEffect(()=>{
-        fetchObjectives();
+        fetchObjectives(props.deptName);
     },[fetchObjectives]);
 
     const showObjectiveForm = () =>{
@@ -19,12 +19,14 @@ const ObjectiveContainer = (props) => {
 
     return(
         <div>
-            <ObjectiveNew 
-                addMode={addMode} 
-                action={showObjectiveForm}/>
-            <h2 className='centered'>Objectives</h2>
+            <div className="grid100">
+                <ObjectiveNew 
+                    addMode={addMode} 
+                    action={showObjectiveForm}/>
+            </div>
             <br />
             <Objectives 
+                deptName={props.deptName}
                 action={showObjectiveForm} 
                 objectives={props.objectives}/>
         </div>
@@ -33,7 +35,7 @@ const ObjectiveContainer = (props) => {
 
 const mapDispatchToProps = dispatch => { 
     return {
-        fetchObjectives: () => dispatch(fetchObjectives())
+        fetchObjectives: (deptName) => dispatch(fetchObjectivesByDepartment(deptName))
     }
 }
 

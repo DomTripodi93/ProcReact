@@ -16,25 +16,15 @@ export function fetchSingleObjective(objectiveName, deptName){
 }
 //Gets specific objective by name
 
-export function fetchObjectives(){
-    return dispatch => {
-        http.fetchAll("objective/byUser")
-            .then((objectives) => {
-                dispatch(setObjectives(objectives));
-            });
-    }
-}
-//Gets all objectives
-
 export function fetchObjectivesByDepartment(deptName){
     return dispatch => {
-        http.fetchAll("objective/byDepartment"+deptName)
+        http.fetchAll("objective/byDepartment/"+deptName)
             .then((objectives) => {
                 dispatch(setObjectives(objectives));
             });
     }
 }
-//Gets all objectives
+//Gets all objectives for a specific department
 
 export function addObjective(objective, callback){
     objective = prepObjectiveValues(objective);
