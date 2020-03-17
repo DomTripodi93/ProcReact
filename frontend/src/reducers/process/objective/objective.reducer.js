@@ -6,6 +6,7 @@ const INITIAL_STATE = {
 }
 
 const objectiveReducer = (state = INITIAL_STATE, action) => {
+    let objectiveHold = { ...state.objectives };
     switch (action.type) {
         case ObjectiveActionTypes.SET_SINGLE_OBJECTIVE:
             return {
@@ -13,7 +14,6 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 selectedObjective: action.payload
             };
         case ObjectiveActionTypes.SET_OBJECTIVES:
-            let objectiveHold = { ...state.objectives };
             if (action.payload.data.length > 0){
                 objectiveHold[action.deptName] = action.payload.data;
             } else {
@@ -24,34 +24,37 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 objectives: objectiveHold
             };
         case ObjectiveActionTypes.ADD_OBJECTIVE:
+            objectiveHold[action.payload.deptName].push(action.payload)
             return {
                 ...state,
-                objectives: [...state.objectives, action.payload]
+                objectives: objectiveHold
             };
         case ObjectiveActionTypes.UPDATE_OBJECTIVE:
+            objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
+                .filter((value)=>{
+                    return value.objectiveName !== action.payload.objectiveName 
+                })
+            objectiveHold[action.payload.deptName].push(action.payload)
+            objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
+                .sort((first, second)=>{
+                    if(first.objectiveName > second.objectiveName){
+                        return 1
+                    } else {
+                        return -1
+                    }}
+                )
             return {
                 ...state,
-                objectives: [
-                    action.payload,
-                    ...state.objectives
-                        .filter((value)=>{
-                            return value.objectiveName !== action.payload.objectiveName 
-                        })]
-                        .sort((first, second)=>{
-                            if(first.objectiveName > second.objectiveName){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                objectives: objectiveHold
             };
         case ObjectiveActionTypes.DELETE_OBJECTIVE:
+            objectiveHold[action.deptName] = objectiveHold[action.deptName]
+                .filter((value)=>{
+                    return value.objectiveName !== action.payload
+                })
             return {
                 ...state,
-                objectives: [...state.objectives
-                    .filter((value)=>{
-                        return value.objectiveName !== action.payload
-                    })]
+                objectives: objectiveHold
             };
         default:
             return state;

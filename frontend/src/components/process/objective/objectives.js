@@ -6,14 +6,16 @@ const Objectives = props => {
         <div>
             {props.objectives.length > 0 ?
                 <div>
-                    <h3 className='centered'>{props.deptName}</h3>
+                    <h3 className='centered'>Objectives</h3>
                     <div className='grid50'>
                         {props.objectives.map(objective=>(
                             <div 
                                 key={objective.objectiveName}
                                 >
                                 <SingleObjective
-                                    objective={objective} />
+                                    objective={objective}
+                                    deptName={props.deptName}
+                                    inDept={true} />
                             </div>
                         ))}
                     </div>

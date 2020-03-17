@@ -9,6 +9,7 @@ const ObjectiveNew = (props) =>{
                 <div>
                     <div className='border'>
                         <ObjectiveForm 
+                            deptName={props.deptName} 
                             callback={props.action} 
                             editMode={false}/>
                     </div>

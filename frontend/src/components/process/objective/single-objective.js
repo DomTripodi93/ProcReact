@@ -15,10 +15,12 @@ const SingleObjective = props =>{
     }
 
     const handleDelete = () => {
+        console.log(props.deptName)
         if (window.confirm(
           "Are you sure you want to delete this objective: " +props.objective.objectiveName+ "?"
           )){
-            props.deleteObjective(props.objective.objectiveName);
+            console.log(props.deptName)
+            props.deleteObjective(props.objective.objectiveName, props.deptName);
         }
     }
 
@@ -28,29 +30,48 @@ const SingleObjective = props =>{
                 {!editMode ?
                     <div>
                         <h3>{props.objective.objectiveName}</h3>
-                        {props.objective.funcName ?
-                            <h4>Function: {props.objective.funcName}</h4>
+                        {props.objective.goal ?
+                            <h4>Goal: {props.objective.goal}</h4>
+                        :
+                            null
+                        }
+                        {props.objective.time ?
+                            <h4>Time: {props.objective.time} Hours</h4>
                         :
                             null
                         }
                         <div className="grid50">
-                            <CustomButton action={setEditMode} buttonStyle="blue" label="Edit" />
-                            <CustomButton action={handleDelete} buttonStyle="red" label="Delete" />
+                            <CustomButton 
+                                action={setEditMode} 
+                                buttonStyle="blue" 
+                                label="Edit" />
+                            <CustomButton 
+                                action={handleDelete} 
+                                buttonStyle="red" 
+                                label="Delete" />
                         </div>
                     </div>
                 :
-                    <ObjectiveForm editMode={true} objectiveInput={props.objective} callback={setEditMode} />
+                    <ObjectiveForm 
+                        deptName={props.deptName} 
+                        editMode={true} 
+                        objectiveInput={props.objective} 
+                        callback={setEditMode} />
                 }
             </div>
             <br />
-            <StepContainer objectiveName={props.objective.objectiveName} />
+            {!props.inDept ?
+                <StepContainer objectiveName={props.objective.objectiveName} />
+            :
+                null
+            }
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        deleteObjective: (id) => dispatch(deleteObjective(id))
+        deleteObjective: (objectiveName, deptName) => dispatch(deleteObjective(objectiveName, deptName))
     }
 }
 

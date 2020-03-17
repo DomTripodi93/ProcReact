@@ -6,9 +6,9 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleDepartment(id){
+export function fetchSingleDepartment(name){
     return dispatch => {
-        http.fetchById("department", id)
+        http.fetchByValue("department", name)
             .then((department) => {
                 dispatch(setSingleDepartment(department));
             });
@@ -41,7 +41,7 @@ export function addDepartment(department, callback){
 export function updateDepartment(department, callback){
     department = prepDepartmentValues(department);
     return dispatch =>{
-        http.updateItemById("department", department, department.deptName)
+        http.updateItem("department", department, department.deptName)
             .then(() =>{
                 dispatch(updateDepartmentInState(department));
                 callback();
@@ -50,11 +50,11 @@ export function updateDepartment(department, callback){
 }
 //Updates department in database
 
-export function deleteDepartment(id){
+export function deleteDepartment(name){
     return dispatch =>{
-        http.deleteItemById("department", id)
+        http.deleteItem("department", name)
             .then(()=>{
-                dispatch(deleteDepartmentFromState(id));
+                dispatch(deleteDepartmentFromState(name));
             });
     }
 }

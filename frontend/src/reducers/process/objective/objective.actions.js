@@ -41,7 +41,7 @@ export function addObjective(objective, callback){
 export function updateObjective(objective, callback){
     objective = prepObjectiveValues(objective);
     return dispatch =>{
-        http.updateItemById("objective", objective, objective.objectiveName)
+        http.updateItem("objective", objective, objective.deptName + "&" + objective.objectiveName)
             .then(() =>{
                 dispatch(updateObjectiveInState(objective));
                 callback();
@@ -50,11 +50,11 @@ export function updateObjective(objective, callback){
 }
 //Updates objective in database
 
-export function deleteObjective(id){
+export function deleteObjective(objectiveName, deptName){
     return dispatch =>{
-        http.deleteItemById("objective", id)
+        http.deleteItem("objective", deptName + "&" + objectiveName)
             .then(()=>{
-                dispatch(deleteObjectiveFromState(id));
+                dispatch(deleteObjectiveFromState(objectiveName, deptName));
             });
     }
 }
@@ -93,10 +93,11 @@ export function updateObjectiveInState(objective){
 }
 //Updates function for objective
 
-export function deleteObjectiveFromState(id){
+export function deleteObjectiveFromState(objectiveName, deptName){
     return {
         type: ObjectiveActionTypes.DELETE_OBJECTIVE,
-        payload: id
+        payload: objectiveName,
+        deptName: deptName
     }
 }
 //Deletes selected objective

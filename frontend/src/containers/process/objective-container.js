@@ -22,6 +22,7 @@ const ObjectiveContainer = (props) => {
         <div>
             <div className="grid100">
                 <ObjectiveNew 
+                    deptName={props.deptName}
                     addMode={addMode} 
                     action={showObjectiveForm}/>
             </div>
