@@ -11,6 +11,7 @@ const CommonDifficultyNew = (props) =>{
                         <CommonDifficultyForm 
                             deptName={props.deptName} 
                             objectiveName={props.objectiveName}
+                            stepNumber={props.stepNumber}
                             callback={props.action} 
                             editMode={false}/>
                     </div>

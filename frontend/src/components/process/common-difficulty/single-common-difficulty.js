@@ -3,10 +3,6 @@ import CustomButton from '../../../shared/elements/button/custom-button.componen
 import CommonDifficultyForm from './common-difficulty-form';
 import { deleteCommonDifficulty } from '../../../reducers/process/common-difficulty/common-difficulty.actions';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CommonDifficultyContainer from '../../../containers/process/common-difficulty-container';
-import BestPracticeContainer from '../../../containers/process/best-practice-container';
-
 
 const SingleCommonDifficulty = props =>{
     const [editMode, updateEditMode] = useState(false);
@@ -17,9 +13,15 @@ const SingleCommonDifficulty = props =>{
 
     const handleDelete = () => {
         if (window.confirm(
-          "Are you sure you want to delete this commonDifficulty: " +props.commonDifficulty.difficulty + ": " + props.commonDifficulty.name + "?"
-          )){
-            props.deleteCommonDifficulty(props.commonDifficulty.difficulty, props.objectiveName ,props.deptName);
+            "Are you sure you want to delete this commonDifficulty: " +
+            props.commonDifficulty.difficulty + ": " + 
+            props.commonDifficulty.name + "?"
+        )){
+            props.deleteCommonDifficulty(
+                props.commonDifficulty.difficulty, 
+                props.commonDifficulty.objectiveName, 
+                props.commonDifficulty.deptName
+            );
         }
     }
 
@@ -51,10 +53,7 @@ const SingleCommonDifficulty = props =>{
                         </div>
                     </div>
                 :
-                    <CommonDifficultyForm 
-                        deptName={props.deptName} 
-                        objectiveName={props.objectiveName}
-                        stepNumber={props.stepNumber}
+                    <CommonDifficultyForm
                         editMode={true}
                         inDept={props.inDept}
                         commonDifficultyInput={props.commonDifficulty} 

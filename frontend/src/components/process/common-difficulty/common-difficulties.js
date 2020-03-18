@@ -13,8 +13,6 @@ const CommonDifficulties = props => {
                                 >
                                 <SingleCommonDifficulty
                                     commonDifficulty={commonDifficulty}
-                                    deptName={props.deptName}
-                                    objectiveName={props.objectiveName}
                                     inDept={true} />
                             </div>
                         ))}

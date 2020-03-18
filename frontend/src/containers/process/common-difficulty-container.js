@@ -35,14 +35,13 @@ const CommonDifficultyContainer = (props) => {
                 <CommonDifficultyNew
                     deptName={deptName}
                     objectiveName={objectiveName}
+                    stepNumber={stepNumber}
                     addMode={addMode}
                     action={showCommonDifficultyForm}/>
             </div>
             <br />
             {props.commonDifficulties ?
                 <CommonDifficulties 
-                    deptName={deptName}
-                    objectiveName={objectiveName}
                     action={showCommonDifficultyForm} 
                     commonDifficulties={props.commonDifficulties}/>
             :
