@@ -1,6 +1,9 @@
 import rootHttp from '../../root-http';
 import ObjectiveActionTypes from './objective.types';
 import helpers from '../../../shared/helpers';
+import store from '../../store';
+
+
 
 const http = new rootHttp();
 const helper = new helpers();
@@ -42,7 +45,22 @@ export function updateObjective(objective, callback){
     return dispatch =>{
         http.updateItem("objective", objective, objective.deptName + "&" + objective.objectiveName)
             .then(() =>{
-                dispatch(updateObjectiveInState(objective));
+                dispatch(updateObjectivesInState(objective));
+                callback();
+            });
+    }
+}
+//Updates objective in database
+
+export function updateSingleObjective(objective, callback){
+    objective = prepObjectiveValues(objective);
+    return dispatch =>{
+        http.updateItem("objective", objective, objective.deptName + "&" + objective.objectiveName)
+            .then(() =>{
+                if (Object.keys(store.getState().objective.objectives).length > 0){
+                    dispatch(updateObjectivesInState(objective));
+                }
+                dispatch(setSingleObjective(objective));
                 callback();
             });
     }
@@ -84,9 +102,9 @@ export function setSingleObjective(objective){
 }
 //Sets selected objective in state
 
-export function updateObjectiveInState(objective){
+export function updateObjectivesInState(objective){
     return {
-        type: ObjectiveActionTypes.UPDATE_OBJECTIVE,
+        type: ObjectiveActionTypes.UPDATE_OBJECTIVES,
         payload: objective
     }
 }

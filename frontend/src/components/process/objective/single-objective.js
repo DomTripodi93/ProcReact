@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 
 
 const SingleObjective = props =>{
-
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -54,7 +53,8 @@ const SingleObjective = props =>{
                 :
                     <ObjectiveForm 
                         deptName={props.LinkdeptName} 
-                        editMode={true} 
+                        editMode={true}
+                        inDept={props.inDept}
                         objectiveInput={props.objective} 
                         callback={setEditMode} />
                 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { addObjective, updateObjective } from '../../../reducers/process/objective/objective.actions';
+import { addObjective, updateObjective, updateSingleObjective } from '../../../reducers/process/objective/objective.actions';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import FormInput from '../../../shared/elements/form-input/form-input.component';
 
@@ -29,7 +29,11 @@ const ObjectiveForm = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         if (props.editMode){
-            props.updateObjective(objectiveInfo, props.callback);
+            if (props.inDept) {
+                props.updateObjective(objectiveInfo, props.callback);
+            } else {
+                props.updateSingleObjective(objectiveInfo, props.callback);
+            }
         } else {
             props.addObjective(objectiveInfo, props.callback);
         }
@@ -112,8 +116,10 @@ const mapDispatchToProps = dispatch => ({
     },
     updateObjective: (objective, callback) => {
         dispatch(updateObjective(objective, callback))
+    },
+    updateSingleObjective: (objective, callback) => {
+        dispatch(updateSingleObjective(objective, callback))
     }
 });
-
 
 export default connect(null, mapDispatchToProps)(ObjectiveForm);

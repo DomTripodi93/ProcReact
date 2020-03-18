@@ -29,7 +29,7 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 objectives: objectiveHold
             };
-        case ObjectiveActionTypes.UPDATE_OBJECTIVE:
+        case ObjectiveActionTypes.UPDATE_OBJECTIVES:
             objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
                 .filter((value)=>{
                     return value.objectiveName !== action.payload.objectiveName 
