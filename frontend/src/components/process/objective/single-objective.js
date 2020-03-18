@@ -66,7 +66,7 @@ const SingleObjective = props =>{
                 <Link to={'objective/' + props.deptName + '/' + props.objective.objectiveName} className='grid100 spaced'>
                     <CustomButton 
                         buttonStyle='green' 
-                        label="View Schedule" />
+                        label="View Objective" />
                 </Link>
             }
         </div>
