@@ -6,7 +6,6 @@ const Steps = props => {
         <div>
             {props.steps.length > 0 ?
                 <div>
-                    <h3 className='centered'>Steps</h3>
                     <div className='grid50'>
                         {props.steps.map(step=>(
                             <div 

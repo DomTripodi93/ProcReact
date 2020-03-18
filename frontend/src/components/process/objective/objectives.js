@@ -6,7 +6,6 @@ const Objectives = props => {
         <div>
             {props.objectives.length > 0 ?
                 <div>
-                    <h3 className='centered'>Objectives</h3>
                     <div className='grid50'>
                         {props.objectives.map(objective=>(
                             <div 

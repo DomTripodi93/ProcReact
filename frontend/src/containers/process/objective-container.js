@@ -20,12 +20,14 @@ const ObjectiveContainer = (props) => {
 
     return(
         <div>
+            <h3 className='centered'>Objectives</h3>
             <div className="grid100">
                 <ObjectiveNew 
                     deptName={deptName}
                     addMode={addMode} 
                     action={showObjectiveForm}/>
             </div>
+            <br />
             {props.objectives[deptName] ?
                 <Objectives 
                     deptName={deptName}

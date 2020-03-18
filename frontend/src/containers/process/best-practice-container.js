@@ -3,7 +3,7 @@ import React from 'react';
 const BestPracticeContainer = props => {
     return (
         <div> 
-            step container
+            best practice container
         </div>
     )
 }

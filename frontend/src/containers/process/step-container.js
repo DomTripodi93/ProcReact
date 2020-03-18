@@ -28,6 +28,7 @@ const StepContainer = (props) => {
 
     return(
         <div>
+            <h3 className='centered'>Steps</h3>
             <div className="grid100">
                 <StepNew
                     deptName={deptName}
@@ -35,6 +36,7 @@ const StepContainer = (props) => {
                     addMode={addMode}
                     action={showStepForm}/>
             </div>
+            <br />
             {props.steps ?
                 <Steps 
                     deptName={deptName}
