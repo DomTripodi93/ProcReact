@@ -18,7 +18,7 @@ export function fetchSingleStep(stepNumber, objectiveName, deptName){
 
 export function fetchStepsByDepartmentAndObjective(deptName, objectiveName){
     return dispatch => {
-        http.fetchAll("step/byDepartment/" + deptName + "&" + objectiveName)
+        http.fetchAll("step/byObjective/" + deptName + "&" + objectiveName)
             .then((steps) => {
                 dispatch(setSteps(steps));
             });

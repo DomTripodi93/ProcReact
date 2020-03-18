@@ -24,8 +24,7 @@ const EmployeeContainer = (props) => {
                 action={showEmployeeForm}/>
             <h2 className='centered'>Employees</h2>
             <br />
-            <Employees 
-                action={showEmployeeForm} 
+            <Employees
                 employees={props.employees}/>
         </div>
     )

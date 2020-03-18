@@ -61,7 +61,7 @@ const SingleObjective = props =>{
             </div>
             <br />
             {!props.inDept ?
-                <StepContainer objectiveName={props.objective.objectiveName} />
+                <StepContainer objectiveName={props.objective.objectiveName} deptName={props.deptName} />
             :
                 <Link to={'objective/' + props.deptName + '/' + props.objective.objectiveName} className='grid100 spaced'>
                     <CustomButton 

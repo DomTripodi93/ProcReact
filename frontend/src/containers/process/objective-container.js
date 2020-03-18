@@ -29,7 +29,6 @@ const ObjectiveContainer = (props) => {
             {props.objectives[deptName] ?
                 <Objectives 
                     deptName={deptName}
-                    action={showObjectiveForm} 
                     objectives={props.objectives[deptName]}/>
             :
                 null

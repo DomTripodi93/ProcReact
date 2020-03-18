@@ -25,7 +25,6 @@ const DepartmentContainer = (props) => {
             <h2 className='centered'>Departments</h2>
             <br />
             <Departments 
-                action={showDepartmentForm} 
                 departments={props.departments}/>
         </div>
     )
