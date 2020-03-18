@@ -47,7 +47,7 @@ const SingleStep = props =>{
                     </div>
                 :
                     <StepForm 
-                        deptName={props.LinkdeptName} 
+                        deptName={props.deptName} 
                         objectiveName={props.objectiveName}
                         editMode={true}
                         inDept={props.inDept}
@@ -58,8 +58,14 @@ const SingleStep = props =>{
             <br />
             {!props.inDept ?
                 <div className="grid50">
-                    <BestPracticeContainer />
-                    <CommonDifficultyContainer />
+                    <BestPracticeContainer 
+                        deptName={props.deptName} 
+                        objectiveName={props.objectiveName}
+                        stepNumber={props.step.stepNumber}/>
+                    <CommonDifficultyContainer
+                        deptName={props.deptName} 
+                        objectiveName={props.objectiveName}
+                        stepNumber={props.step.stepNumber}/>
                 </div>
             :
                 <Link to={'/step/' + props.deptName + '/' + props.objectiveName + '/' + props.step.stepNumber} className='grid100 spaced'>

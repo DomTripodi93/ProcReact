@@ -56,7 +56,7 @@ const SingleObjective = props =>{
                     </div>
                 :
                     <ObjectiveForm 
-                        deptName={props.LinkdeptName} 
+                        deptName={props.deptName} 
                         editMode={true}
                         inDept={props.inDept}
                         objectiveInput={props.objective} 

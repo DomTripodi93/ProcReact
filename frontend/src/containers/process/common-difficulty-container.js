@@ -10,16 +10,18 @@ const CommonDifficultyContainer = (props) => {
     const fetchCommonDifficulties = props.fetchCommonDifficulties;
     const deptName = props.deptName;
     const objectiveName = props.objectiveName;
+    const stepNumber = props.stepNumber;
 
     useEffect(()=>{
         if (
             deptName !== undefined && 
             objectiveName !== undefined && 
-            deptName !== ""
+            deptName !== "" &&
+            stepNumber !== undefined
         ){
-            fetchCommonDifficulties(deptName, objectiveName);
+            fetchCommonDifficulties(deptName, objectiveName, stepNumber);
         }
-    },[fetchCommonDifficulties, deptName, objectiveName]);
+    },[fetchCommonDifficulties, deptName, objectiveName, stepNumber]);
 
 
     const showCommonDifficultyForm = () =>{
@@ -37,7 +39,7 @@ const CommonDifficultyContainer = (props) => {
                     action={showCommonDifficultyForm}/>
             </div>
             <br />
-            {props.commonDifficultys ?
+            {props.commonDifficulties ?
                 <CommonDifficulties 
                     deptName={deptName}
                     objectiveName={objectiveName}

@@ -54,7 +54,7 @@ export function updateCommonDifficulty(commonDifficulty, callback){
 export function updateSingleCommonDifficulty(commonDifficulty, callback){
     commonDifficulty = prepCommonDifficultyValues(commonDifficulty);
     return dispatch =>{
-        http.updateItem("commonDifficulty", commonDifficulty, commonDifficulty.deptName + "&" + commonDifficulty.objectiveName+ "&" + commonDifficulty.commonDifficultyNumber)
+        http.updateItemById("commonDifficulty", commonDifficulty, commonDifficulty.id)
             .then(() =>{
                 if (Object.keys(store.getState().commonDifficulty.commonDifficulties).length > 0){
                     dispatch(updateCommonDifficultiesInState(commonDifficulty));
@@ -108,10 +108,10 @@ export function updateCommonDifficultiesInState(commonDifficulty){
 }
 //Updates function for commonDifficulty
 
-export function deleteCommonDifficultyFromState(commonDifficultyNumber){
+export function deleteCommonDifficultyFromState(id){
     return {
         type: CommonDifficultyActionTypes.DELETE_COMMON_DIFFICULTY,
-        payload: commonDifficultyNumber
+        payload: id
     }
 }
 //Deletes selected commonDifficulty

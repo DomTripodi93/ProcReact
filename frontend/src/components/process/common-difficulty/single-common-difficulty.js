@@ -1,11 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CustomButton from '../../../shared/elements/button/custom-button.component';
+import CommonDifficultyForm from './common-difficulty-form';
+import { deleteCommonDifficulty } from '../../../reducers/process/common-difficulty/common-difficulty.actions';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import CommonDifficultyContainer from '../../../containers/process/common-difficulty-container';
+import BestPracticeContainer from '../../../containers/process/best-practice-container';
 
-const SingleCommonDifficulty = props => {
+
+const SingleCommonDifficulty = props =>{
+    const [editMode, updateEditMode] = useState(false);
+
+    const setEditMode = () => {
+        updateEditMode(!editMode)
+    }
+
+    const handleDelete = () => {
+        if (window.confirm(
+          "Are you sure you want to delete this commonDifficulty: " +props.commonDifficulty.difficulty + ": " + props.commonDifficulty.name + "?"
+          )){
+            props.deleteCommonDifficulty(props.commonDifficulty.difficulty, props.objectiveName ,props.deptName);
+        }
+    }
+
     return(
         <div>
-            common difficulty form
+            <div className='border centered'>
+                {!editMode ?
+                    <div>
+                        <h3>{props.commonDifficulty.difficulty}</h3>
+                        {props.commonDifficulty.cause ?
+                            <h4>Cause: <br /> {props.commonDifficulty.cause}</h4>
+                        :
+                            null
+                        }
+                        {props.commonDifficulty.solution ?
+                            <h4>Solution: <br /> {props.commonDifficulty.solution}</h4>
+                        :
+                            null
+                        }
+                        <div className="grid50">
+                            <CustomButton 
+                                action={setEditMode} 
+                                buttonStyle="blue" 
+                                label="Edit" />
+                            <CustomButton 
+                                action={handleDelete} 
+                                buttonStyle="red" 
+                                label="Delete" />
+                        </div>
+                    </div>
+                :
+                    <CommonDifficultyForm 
+                        deptName={props.deptName} 
+                        objectiveName={props.objectiveName}
+                        stepNumber={props.stepNumber}
+                        editMode={true}
+                        inDept={props.inDept}
+                        commonDifficultyInput={props.commonDifficulty} 
+                        callback={setEditMode} />
+                }
+            </div>
         </div>
     )
 }
 
-export default SingleCommonDifficulty;
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteCommonDifficulty: (difficulty, objectiveName, deptName) => dispatch(deleteCommonDifficulty(difficulty, objectiveName, deptName))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(SingleCommonDifficulty);
