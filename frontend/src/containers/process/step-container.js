@@ -34,7 +34,7 @@ const StepContainer = (props) => {
                     addMode={addMode}
                     action={showStepForm}/>
             </div>
-            {props.steps.length > 0 ?
+            {props.steps ?
                 <Steps 
                     deptName={deptName}
                     action={showStepForm} 
