@@ -48,7 +48,7 @@ const App = (props) => {
             <Route exact path='/employees' component={EmployeeContainer} />
             <Route exact path='/departments' component={DepartmentContainer} />
             <Route path='/objective/:deptName/:objectiveName' component={SingleObjectiveContainer} />
-            <Route path='/step/:deptName/:objectiveName/:stepName' component={SingleStepContainer} />
+            <Route path='/step/:deptName/:objectiveName/:stepNumber' component={SingleStepContainer} />
           </Switch>
           :
           <Switch>

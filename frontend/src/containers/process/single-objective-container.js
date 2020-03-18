@@ -5,19 +5,16 @@ import SingleObjective from '../../components/process/objective/single-objective
 
 
 const SingleObjectiveContainer = props =>{
-    const [deptName, setDeptName] = useState("");
+    const deptName = props.match.params.deptName;
+    const objectiveName = props.match.params.objectiveName;
 
     useEffect(()=>{
         if (!props.inDept){
-            setDeptName(props.match.params.deptName);
             if (
-                props.match.params.objectiveName !== props.selectedObjective.objectiveName ||
-                props.match.params.deptName !== props.selectedObjective.deptName
+                objectiveName !== props.selectedObjective.objectiveName ||
+                deptName !== props.selectedObjective.deptName
             ){
-                props.fetchSingleObjective(
-                    props.match.params.objectiveName, 
-                    props.match.params.deptName
-                );
+                props.fetchSingleObjective(objectiveName, deptName);
             }
         }
     },[props])
