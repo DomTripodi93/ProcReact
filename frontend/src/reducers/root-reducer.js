@@ -6,6 +6,7 @@ import employeeReducer from './schedule/employee/employee.reducer';
 import departmentReducer from './process/department/department.reducer';
 import objectiveReducer from './process/objective/objective.reducer';
 import stepReducer from './process/step/step.reducer';
+import commonDifficultyReducer from './process/common-difficulty/common-difficulty.reducer';
 
 
 export default combineReducers({
@@ -14,5 +15,6 @@ export default combineReducers({
     employee: employeeReducer,
     department: departmentReducer,
     objective: objectiveReducer,
-    step: stepReducer
+    step: stepReducer,
+    commonDifficulty: commonDifficultyReducer
 })

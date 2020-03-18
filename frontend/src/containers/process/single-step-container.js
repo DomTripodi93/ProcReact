@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { fetchSingleStep } from '../../reducers/process/step/step.actions';
 import { connect } from 'react-redux';
 import SingleStep from '../../components/process/step/single-step';
@@ -19,7 +19,7 @@ const SingleStepContainer = props =>{
                 props.fetchSingleStep(stepNumber, objectiveName, deptName);
             }
         }
-    },[props])
+    },[props, deptName, objectiveName, stepNumber])
 
     return(
         <div>

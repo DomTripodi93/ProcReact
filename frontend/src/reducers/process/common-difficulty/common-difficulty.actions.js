@@ -70,7 +70,7 @@ export function deleteCommonDifficulty(id){
     return dispatch =>{
         http.deleteItemById("commonDifficulty", id)
             .then(()=>{
-                dispatch(deleteCommonDifficultyFromState(commonDifficultyNumber, deptName));
+                dispatch(deleteCommonDifficultyFromState(id));
             });
     }
 }

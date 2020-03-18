@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { fetchSingleObjective } from '../../reducers/process/objective/objective.actions';
 import { connect } from 'react-redux';
 import SingleObjective from '../../components/process/objective/single-objective';
@@ -17,7 +17,7 @@ const SingleObjectiveContainer = props =>{
                 props.fetchSingleObjective(objectiveName, deptName);
             }
         }
-    },[props])
+    },[props, deptName, objectiveName])
 
     return(
         <div>

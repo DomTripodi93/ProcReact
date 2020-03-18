@@ -3,9 +3,9 @@ import CustomButton from '../../../shared/elements/button/custom-button.componen
 import StepForm from './step-form';
 import { deleteStep } from '../../../reducers/process/step/step.actions';
 import { connect } from 'react-redux';
-import StepContainer from '../../../containers/process/step-container';
 import { Link } from 'react-router-dom';
-
+import CommonDifficultyContainer from '../../../containers/process/common-difficulty-container';
+import BestPracticeContainer from '../../../containers/process/best-practice-container';
 
 
 const SingleStep = props =>{
@@ -58,8 +58,8 @@ const SingleStep = props =>{
             <br />
             {!props.inDept ?
                 <div className="grid50">
-                    <div>best practices</div>
-                    <div>common difficulties</div>
+                    <BestPracticeContainer />
+                    <CommonDifficultyContainer />
                 </div>
             :
                 <Link to={'/step/' + props.deptName + '/' + props.objectiveName + '/' + props.step.stepNumber} className='grid100 spaced'>
