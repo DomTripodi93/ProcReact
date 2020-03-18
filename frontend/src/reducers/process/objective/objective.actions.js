@@ -2,7 +2,6 @@ import rootHttp from '../../root-http';
 import ObjectiveActionTypes from './objective.types';
 import helpers from '../../../shared/helpers';
 
-
 const http = new rootHttp();
 const helper = new helpers();
 

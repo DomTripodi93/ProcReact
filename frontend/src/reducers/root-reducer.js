@@ -5,6 +5,7 @@ import { dropDownReducer } from './drop-down/drop-down.reducer'
 import employeeReducer from './schedule/employee/employee.reducer';
 import departmentReducer from './process/department/department.reducer';
 import objectiveReducer from './process/objective/objective.reducer';
+import stepReducer from './process/step/step.reducer';
 
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
     dropDown: dropDownReducer,
     employee: employeeReducer,
     department: departmentReducer,
-    objective: objectiveReducer
+    objective: objectiveReducer,
+    step: stepReducer
 })

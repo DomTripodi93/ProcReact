@@ -21,14 +21,10 @@ const SingleObjectiveContainer = props =>{
 
     return(
         <div>
-            {props.selectedObjective ?
-                <SingleObjective 
-                    objective={props.selectedObjective}
-                    deptName={deptName}
-                    inDept={false}/>
-            :
-                <div>didnt work</div>
-            }
+            <SingleObjective 
+                objective={props.selectedObjective}
+                deptName={deptName}
+                inDept={false}/>
         </div>
     )
 }
