@@ -117,9 +117,9 @@ export function deleteStepFromState(stepNumber){
 //Deletes selected step
 
 function prepStepValues(step){
-    step.stepNumber = helper.capitalizeAll(step.stepNumber);
-    if (step.funcName){
-        step.funcName = helper.capitalize(step.funcName);
+    step.name = helper.capitalizeAll(step.name);
+    if (step.goal){
+        step.goal = helper.capitalize(step.goal);
     }
 
     return step;

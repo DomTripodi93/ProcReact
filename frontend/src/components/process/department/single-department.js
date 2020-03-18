@@ -16,7 +16,7 @@ const SingleDepartment = props =>{
 
     const handleDelete = () => {
         if (window.confirm(
-          "Are you sure you want to delete this department: " +props.department.deptName+ "?"
+          "Are you sure you want to delete this department: " + props.department.deptName + "?"
           )){
             props.deleteDepartment(props.department.deptName);
         }

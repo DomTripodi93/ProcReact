@@ -17,7 +17,7 @@ const SingleStep = props =>{
 
     const handleDelete = () => {
         if (window.confirm(
-          "Are you sure you want to delete this step: " + props.step.stepNumber + "?"
+          "Are you sure you want to delete this step: " +props.step.stepNumber + ": " + props.step.name + "?"
           )){
             props.deleteStep(props.step.stepNumber, props.objectiveName ,props.deptName);
         }
