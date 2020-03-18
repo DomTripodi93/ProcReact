@@ -4,10 +4,12 @@ import ObjectiveForm from './objective-form';
 import { deleteObjective } from '../../../reducers/process/objective/objective.actions';
 import { connect } from 'react-redux';
 import StepContainer from '../../../containers/process/step-container';
+import { Link } from 'react-router-dom';
 
 
 
 const SingleObjective = props =>{
+
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -15,11 +17,9 @@ const SingleObjective = props =>{
     }
 
     const handleDelete = () => {
-        console.log(props.deptName)
         if (window.confirm(
-          "Are you sure you want to delete this objective: " +props.objective.objectiveName+ "?"
+          "Are you sure you want to delete this objective: " + props.objective.objectiveName + "?"
           )){
-            console.log(props.deptName)
             props.deleteObjective(props.objective.objectiveName, props.deptName);
         }
     }
@@ -53,7 +53,7 @@ const SingleObjective = props =>{
                     </div>
                 :
                     <ObjectiveForm 
-                        deptName={props.deptName} 
+                        deptName={props.LinkdeptName} 
                         editMode={true} 
                         objectiveInput={props.objective} 
                         callback={setEditMode} />
@@ -63,7 +63,11 @@ const SingleObjective = props =>{
             {!props.inDept ?
                 <StepContainer objectiveName={props.objective.objectiveName} />
             :
-                null
+                <Link to={'objective/' + props.deptName + '/' + props.objective.objectiveName} className='grid100 spaced'>
+                    <CustomButton 
+                        buttonStyle='green' 
+                        label="View Schedule" />
+                </Link>
             }
         </div>
     )

@@ -13,7 +13,7 @@ const ObjectiveForm = props => {
         time: ''
     });
   
-    const { objectiveName, deptName, goal, time } = objectiveInfo;
+    const { objectiveName, goal, time } = objectiveInfo;
 
     useEffect(()=>{
         if (props.editMode){

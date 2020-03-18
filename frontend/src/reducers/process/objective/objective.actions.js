@@ -10,7 +10,7 @@ export function fetchSingleObjective(objectiveName, deptName){
     return dispatch => {
         http.fetchByValue("objective", deptName + "&" + objectiveName)
             .then((objective) => {
-                dispatch(setSingleObjective(objective));
+                dispatch(setSingleObjective(objective.data));
             });
     }  
 }

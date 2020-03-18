@@ -11,7 +11,7 @@ const ObjectiveContainer = (props) => {
     const deptName = props.deptName;
 
     useEffect(()=>{
-        fetchObjectives(props.deptName);
+        fetchObjectives(deptName);
     },[fetchObjectives, deptName]);
 
     const showObjectiveForm = () =>{
@@ -22,15 +22,15 @@ const ObjectiveContainer = (props) => {
         <div>
             <div className="grid100">
                 <ObjectiveNew 
-                    deptName={props.deptName}
+                    deptName={deptName}
                     addMode={addMode} 
                     action={showObjectiveForm}/>
             </div>
-            {props.objectives[props.deptName] ?
+            {props.objectives[deptName] ?
                 <Objectives 
-                    deptName={props.deptName}
+                    deptName={deptName}
                     action={showObjectiveForm} 
-                    objectives={props.objectives[props.deptName]}/>
+                    objectives={props.objectives[deptName]}/>
             :
                 null
             }

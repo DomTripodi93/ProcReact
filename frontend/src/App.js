@@ -15,6 +15,7 @@ import DepartmentContainer from './containers/process/department-container';
 
 import store from './reducers/store';
 import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
+import SingleObjectiveContainer from './containers/process/single-objective-container';
 
 
 const App = (props) => {
@@ -45,6 +46,7 @@ const App = (props) => {
             <Route exact path='/signout' component={Signout} />
             <Route exact path='/employees' component={EmployeeContainer} />
             <Route exact path='/departments' component={DepartmentContainer} />
+            <Route path='/objective/:deptName/:objectiveName' component={SingleObjectiveContainer} />
           </Switch>
           :
           <Switch>
