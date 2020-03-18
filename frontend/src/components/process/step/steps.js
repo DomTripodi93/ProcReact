@@ -15,6 +15,7 @@ const Steps = props => {
                                 <SingleStep
                                     step={step}
                                     deptName={props.deptName}
+                                    objectiveName={props.objectiveName}
                                     inDept={true} />
                             </div>
                         ))}

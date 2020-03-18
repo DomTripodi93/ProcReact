@@ -1,6 +1,7 @@
 import rootHttp from '../../root-http';
 import StepActionTypes from './step.types';
 import helpers from '../../../shared/helpers';
+import store from '../../store';
 
 
 const http = new rootHttp();
@@ -43,12 +44,27 @@ export function updateStep(step, callback){
     return dispatch =>{
         http.updateItem("step", step, step.deptName + "&" + step.objectiveName + "&" + step.stepNumber)
             .then(() =>{
-                dispatch(updateStepInState(step));
+                dispatch(updateStepsInState(step));
                 callback();
             });
     }
 }
 //Updates step in database
+
+export function updateSingleStep(step, callback){
+    step = prepStepValues(step);
+    return dispatch =>{
+        http.updateItem("step", step, step.deptName + "&" + step.objectiveName+ "&" + step.stepNumber)
+            .then(() =>{
+                if (Object.keys(store.getState().step.steps).length > 0){
+                    dispatch(updateStepsInState(step));
+                }
+                dispatch(setSingleStep(step));
+                callback();
+            });
+    }
+}
+//Updates objective in database
 
 export function deleteStep(stepNumber, objectiveName, deptName){
     return dispatch =>{
@@ -84,9 +100,9 @@ export function setSingleStep(step){
 }
 //Sets selected step in state
 
-export function updateStepInState(step){
+export function updateStepsInState(step){
     return {
-        type: StepActionTypes.UPDATE_STEP,
+        type: StepActionTypes.UPDATE_STEPS,
         payload: step
     }
 }

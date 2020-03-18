@@ -10,6 +10,7 @@ const StepNew = (props) =>{
                     <div className='border'>
                         <StepForm 
                             deptName={props.deptName} 
+                            objectiveName={props.objectiveName}
                             callback={props.action} 
                             editMode={false}/>
                     </div>

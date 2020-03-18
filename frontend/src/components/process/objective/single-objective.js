@@ -28,7 +28,11 @@ const SingleObjective = props =>{
             <div className='border centered'>
                 {!editMode ?
                     <div>
-                        <h3>{props.objective.objectiveName}</h3>
+                        {!props.inDept ?
+                            <h3>{props.deptName} - {props.objective.objectiveName}</h3>
+                        :
+                            <h3>{props.objective.objectiveName}</h3>
+                        }
                         {props.objective.goal ?
                             <h4>Goal: {props.objective.goal}</h4>
                         :

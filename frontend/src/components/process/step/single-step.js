@@ -19,7 +19,7 @@ const SingleStep = props =>{
         if (window.confirm(
           "Are you sure you want to delete this step: " + props.step.stepNumber + "?"
           )){
-            props.deleteStep(props.step.stepNumber, props.deptName);
+            props.deleteStep(props.step.stepNumber, props.objectiveName ,props.deptName);
         }
     }
 
@@ -31,11 +31,6 @@ const SingleStep = props =>{
                         <h3>{props.step.stepNumber}: {props.step.name}</h3>
                         {props.step.goal ?
                             <h4>Goal: {props.step.goal}</h4>
-                        :
-                            null
-                        }
-                        {props.step.time ?
-                            <h4>Time: {props.step.time} Hours</h4>
                         :
                             null
                         }
@@ -53,6 +48,7 @@ const SingleStep = props =>{
                 :
                     <StepForm 
                         deptName={props.LinkdeptName} 
+                        objectiveName={props.objectiveName}
                         editMode={true}
                         inDept={props.inDept}
                         stepInput={props.step} 
@@ -61,9 +57,12 @@ const SingleStep = props =>{
             </div>
             <br />
             {!props.inDept ?
-                <StepContainer stepNumber={props.step.stepNumber} deptName={props.deptName} />
+                <div className="grid50">
+                    <div>best practices</div>
+                    <div>common difficulties</div>
+                </div>
             :
-                <Link to={'step/' + props.deptName + '/' + props.objectiveName + '/' + props.step.stepNumber} className='grid100 spaced'>
+                <Link to={'/step/' + props.deptName + '/' + props.objectiveName + '/' + props.step.stepNumber} className='grid100 spaced'>
                     <CustomButton 
                         buttonStyle='green' 
                         label="View Step" />

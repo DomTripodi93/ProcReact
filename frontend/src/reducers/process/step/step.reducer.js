@@ -22,17 +22,17 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 steps: [...state.steps, action.payload]
             };
-        case StepActionTypes.UPDATE_STEP:
+        case StepActionTypes.UPDATE_STEPS:
             return {
                 ...state,
                 steps: [
                     action.payload,
                     ...state.steps
                         .filter((value)=>{
-                            return value.deptName !== action.payload.deptName 
+                            return value.stepNumber !== action.payload.stepNumber 
                         })]
                         .sort((first, second)=>{
-                            if(first.deptName > second.deptName){
+                            if(first.stepNumber > second.stepNumber){
                                 return 1
                             } else {
                                 return -1
@@ -44,7 +44,7 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 steps: [...state.steps
                     .filter((value)=>{
-                        return value.deptName !== action.payload
+                        return value.stepNumber !== action.payload
                     })]
             };
         default:

@@ -31,12 +31,14 @@ const StepContainer = (props) => {
             <div className="grid100">
                 <StepNew
                     deptName={deptName}
+                    objectiveName={objectiveName}
                     addMode={addMode}
                     action={showStepForm}/>
             </div>
             {props.steps ?
                 <Steps 
                     deptName={deptName}
+                    objectiveName={objectiveName}
                     action={showStepForm} 
                     steps={props.steps}/>
             :
