@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => { 
+const Welcome = () => { 
     return (
         <div className="border centered">
             <h2 className="spaced">Welcome to Process Manager V 0.1.0</h2>
@@ -15,4 +15,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Welcome;

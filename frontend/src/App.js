@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
-import { checkUser } from './reducers/user/user.actions';
+import store from './reducers/store';
+import './App.css';
 
 import Header from './shared/header/header';
 import Home from './containers/home/home';
@@ -12,11 +11,12 @@ import Signin from './containers/registration/signin';
 import Signout from './containers/registration/signout';
 import EmployeeContainer from './containers/schedule/employee-container';
 import DepartmentContainer from './containers/process/department-container';
-
-import store from './reducers/store';
-import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
 import SingleObjectiveContainer from './containers/process/single-objective-container';
 import SingleStepContainer from './containers/process/single-step-container';
+import Welcome from './containers/home/welcome';
+
+import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
+import { checkUser } from './reducers/user/user.actions';
 
 
 const App = (props) => {
@@ -52,7 +52,7 @@ const App = (props) => {
           </Switch>
           :
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={Welcome} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/signin' component={Signin} />
           </Switch>
