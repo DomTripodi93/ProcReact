@@ -117,12 +117,12 @@ export function deleteBestPracticeFromState(id){
 //Deletes selected bestPractice
 
 function prepBestPracticeValues(bestPractice){
-    bestPractice.difficulty = helper.capitalizeAll(bestPractice.difficulty);
-    if (bestPractice.cause){
-        bestPractice.cause = helper.capitalize(bestPractice.cause);
+    bestPractice.practice = helper.capitalizeAll(bestPractice.practice);
+    if (bestPractice.method){
+        bestPractice.method = helper.capitalize(bestPractice.method);
     }
-    if (bestPractice.solution){
-        bestPractice.solution = helper.capitalize(bestPractice.solution);
+    if (bestPractice.purpose){
+        bestPractice.purpose = helper.capitalize(bestPractice.purpose);
     }
 
     return bestPractice;
