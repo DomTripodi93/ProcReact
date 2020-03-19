@@ -21,8 +21,8 @@ const BestPracticeNew = (props) =>{
                 <div className='full-button'>
                     <div className='grid100'>
                         <CustomButton 
-                            buttonStyle="blue"
-                            label="Add Common Difficulty"
+                            buttonStyle="blue round"
+                            label="Add Best Practice"
                             action={props.action} 
                             />
                     </div>

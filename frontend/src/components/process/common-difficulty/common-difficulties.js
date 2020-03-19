@@ -6,7 +6,7 @@ const CommonDifficulties = props => {
         <div>
             {props.commonDifficulties.length > 0 ?
                 <div>
-                    <div className='grid50'>
+                    <div className='grid50-to-100'>
                         {props.commonDifficulties.map(commonDifficulty=>(
                             <div 
                                 key={commonDifficulty.id}

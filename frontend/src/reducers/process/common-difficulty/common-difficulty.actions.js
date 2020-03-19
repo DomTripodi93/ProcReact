@@ -7,16 +7,6 @@ import store from '../../store';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleCommonDifficulty(id){
-    return dispatch => {
-        http.fetchById(id)
-            .then((commonDifficulty) => {
-                dispatch(setSingleCommonDifficulty(commonDifficulty.data));
-            });
-    }  
-}
-//Gets specific commonDifficulty by name
-
 export function fetchCommonDifficultiesByStep(deptName, objectiveName, stepNumber){
     return dispatch => {
         http.fetchAll("commonDifficulty/byStep/" + deptName + "&" + objectiveName + "&" + stepNumber)
@@ -51,21 +41,6 @@ export function updateCommonDifficulty(commonDifficulty, callback){
 }
 //Updates commonDifficulty in database
 
-export function updateSingleCommonDifficulty(commonDifficulty, callback){
-    commonDifficulty = prepCommonDifficultyValues(commonDifficulty);
-    return dispatch =>{
-        http.updateItemById("commonDifficulty", commonDifficulty, commonDifficulty.id)
-            .then(() =>{
-                if (Object.keys(store.getState().commonDifficulty.commonDifficulties).length > 0){
-                    dispatch(updateCommonDifficultiesInState(commonDifficulty));
-                }
-                dispatch(setSingleCommonDifficulty(commonDifficulty));
-                callback();
-            });
-    }
-}
-//Updates objective in database
-
 export function deleteCommonDifficulty(id){
     return dispatch =>{
         http.deleteItemById("commonDifficulty", id)
@@ -92,13 +67,6 @@ export function setCommonDifficulties(commonDifficulties){
 }
 //Sets all commonDifficulties in state
 
-export function setSingleCommonDifficulty(commonDifficulty){
-    return {
-        type: CommonDifficultyActionTypes.SET_SINGLE_COMMON_DIFFICULTY,
-        payload: commonDifficulty
-    }
-}
-//Sets selected commonDifficulty in state
 
 export function updateCommonDifficultiesInState(commonDifficulty){
     return {

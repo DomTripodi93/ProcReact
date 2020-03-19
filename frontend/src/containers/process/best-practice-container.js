@@ -30,7 +30,7 @@ const BestPracticeContainer = (props) => {
 
     return(
         <div>
-            <h3 className='centered'>Common Difficulties</h3>
+            <h3 className='centered'>Best Practices</h3>
             <div className="grid100">
                 <BestPracticeNew
                     deptName={deptName}

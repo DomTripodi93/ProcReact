@@ -55,7 +55,6 @@ const SingleStep = props =>{
                         callback={setEditMode} />
                 }
             </div>
-            <br />
             {!props.inDept ?
                 <div className="grid50">
                     <BestPracticeContainer 
@@ -70,7 +69,7 @@ const SingleStep = props =>{
             :
                 <Link to={'/step/' + props.deptName + '/' + props.objectiveName + '/' + props.step.stepNumber} className='grid100 spaced'>
                     <CustomButton 
-                        buttonStyle='green' 
+                        buttonStyle='green round' 
                         label="View Step" />
                 </Link>
             }

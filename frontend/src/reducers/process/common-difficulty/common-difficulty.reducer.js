@@ -1,17 +1,11 @@
 import CommonDifficultyActionTypes from './common-difficulty.types';
 
 const INITIAL_STATE = {
-    commonDifficulties: [],
-    selectedCommonDifficulty: {},
+    commonDifficulties: []
 }
 
 const commonDifficultyReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case CommonDifficultyActionTypes.SET_SINGLE_COMMON_DIFFICULTY:
-            return {
-                ...state,
-                selectedCommonDifficulty: action.payload
-            };
         case CommonDifficultyActionTypes.SET_COMMON_DIFFICULTIES:
             return {
                 ...state,

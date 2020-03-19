@@ -19,7 +19,7 @@ const ObjectiveNew = (props) =>{
                 <div className='full-button'>
                     <div className='grid100'>
                         <CustomButton 
-                            buttonStyle="blue"
+                            buttonStyle="blue round"
                             label="Add Objective"
                             action={props.action} 
                             />

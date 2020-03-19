@@ -21,7 +21,7 @@ const CommonDifficultyNew = (props) =>{
                 <div className='full-button'>
                     <div className='grid100'>
                         <CustomButton 
-                            buttonStyle="blue"
+                            buttonStyle="blue round"
                             label="Add Common Difficulty"
                             action={props.action} 
                             />

@@ -179,6 +179,11 @@ a, ul{
   grid-template-columns: 50% 50%;
 }
 
+.grid50-to-100 { 
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 .grid33 { 
   display: grid;
   grid-template-columns: 33.33% 33.33% 33.33%;
@@ -253,6 +258,11 @@ h3{
 @media only screen and (max-width: 915px){
   .btn{
       font-size: 80%;
+  }
+
+  .grid50-to-100 { 
+    display: grid;
+    grid-template-columns: 100%;
   }
 }
 

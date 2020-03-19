@@ -63,9 +63,10 @@ const SingleObjective = props =>{
                         callback={setEditMode} />
                 }
             </div>
-            <br />
             {!props.inDept ?
-                <StepContainer objectiveName={props.objective.objectiveName} deptName={props.deptName} />
+                <div className='size-holder middle'>
+                    <StepContainer objectiveName={props.objective.objectiveName} deptName={props.deptName} />
+                </div>
             :
                 <Link to={'objective/' + props.deptName + '/' + props.objective.objectiveName} className='grid100 spaced'>
                     <CustomButton 

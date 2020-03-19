@@ -1,17 +1,11 @@
 import DepartmentActionTypes from './department.types';
 
 const INITIAL_STATE = {
-    departments: [],
-    selectedDepartment: {},
+    departments: []
 }
 
 const departmentReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case DepartmentActionTypes.SET_SINGLE_DEPARTMENT:
-            return {
-                ...state,
-                selectedDepartment: action.payload
-            };
         case DepartmentActionTypes.SET_DEPARTMENTS:
             return {
                 ...state,

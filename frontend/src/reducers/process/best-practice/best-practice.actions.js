@@ -7,16 +7,6 @@ import store from '../../store';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleBestPractice(id){
-    return dispatch => {
-        http.fetchById(id)
-            .then((bestPractice) => {
-                dispatch(setSingleBestPractice(bestPractice.data));
-            });
-    }  
-}
-//Gets specific bestPractice by name
-
 export function fetchBestPracticesByStep(deptName, objectiveName, stepNumber){
     return dispatch => {
         http.fetchAll("bestPractice/byStep/" + deptName + "&" + objectiveName + "&" + stepNumber)
@@ -51,21 +41,6 @@ export function updateBestPractice(bestPractice, callback){
 }
 //Updates bestPractice in database
 
-export function updateSingleBestPractice(bestPractice, callback){
-    bestPractice = prepBestPracticeValues(bestPractice);
-    return dispatch =>{
-        http.updateItemById("bestPractice", bestPractice, bestPractice.id)
-            .then(() =>{
-                if (Object.keys(store.getState().bestPractice.bestPractices).length > 0){
-                    dispatch(updateBestPracticesInState(bestPractice));
-                }
-                dispatch(setSingleBestPractice(bestPractice));
-                callback();
-            });
-    }
-}
-//Updates objective in database
-
 export function deleteBestPractice(id){
     return dispatch =>{
         http.deleteItemById("bestPractice", id)
@@ -91,14 +66,6 @@ export function setBestPractices(bestPractices){
     }
 }
 //Sets all bestPractices in state
-
-export function setSingleBestPractice(bestPractice){
-    return {
-        type: BestPracticeActionTypes.SET_SINGLE_BEST_PRACTICE,
-        payload: bestPractice
-    }
-}
-//Sets selected bestPractice in state
 
 export function updateBestPracticesInState(bestPractice){
     return {

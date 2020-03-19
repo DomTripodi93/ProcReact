@@ -6,16 +6,6 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleDepartment(name){
-    return dispatch => {
-        http.fetchByValue("department", name)
-            .then((department) => {
-                dispatch(setSingleDepartment(department));
-            });
-    }  
-}
-//Gets specific department by name
-
 export function fetchDepartments(){
     return dispatch => {
         http.fetchAll("department/byUser")
@@ -75,14 +65,6 @@ export function setDepartments(departments){
     }
 }
 //Sets all departments in state
-
-export function setSingleDepartment(department){
-    return {
-        type: DepartmentActionTypes.SET_SINGLE_DEPARTMENT,
-        payload: department
-    }
-}
-//Sets selected department in state
 
 export function updateDepartmentInState(department){
     return {

@@ -1,17 +1,11 @@
 import BestPracticeActionTypes from './best-practice.types';
 
 const INITIAL_STATE = {
-    bestPractices: [],
-    selectedBestPractice: {},
+    bestPractices: []
 }
 
 const bestPracticeReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case BestPracticeActionTypes.SET_SINGLE_BEST_PRACTICE:
-            return {
-                ...state,
-                selectedBestPractice: action.payload
-            };
         case BestPracticeActionTypes.SET_BEST_PRACTICES:
             return {
                 ...state,
