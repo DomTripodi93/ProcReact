@@ -18,9 +18,7 @@ const SingleBestPractice = props =>{
             props.bestPractice.name + "?"
         )){
             props.deleteBestPractice(
-                props.bestPractice.practice, 
-                props.bestPractice.objectiveName, 
-                props.bestPractice.deptName
+                props.bestPractice.id
             );
         }
     }
