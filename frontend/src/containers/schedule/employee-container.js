@@ -23,7 +23,6 @@ const EmployeeContainer = (props) => {
                 addMode={addMode} 
                 action={showEmployeeForm}/>
             <h2 className='centered'>Employees</h2>
-            <br />
             <Employees
                 employees={props.employees}/>
         </div>
