@@ -1,7 +1,6 @@
 import rootHttp from '../../root-http';
 import BestPracticeActionTypes from './best-practice.types';
 import helpers from '../../../shared/helpers';
-import store from '../../store';
 
 
 const http = new rootHttp();

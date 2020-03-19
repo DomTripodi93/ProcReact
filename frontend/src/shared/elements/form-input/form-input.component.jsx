@@ -7,7 +7,7 @@ import {
 } from './form-input.styles';
 
 const FormInput = ({ handleChange, label, ...props }) => (
-  <GroupContainer>
+  <GroupContainer className="input-width grid100">
     <FormInputContainer onChange={handleChange} {...props} />
     {label ? (
       <FormInputLabel className={props.value ? 'shrink' : ''}>

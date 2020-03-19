@@ -3,17 +3,28 @@ import { connect } from 'react-redux';
 import { addEmployee, updateEmployee } from '../../../reducers/schedule/employee/employee.actions';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import FormInput from '../../../shared/elements/form-input/form-input.component';
+import FormSelect from '../../../shared/elements/form-select/form-select.component';
 
 
 const EmployeeForm = props => {
     const [employeeInfo, setEmployeeInfo] = useState({
       name: '',
-      deptName: '',
-      canEdit: '',
+      deptName: 'None',
+      canEdit: false,
       title: '',
     });
-  
     const { name, deptName, canEdit, title } = employeeInfo;
+    const deptOptions = props.deptOptions;
+    const editOptions = [
+        {
+            value: true,
+            label: "True"
+        },
+        {
+            value: false,
+            label: "False"
+        }
+    ];
 
     useEffect(()=>{
         if (props.editMode){
@@ -36,9 +47,10 @@ const EmployeeForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setEmployeeInfo({ ...employeeInfo, [name]: value });
+        console.log(event.target.name)
+        const { name, value } = event.target;
+
+        setEmployeeInfo({ ...employeeInfo, [name]: value });
     };
 
     return (
@@ -61,20 +73,19 @@ const EmployeeForm = props => {
                     onChange={handleChange}
                     required
                     />
-                <FormInput
-                    label='Department'
-                    type='deptName' 
+                <FormSelect
+                    label="Department"
                     name='deptName'
                     value={deptName}
+                    options={deptOptions}
                     onChange={handleChange}
                     />
-                <FormInput
-                    label='Process Admin'
-                    type='canEdit' 
+                <FormSelect
+                    label="Admin"
                     name='canEdit'
                     value={canEdit}
+                    options={editOptions}
                     onChange={handleChange}
-                    required
                     />
                 <FormInput
                     label='Job Title'

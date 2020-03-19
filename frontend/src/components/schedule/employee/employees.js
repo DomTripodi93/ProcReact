@@ -12,6 +12,7 @@ const Employees = props => {
                             key={employee.employeeId}
                             className='sized30'>
                             <SingleEmployee
+                                deptOptions={props.deptOptions}
                                 employee={employee}
                                 className='sized30' />
                         </div>

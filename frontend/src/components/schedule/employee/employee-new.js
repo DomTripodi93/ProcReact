@@ -8,6 +8,7 @@ const EmployeeNew = (props) =>{
             {props.addMode ?
                 <div className='border'>
                     <EmployeeForm 
+                        deptOptions={props.deptOptions}
                         callback={props.action} 
                         editMode={false}/>
                 </div>

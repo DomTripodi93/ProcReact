@@ -9,16 +9,18 @@ const shrinkLabelStyles = css`
   color: ${mainColor};
 `;
 
-export const GroupContainer = styled.div`
+export const FormSelectContainer = styled.div`
   position: relative;
   margin: auto;
+`
 
-  input[type='password'] {
-    letter-spacing: 0.3em;
-  }
-`;
+FormSelectContainer.displayName = 'FormSelectContainer'
 
-export const FormInputContainer = styled.input`
+
+export const FormSelector = styled.select`
+  border-radius: 3px;
+  width: 100%;
+  height: 35px;
   background: none;
   background-color: white;
   color: ${mainColor};
@@ -30,25 +32,30 @@ export const FormInputContainer = styled.input`
   margin: 15px 0;
   overflow: hidden;
 
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+
   &:focus {
     outline: none;
   }
-
-  &:focus ~ label {
-    ${shrinkLabelStyles}
-  }
 `;
 
-FormInputContainer.displayName = 'FormInputContainer';
+FormSelector.displayName = 'FormSelector';
 
-export const FormInputLabel = styled.label`
+
+export const FormSelectLabel = styled.label`
   color: ${subColor};
   font-size: 14px;
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 7px;
-  top: 27px;
+  left: 5px;
   transition: 300ms ease all;
 
   &.shrink {
@@ -56,4 +63,4 @@ export const FormInputLabel = styled.label`
   }
 `;
 
-FormInputLabel.displayName = 'FormInputLabel';
+FormSelectLabel.displayName = 'FormSelectLabel';

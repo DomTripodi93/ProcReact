@@ -169,6 +169,20 @@ a, ul{
   width: 100%;
 }
 
+.label-holder{
+  position: relative;
+  width: 78.6%;
+  margin: auto;
+}
+
+.label{
+  position: absolute;
+  margin: 0;
+  top: -18px;
+  left: 0;
+  font-size: 12px;
+}
+
 .grid100 { 
   display: grid;
   grid-template-columns: 100%;

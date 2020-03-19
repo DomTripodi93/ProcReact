@@ -1,7 +1,6 @@
 import rootHttp from '../../root-http';
 import CommonDifficultyActionTypes from './common-difficulty.types';
 import helpers from '../../../shared/helpers';
-import store from '../../store';
 
 
 const http = new rootHttp();

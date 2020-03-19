@@ -1,9 +1,11 @@
 import React from 'react';
+import Calendar from '../../components/schedule/schedule/calendar';
+
 
 const ScheduleContainer = props => {
     return(
         <div>
-            Schedule Container
+            <Calendar />
         </div>
     )
 }
