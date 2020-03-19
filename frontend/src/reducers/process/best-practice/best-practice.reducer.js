@@ -1,33 +1,33 @@
-import CommonDifficultyActionTypes from './common-difficulty.types';
+import BestPracticeActionTypes from './best-practice.types';
 
 const INITIAL_STATE = {
-    commonDifficulties: [],
-    selectedCommonDifficulty: {},
+    bestPractices: [],
+    selectedBestPractice: {},
 }
 
-const commonDifficultyReducer = (state = INITIAL_STATE, action) => {
+const bestPracticeReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case CommonDifficultyActionTypes.SET_SINGLE_COMMON_DIFFICULTY:
+        case BestPracticeActionTypes.SET_SINGLE_BEST_PRACTICE:
             return {
                 ...state,
-                selectedCommonDifficulty: action.payload
+                selectedBestPractice: action.payload
             };
-        case CommonDifficultyActionTypes.SET_COMMON_DIFFICULTIES:
+        case BestPracticeActionTypes.SET_BEST_PRACTICES:
             return {
                 ...state,
-                commonDifficulties: action.payload.data
+                bestPractices: action.payload.data
             };
-        case CommonDifficultyActionTypes.ADD_COMMON_DIFFICULTY:
+        case BestPracticeActionTypes.ADD_BEST_PRACTICE:
             return {
                 ...state,
-                commonDifficulties: [...state.commonDifficulties, action.payload]
+                bestPractices: [...state.bestPractices, action.payload]
             };
-        case CommonDifficultyActionTypes.UPDATE_COMMON_DIFFICULTIES:
+        case BestPracticeActionTypes.UPDATE_BEST_PRACTICES:
             return {
                 ...state,
-                commonDifficulties: [
+                bestPractices: [
                     action.payload,
-                    ...state.commonDifficulties
+                    ...state.bestPractices
                         .filter((value)=>{
                             return value.id !== action.payload.id 
                         })]
@@ -39,10 +39,10 @@ const commonDifficultyReducer = (state = INITIAL_STATE, action) => {
                             }}
                         )
             };
-        case CommonDifficultyActionTypes.DELETE_COMMON_DIFFICULTY:
+        case BestPracticeActionTypes.DELETE_BEST_PRACTICE:
             return {
                 ...state,
-                commonDifficulties: [...state.commonDifficulties
+                bestPractices: [...state.bestPractices
                     .filter((value)=>{
                         return value.id !== action.payload
                     })]
@@ -52,4 +52,4 @@ const commonDifficultyReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default commonDifficultyReducer;
+export default bestPracticeReducer;

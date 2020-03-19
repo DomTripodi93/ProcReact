@@ -7,6 +7,7 @@ import departmentReducer from './process/department/department.reducer';
 import objectiveReducer from './process/objective/objective.reducer';
 import stepReducer from './process/step/step.reducer';
 import commonDifficultyReducer from './process/common-difficulty/common-difficulty.reducer';
+import bestPracticeReducer from './process/best-practice/best-practice.reducer';
 
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
     department: departmentReducer,
     objective: objectiveReducer,
     step: stepReducer,
-    commonDifficulty: commonDifficultyReducer
+    commonDifficulty: commonDifficultyReducer,
+    bestPractice: bestPracticeReducer
 })
