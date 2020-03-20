@@ -29,14 +29,16 @@ const StepForm = props => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode){
+        if (props.editMode && stepInfo !== props.stepInput){
             if (props.inDept) {
                 props.updateStep(stepInfo, props.callback);
             } else {
                 props.updateSingleStep(stepInfo, props.callback);
             }
-        } else {
+        } else if (!props.editMode){
             props.addStep(stepInfo, props.callback);
+        } else {
+            props.callback();
         }
     };
 

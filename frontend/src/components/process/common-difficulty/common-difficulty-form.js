@@ -32,7 +32,11 @@ const CommonDifficultyForm = props => {
         console.log(commonDifficultyInfo)
         event.preventDefault();
         if (props.editMode){
-            props.updateCommonDifficulty(commonDifficultyInfo, props.callback);
+            if (commonDifficultyInfo !== props.commonDifficultyInput){
+                props.updateCommonDifficulty(commonDifficultyInfo, props.callback);
+            } else {
+                props.callback();
+            }
         } else {
             props.addCommonDifficulty(commonDifficultyInfo, props.callback);
         }

@@ -55,7 +55,7 @@ export const FormSelectLabel = styled.label`
   font-weight: normal;
   position: absolute;
   pointer-events: none;
-  left: 5px;
+  left: 7px;
   transition: 300ms ease all;
 
   &.shrink {

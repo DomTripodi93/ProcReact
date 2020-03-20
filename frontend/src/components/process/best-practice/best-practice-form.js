@@ -32,7 +32,11 @@ const BestPracticeForm = props => {
         console.log(bestPracticeInfo)
         event.preventDefault();
         if (props.editMode){
-            props.updateBestPractice(bestPracticeInfo, props.callback);
+            if (bestPracticeInfo !== props.bestPracticeInput){
+                props.updateBestPractice(bestPracticeInfo, props.callback);
+            } else {
+                props.callback();
+            }
         } else {
             props.addBestPractice(bestPracticeInfo, props.callback);
         }

@@ -27,7 +27,11 @@ const DepartmentForm = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         if (props.editMode){
-            props.updateDepartment(departmentInfo, props.callback);
+            if (departmentInfo !== props.departmentInput){
+                props.updateDepartment(departmentInfo, props.callback);
+            } else {
+                props.callback();
+            }
         } else {
             props.addDepartment(departmentInfo, props.callback);
         }

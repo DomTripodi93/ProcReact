@@ -28,14 +28,16 @@ const ObjectiveForm = props => {
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode){
+        if (props.editMode && objectiveInfo !== props.objectiveInput){
             if (props.inDept) {
                 props.updateObjective(objectiveInfo, props.callback);
             } else {
                 props.updateSingleObjective(objectiveInfo, props.callback);
             }
-        } else {
+        } else if (!props.editMode) {
             props.addObjective(objectiveInfo, props.callback);
+        } else {
+            props.callback();
         }
     };
 

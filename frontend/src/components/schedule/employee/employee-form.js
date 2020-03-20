@@ -40,14 +40,17 @@ const EmployeeForm = props => {
     const handleSubmit = async event => {
         event.preventDefault();
         if (props.editMode){
-            props.updateEmployee(employeeInfo, props.callback);
+            if (employeeInfo !== props.employeeInput){
+                props.updateEmployee(employeeInfo, props.callback);
+            } else {
+                props.callback();
+            }
         } else {
             props.addEmployee(employeeInfo, props.callback);
         }
     };
 
     const handleChange = event => {
-        console.log(event.target.name)
         const { name, value } = event.target;
 
         setEmployeeInfo({ ...employeeInfo, [name]: value });
