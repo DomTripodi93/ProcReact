@@ -230,7 +230,6 @@ a, ul{
 
 .sized30{
   width: 30.2%;
-  max-width: 400px;
   margin: 17px 1.5% 17px 1.5%;
 }
 
@@ -247,10 +246,11 @@ a, ul{
 }
 
 .date{
-  margin: 7% 0px 0px 10%;
+  margin: 10% 10% 10% 10%;
 }
 
 .label-text{
+  margin: 15px 7px 0px 7px;
   font-weight: bold;
   color: rgb(53, 10, 124);
   font-size: 1.8vw;
@@ -273,6 +273,11 @@ h3{
   .btn{
       font-size: 80%;
   }
+  
+  .sized30{
+      width: 40%;
+      margin: 17px 5% 17px 5%;
+  }
 
   .grid50-to-100 { 
     display: grid;
@@ -287,7 +292,6 @@ h3{
   
   .sized30{
       width: 85%;
-      max-width: 768px;
       margin: 17px 7.5% 17px 7.5%;
   }
 
@@ -315,5 +319,12 @@ h3{
   
   .day-border{
       height: 200px;
+  }
+}
+
+@media only screen and (min-width: 1700px) {
+  .sized30{
+      width: 20%;
+      margin: 17px 2.5% 17px 2.5%;
   }
 }

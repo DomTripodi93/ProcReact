@@ -102,13 +102,13 @@ const EmployeeForm = props => {
                             <CustomButton
                                 buttonStyle="blue"
                                 type="submit"
-                                label="Add Employee"
+                                label="Add"
                                 />
                         :
                             <CustomButton
                                 buttonStyle="blue"
                                 type="submit"
-                                label="Update Employee"
+                                label="Update"
                                 />
                         }
                         <CustomButton

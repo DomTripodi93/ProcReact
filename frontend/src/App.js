@@ -9,7 +9,6 @@ import { checkUser } from './reducers/user/user.actions';
 import Header from './shared/header/header';
 
 import Home from './containers/home/home';
-import Welcome from './containers/home/welcome';
 
 import Register from './containers/registration/registration';
 import Signin from './containers/registration/signin';
@@ -50,7 +49,7 @@ const App = (props) => {
       <div>
         {authValue ? 
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={ScheduleContainer} />
             <Route exact path='/signout' component={Signout} />
             
             <Route exact path='/departments' component={DepartmentContainer} />
@@ -65,7 +64,7 @@ const App = (props) => {
           </Switch>
           :
           <Switch>
-            <Route exact path='/' component={Welcome} />
+            <Route exact path='/' component={Home} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/signin' component={Signin} />
           </Switch>
