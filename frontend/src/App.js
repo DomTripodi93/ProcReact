@@ -22,7 +22,6 @@ import EmployeeContainer from './containers/schedule/employee-container';
 import EmployeeDayContainer from './containers/schedule/employee-day-container';
 import ScheduleDayContainer from './containers/schedule/schedule-day-container';
 import ScheduleContainer from './containers/schedule/schedule-container';
-import EmployeeScheduleContainer from './containers/schedule/employee-schedule-container';
 
 
 const App = (props) => {
@@ -58,9 +57,9 @@ const App = (props) => {
             
             <Route exact path='/employees' component={EmployeeContainer} />
             <Route exact path='/schedule' component={ScheduleContainer} />
-            <Route path='/schedule/:employeeId' component={EmployeeScheduleContainer} />
-            <Route exact path='/day' component={ScheduleDayContainer} />
-            <Route path='/day/:employeeId' component={EmployeeDayContainer} />
+            <Route path='/schedule/:employeeId' component={ScheduleContainer} />
+            <Route exact path='/day/:month/:day/:year' component={ScheduleDayContainer} />
+            <Route path='/day/:employeeId/:month/:day/:year' component={EmployeeDayContainer} />
           </Switch>
           :
           <Switch>

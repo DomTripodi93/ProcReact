@@ -249,6 +249,10 @@ a, ul{
   margin: 10% 10% 10% 10%;
 }
 
+.month-input{
+  height: 35px;
+}
+
 .label-text{
   margin: 15px 7px 0px 7px;
   font-weight: bold;

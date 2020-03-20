@@ -1,17 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 const Calendar = props => {
-    var date = new Date();
-    var today = date.getDate();
-    var month = date.getMonth();
-    var monthHold = "" + (month + 1);
-    var year = date.getFullYear();
-    var day = date.getDay();
-    var defaultMonth = ""; 
+    var today = props.date.getDate();
+    const [month, setMonth] = useState(props.month);
+    const [year, setYear] = useState(props.year);
     var oldMonth = month;
-    var baseRoute = "";
     const days = [
       "Sunday",
       "Monday",
@@ -21,69 +16,58 @@ const Calendar = props => {
       "Friday",
       "Saturday"
     ];
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    var monthDays = [];
-    var firstDayOfMonth = [];
-
   
-    const initializeMonth = () =>{
-      if (month < 10){
-        monthHold = "0" + monthHold;
-      }
-      defaultMonth = year + "-" + monthHold;
-      setDate();
-    }
-    //Holds default values for current month and year, for styling of current day
       
-    const setDate = () =>{
-      monthDays = _.range(1, daysInMonth(year, month+1) + 1);
-      firstDayOfMonth = _.range(0, new Date(year, month, 1).getDay());
-      if (props.employeeId){
-        baseRoute = props.employeeId + "/" + (month+1);
-      } else {
-        baseRoute = "" + (month+1);
-      }
+    const setDays = (inputYear, inputMonth) =>{
+      let monthDaysHold = _.range(1, new Date(inputYear, inputMonth+1, 0).getDate() + 1);
+      return monthDaysHold
     }
     //Sets values for days of month to be displayed in expected format
-  
-    const daysInMonth = (year, month) =>{
-      return new Date(year, month, 0).getDate();
-    }
-    //Returns number of days in the month
 
-    initializeMonth();
+    const monthDays = setDays(year, month)
+    
+    const setFirstDays = (inputYear, inputMonth) => {
+        return _.range(0, new Date(inputYear, inputMonth, 1).getDay());
+    }
+    //Sets placeholder for days of week before first day of month
+
+    const firstDayOfMonth = setFirstDays(year, month);
+
+    const setBaseRoute = (inputMonth) => {
+        let baseRouteHold = ""
+        if (props.employeeId){
+          baseRouteHold = "/day/" + props.employeeId + "/" + (inputMonth+1);
+        } else {
+          baseRouteHold = "/day/" + (inputMonth+1);
+        }
+        return baseRouteHold
+    }
+    //Sets base route for linking to day of month scheduled tasks
+
+    const baseRoute = setBaseRoute(month)
+
+    useEffect(()=>{
+        setMonth(props.month);
+        setYear(props.year);
+    },[props])
     
     return(
         <div>
-            Calendar
-            <div class="grid7split border">
+            <div className="grid7split border">
                 {days.map(day =>(
-                    <div class="day-label-border">
-                        <h5 class="centered label-text">{day}</h5>
+                    <div key={day} className="day-label-border">
+                        <h5 className="centered label-text">{day}</h5>
                     </div>
                 ))}
                 {firstDayOfMonth.map(date =>(
-                    <div class="day-border"></div>
+                    <div key={date} className="day-border"></div>
                 ))}
                 {monthDays.map(date => (
-                    <div>
-                        {date !== today || date === today && month !== oldMonth ?
+                    <div key={date}>
+                        {date !== today || (date === today && month !== oldMonth) ?
                             <Link to={baseRoute+'/'+date+'/'+year}>
-                                <div class="day-border padded">
-                                    <h5 class="label-text date">{date}</h5>
+                                <div className="day-border padded">
+                                    <h5 className="label-text date">{date}</h5>
                                 </div>
                             </Link>
                         :
@@ -91,8 +75,8 @@ const Calendar = props => {
                         }
                         {date === today && month === oldMonth ?
                             <Link to={baseRoute+'/'+date+'/'+year}>
-                                <div class="today-border padded" >
-                                    <h5 class="label-text date">{date}</h5>
+                                <div className="today-border padded" >
+                                    <h5 className="label-text date">{date}</h5>
                                 </div>
                             </Link>
                         :

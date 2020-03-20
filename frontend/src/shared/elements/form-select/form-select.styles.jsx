@@ -20,7 +20,6 @@ FormSelectContainer.displayName = 'FormSelectContainer'
 export const FormSelector = styled.select`
   border-radius: 3px;
   width: 100%;
-  height: 35px;
   background: none;
   background-color: white;
   color: ${mainColor};
@@ -29,8 +28,10 @@ export const FormSelector = styled.select`
   display: block;
   border: none;
   border-radius: 3px;
+  border-bottom: 1px solid ${subColor};
   margin: 15px 0;
   overflow: hidden;
+  z-index: 0;
 
   option {
     color: black;
@@ -39,6 +40,7 @@ export const FormSelector = styled.select`
     white-space: pre;
     min-height: 20px;
     padding: 0px 2px 1px;
+    z-index: 5;
   }
 
   &:focus {

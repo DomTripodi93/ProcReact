@@ -27,6 +27,7 @@ export const FormInputContainer = styled.input`
   display: block;
   border: none;
   border-radius: 3px;
+  border-bottom: 1px solid ${subColor};
   margin: 15px 0;
   overflow: hidden;
 
