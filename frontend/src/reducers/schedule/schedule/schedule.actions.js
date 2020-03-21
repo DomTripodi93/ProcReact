@@ -92,6 +92,12 @@ export function deleteScheduleFromState(id){
 }
 //Deletes selected schedule
 
+export function resetSchedules(){
+    return {
+        type: ScheduleActionTypes.RESET_SCHEDULES
+    }
+}
+
 function prepScheduleValues(schedule){
     schedule.practice = helper.capitalizeAll(schedule.practice);
     if (schedule.method){

@@ -6,21 +6,22 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleEmployee(id){
-    return dispatch => {
-        http.fetchById("employee", id)
-            .then((employee) => {
-                dispatch(setSingleEmployee(employee));
-            });
-    }
-}
-//Gets specific employee by name
 
 export function fetchEmployees(){
     return dispatch => {
         http.fetchAll("employee/byUser")
             .then((employees) => {
                 dispatch(setEmployees(employees));
+            });
+    }
+}
+//Gets all employees
+
+export function fetchEmployeesForMap(){
+    return dispatch => {
+        http.fetchAll("employee/byUser")
+            .then((employees) => {
+                dispatch(mapEmployees(employees));
             });
     }
 }
@@ -81,6 +82,14 @@ export function addEmployeeToState(employee){
 export function setEmployees(employees){
     return {
         type: EmployeeActionTypes.SET_EMPLOYEES,
+        payload: employees
+    }
+}
+//Sets all employees in state
+
+export function mapEmployees(employees){
+    return {
+        type: EmployeeActionTypes.SET_EMPLOYEE_MAP,
         payload: employees
     }
 }

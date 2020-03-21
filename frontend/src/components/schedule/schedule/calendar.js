@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import CalendarHelper from '../../../containers/schedule/calendar-helper';
+import CalendarHelper from '../../../shared/calendar-helper';
 
 const Calendar = props => {
     const [month, setMonth] = useState(props.month);

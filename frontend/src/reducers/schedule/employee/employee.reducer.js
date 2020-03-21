@@ -2,15 +2,19 @@ import EmployeeActionTypes from './employee.types';
 
 const INITIAL_STATE = {
     employees: [],
-    selectedEmployee: {},
+    employeeMap: {}
 }
 
 const employeeReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case EmployeeActionTypes.SET_SINGLE_EMPLOYEE:
+        case EmployeeActionTypes.SET_EMPLOYEE_MAP:
+            let employeesHold = {};
+            action.payload.data.forEach(employee => {
+                employeesHold[employee.employeeId] = employee.name;
+            });
             return {
                 ...state,
-                selectedEmployee: action.payload
+                employeeMap: employeesHold
             };
         case EmployeeActionTypes.SET_EMPLOYEES:
             return {

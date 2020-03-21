@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import CalendarHelper from './calendar-helper';
-import { fetchSchedulesByEmployee, fetchSchedulesByDate } from '../../reducers/schedule/schedule/schedule.actions';
+import CalendarHelper from '../../shared/calendar-helper';
+import { fetchSchedulesByEmployee, fetchSchedulesByDate, resetSchedules } from '../../reducers/schedule/schedule/schedule.actions';
 import { connect } from 'react-redux';
 import Day from '../../components/schedule/schedule/day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
 import { fetchDepartments } from '../../reducers/process/department/department.actions';
 import { fetchObjectivesByDepartment } from '../../reducers/process/objective/objective.actions';
+import { fetchEmployeesForMap } from '../../reducers/schedule/employee/employee.actions';
 
 
 const ScheduleDayContainer = props => {
@@ -17,24 +18,34 @@ const ScheduleDayContainer = props => {
     const year = +props.match.params.year;
     const lastDay = helper.checkDays(year, month);
     
-    const scheduledTasks = props.scheduledTasks;
     const departments = props.departments;
+    const objectives = props.objectives;
     const fetchAllDepartments = props.fetchDepartments;
     const fetchObjectivesForDepartment = props.fetchObjectivesByDepartment;
-    const fetchSchedulesForDate = props.fetchSchedulesByDate;
-    const fetchSchedulesForEmployee = props.fetchSchedulesByEmployee;
-
 
     useEffect(()=>{
         if (departments.length < 1){
             fetchAllDepartments();
-        } 
-        else {
+        } else if (Object.keys(objectives).length < 1){
             departments.forEach(dept =>{
                 fetchObjectivesForDepartment(dept.deptName);
             })
         }
-        if (!scheduledTasks){
+    },[
+        departments, 
+        objectives,
+        fetchAllDepartments, 
+        fetchObjectivesForDepartment
+    ])
+
+
+    const scheduledTasks = props.scheduledTasks;
+    const fetchSchedulesForDate = props.fetchSchedulesByDate;
+    const fetchSchedulesForEmployee = props.fetchSchedulesByEmployee;
+    const scheduledTasksCalled = props.scheduledTasksCalled;
+
+    useEffect(()=>{
+        if (!scheduledTasksCalled){
             if (employeeId){
                 fetchSchedulesForEmployee(employeeId, month, day, year);
             } else {
@@ -42,13 +53,30 @@ const ScheduleDayContainer = props => {
             }
         }
     },[
-        scheduledTasks, 
-        departments, 
-        fetchAllDepartments, 
-        fetchObjectivesForDepartment,
+        scheduledTasks,
+        scheduledTasksCalled,
         fetchSchedulesForEmployee,
-        fetchSchedulesForDate
+        fetchSchedulesForDate,
+        employeeId,
+        month,
+        day,
+        year
+    ])
+
+
+    const employeeMap = props.employeeMap;
+    const fetchEmployees = props.fetchEmployees;
+
+
+    useEffect(()=>{
+        if (Object.keys(employeeMap) < 1){
+            fetchEmployees();
+        }
+    },[
+        fetchEmployees,
+        employeeMap
     ]);
+
 
     const changeDay = (movement) => {
         let route = ""
@@ -74,22 +102,35 @@ const ScheduleDayContainer = props => {
                 }
             }
         }
+        props.resetSchedules();
         props.history.push("/day/" + route) 
     }
+
 
     const showScheduleForm = () =>{
         setAddMode(!addMode);
     }
+
 
     return(
         <div>
             <ScheduleNew 
                 addMode={addMode}
                 action={showScheduleForm}
-                objectives={props.objectives}/>
+                objectives={props.objectives}
+                employeeId={employeeId}
+                year={year}
+                month={month}
+                day={day}
+                employeeMap={employeeMap}/>
             <Day 
                 scheduledTasks={props.scheduledTasks} 
-                callback={changeDay} />
+                callback={changeDay}
+                employeeId={employeeId}
+                year={year}
+                month={month}
+                day={day}
+                employeeMap={employeeMap}/>
         </div>
     )
 }
@@ -99,19 +140,18 @@ const mapDispatchToProps = dispatch => {
         fetchSchedulesByEmployee: (employeeId, month, day, year) => dispatch(fetchSchedulesByEmployee(employeeId, month, day, year)),
         fetchSchedulesByDate: (month, day, year) => dispatch(fetchSchedulesByDate(month, day, year)),
         fetchDepartments: () => dispatch(fetchDepartments()),
-        fetchObjectivesByDepartment: (deptName) => dispatch(fetchObjectivesByDepartment(deptName))
+        fetchObjectivesByDepartment: (deptName) => dispatch(fetchObjectivesByDepartment(deptName)),
+        fetchEmployees: () => dispatch(fetchEmployeesForMap()),
+        resetSchedules: () => dispatch(resetSchedules())
     }
 }
 
 const mapStateToProps = state => ({
     scheduledTasks: state.schedule.scheduledTasks,
+    scheduledTasksCalled: state.schedule.scheduledTasksCalled,
     departments: state.department.departments,
-    objectives: state.objective.objectives
+    objectives: state.objective.objectives,
+    employeeMap: state.employee.employeeMap
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDayContainer);
-
-
-
-// <button onClick={()=>changeDay('last')}>Last</button>
-// <button onClick={()=>changeDay('next')}>Next</button>

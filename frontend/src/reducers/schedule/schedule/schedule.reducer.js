@@ -1,7 +1,8 @@
 import ScheduleActionTypes from './schedule.types';
 
 const INITIAL_STATE = {
-    schedules: []
+    scheduledTasks: [],
+    scheduledTasksCalled: false
 }
 
 const scheduleReducer = (state = INITIAL_STATE, action) => {
@@ -9,19 +10,26 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
         case ScheduleActionTypes.SET_SCHEDULES:
             return {
                 ...state,
-                schedules: action.payload.data
+                scheduledTasks: action.payload.data,
+                scheduledTasksCalled: true
+            };
+        case ScheduleActionTypes.RESET_SCHEDULES:
+            return {
+                ...state,
+                scheduledTasks: [],
+                scheduledTasksCalled: false
             };
         case ScheduleActionTypes.ADD_SCHEDULE:
             return {
                 ...state,
-                schedules: [...state.schedules, action.payload]
+                scheduledTasks: [...state.scheduledTasks, action.payload]
             };
         case ScheduleActionTypes.UPDATE_SCHEDULES:
             return {
                 ...state,
-                schedules: [
+                scheduledTasks: [
                     action.payload,
-                    ...state.schedules
+                    ...state.scheduledTasks
                         .filter((value)=>{
                             return value.id !== action.payload.id 
                         })]
@@ -36,7 +44,7 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
         case ScheduleActionTypes.DELETE_SCHEDULE:
             return {
                 ...state,
-                schedules: [...state.schedules
+                scheduledTasks: [...state.scheduledTasks
                     .filter((value)=>{
                         return value.id !== action.payload
                     })]
