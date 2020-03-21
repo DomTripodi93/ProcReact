@@ -8,12 +8,14 @@ import objectiveReducer from './process/objective/objective.reducer';
 import stepReducer from './process/step/step.reducer';
 import commonDifficultyReducer from './process/common-difficulty/common-difficulty.reducer';
 import bestPracticeReducer from './process/best-practice/best-practice.reducer';
+import scheduleReducer from './schedule/schedule/schedule.reducer';
 
 
 export default combineReducers({
     user: userReducer,
     dropDown: dropDownReducer,
     employee: employeeReducer,
+    schedule: scheduleReducer,
     department: departmentReducer,
     objective: objectiveReducer,
     step: stepReducer,

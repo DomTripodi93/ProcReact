@@ -1,44 +1,44 @@
-import ScheduledTaskActionTypes from './schedule.types';
+import ScheduleActionTypes from './schedule.types';
 
 const INITIAL_STATE = {
-    scheduledTasks: [],
+    schedules: []
 }
 
 const scheduleReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case ScheduledTaskActionTypes.SET_SCHEDULED_TASKS:
+        case ScheduleActionTypes.SET_SCHEDULES:
             return {
                 ...state,
                 schedules: action.payload.data
             };
-        case ScheduledTaskActionTypes.ADD_SCHEDULED_TASK:
+        case ScheduleActionTypes.ADD_SCHEDULE:
             return {
                 ...state,
                 schedules: [...state.schedules, action.payload]
             };
-        case ScheduledTaskActionTypes.UPDATE_SCHEDULED_TASK:
+        case ScheduleActionTypes.UPDATE_SCHEDULES:
             return {
                 ...state,
                 schedules: [
                     action.payload,
                     ...state.schedules
                         .filter((value)=>{
-                            return value.scheduleId !== action.payload.scheduleId 
+                            return value.id !== action.payload.id 
                         })]
                         .sort((first, second)=>{
-                            if(first.scheduleId > second.scheduleId){
+                            if(first.id > second.id){
                                 return 1
                             } else {
                                 return -1
                             }}
                         )
             };
-        case ScheduledTaskActionTypes.DELETE_SCHEDULED_TASK:
+        case ScheduleActionTypes.DELETE_SCHEDULE:
             return {
                 ...state,
                 schedules: [...state.schedules
                     .filter((value)=>{
-                        return value.scheduleId !== action.payload
+                        return value.id !== action.payload
                     })]
             };
         default:

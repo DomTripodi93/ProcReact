@@ -1,101 +1,104 @@
 import rootHttp from '../../root-http';
-import ScheduledTaskActionTypes from './schedule.types';
+import ScheduleActionTypes from './schedule.types';
 import helpers from '../../../shared/helpers';
 
 
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchScheduledTasks(){
+export function fetchSchedulesByDate(month, day, year){
     return dispatch => {
-        http.fetchAll("schedule/byUser")
+        http.fetchAll("schedule/byUser/" + month + "&" + year + "&" + day)
             .then((schedules) => {
-                dispatch(setScheduledTasks(schedules));
+                dispatch(setSchedules(schedules));
             });
     }
 }
-//Gets all schedules
+//Gets all schedules for a specific day
 
-export function fetchScheduledTasksByDepartment(department){
+export function fetchSchedulesByEmployee(employeeId, month, day, year){
     return dispatch => {
-        http.fetchAll("schedule/byDepartment/" + department)
+        http.fetchAll("schedule/byEmployee/" + employeeId + "&" + month + "&" + year + "&" + day)
             .then((schedules) => {
-                dispatch(setScheduledTasks(schedules));
+                dispatch(setSchedules(schedules));
             });
     }
 }
-//Gets all schedules for a department
+//Gets all schedules for a specific day
 
-export function addScheduledTask(schedule, callback){
-    schedule = prepScheduledTaskValues(schedule);
+export function addSchedule(schedule, callback){
+    schedule = prepScheduleValues(schedule);
     return dispatch =>{
         http.addItem("schedule", schedule)
-            .then(addedScheduledTask =>{
-                dispatch(addScheduledTaskToState(addedScheduledTask.data));
+            .then(addedSchedule =>{
+                dispatch(addScheduleToState(addedSchedule.data));
                 callback();
             });
     }
 }
 //Posts new schedule to API
 
-export function updateScheduledTask(schedule, callback){
-    schedule = prepScheduledTaskValues(schedule);
+export function updateSchedule(schedule, callback){
+    schedule = prepScheduleValues(schedule);
     return dispatch =>{
-        http.updateItemById("schedule", schedule, schedule.scheduleId)
+        http.updateItemById("schedule", schedule, schedule.id)
             .then(() =>{
-                dispatch(updateScheduledTaskInState(schedule));
+                dispatch(updateSchedulesInState(schedule));
                 callback();
             });
     }
 }
 //Updates schedule in database
 
-export function deleteScheduledTask(id){
+export function deleteSchedule(id){
     return dispatch =>{
         http.deleteItemById("schedule", id)
             .then(()=>{
-                dispatch(deleteScheduledTaskFromState(id));
+                dispatch(deleteScheduleFromState(id));
             });
     }
 }
 //Deletes selected schedule
 
-export function addScheduledTaskToState(schedule){
+export function addScheduleToState(schedule){
     return {
-        type: ScheduledTaskActionTypes.ADD_SCHEDULED_TASK,
+        type: ScheduleActionTypes.ADD_SCHEDULE,
         payload: schedule
     }
 }
 //Adds new schedule from post to state
 
-export function setScheduledTasks(schedules){
+export function setSchedules(schedules){
     return {
-        type: ScheduledTaskActionTypes.SET_SCHEDULED_TASKS,
+        type: ScheduleActionTypes.SET_SCHEDULES,
         payload: schedules
     }
 }
 //Sets all schedules in state
 
-export function updateScheduledTaskInState(schedule){
+export function updateSchedulesInState(schedule){
     return {
-        type: ScheduledTaskActionTypes.UPDATE_SCHEDULED_TASK,
+        type: ScheduleActionTypes.UPDATE_SCHEDULES,
         payload: schedule
     }
 }
 //Updates function for schedule
 
-export function deleteScheduledTaskFromState(id){
+export function deleteScheduleFromState(id){
     return {
-        type: ScheduledTaskActionTypes.DELETE_SCHEDULED_TASK,
+        type: ScheduleActionTypes.DELETE_SCHEDULE,
         payload: id
     }
 }
 //Deletes selected schedule
 
-function prepScheduledTaskValues(schedule){
-    schedule.name = helper.capitalizeAll(schedule.name);
-    if (schedule.title){
-        schedule.title = helper.capitalizeAll(schedule.title);
+function prepScheduleValues(schedule){
+    schedule.practice = helper.capitalizeAll(schedule.practice);
+    if (schedule.method){
+        schedule.method = helper.capitalize(schedule.method);
+    }
+    if (schedule.purpose){
+        schedule.purpose = helper.capitalize(schedule.purpose);
     }
 
     return schedule;
