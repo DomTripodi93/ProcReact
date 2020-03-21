@@ -77,7 +77,3 @@ class rootHttp{
 }
 
 export default rootHttp;
-
-
-
-// `${this.rootUrl}/${model}`

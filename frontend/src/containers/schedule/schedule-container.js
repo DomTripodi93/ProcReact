@@ -5,7 +5,8 @@ import CalendarNew from '../../components/schedule/schedule/calendar-new';
 
 const ScheduleContainer = props => {
     const date = new Date();
-    const [month, setMonth] = useState(date.getMonth());
+    const thisMonth = date.getMonth();
+    const [month, setMonth] = useState(thisMonth);
     const [year, setYear] = useState(date.getFullYear());
 
     const updateMonth = (selectedMonth) => {
@@ -24,6 +25,7 @@ const ScheduleContainer = props => {
                 employeeId={props.match.params.employeeId} 
                 date={date} 
                 month={month} 
+                thisMonth={thisMonth}
                 year={year} />
         </div>
     )

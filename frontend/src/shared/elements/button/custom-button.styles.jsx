@@ -8,11 +8,11 @@ export const CustomizedButton = styled.button`
   font-size: 16px;
 
   &:hover {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
 
   &:focus {
-    transform: scale(0.88);
+    transform: scale(0.96);
   }
 
   &.round {
