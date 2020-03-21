@@ -44,7 +44,7 @@ export const CustomizedButton = styled.button`
   }
 
   @media (max-width: 950px) {
-    font-size: 1.5vw;
+    font-size: 1.7vw;
   }
 
   @media (max-width: 770px) {

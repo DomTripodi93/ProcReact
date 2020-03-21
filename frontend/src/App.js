@@ -19,7 +19,6 @@ import SingleObjectiveContainer from './containers/process/single-objective-cont
 import SingleStepContainer from './containers/process/single-step-container';
 
 import EmployeeContainer from './containers/schedule/employee-container';
-import EmployeeDayContainer from './containers/schedule/employee-day-container';
 import ScheduleDayContainer from './containers/schedule/schedule-day-container';
 import ScheduleContainer from './containers/schedule/schedule-container';
 
@@ -59,7 +58,7 @@ const App = (props) => {
             <Route exact path='/schedule' component={ScheduleContainer} />
             <Route path='/schedule/:employeeId' component={ScheduleContainer} />
             <Route exact path='/day/:month/:day/:year' component={ScheduleDayContainer} />
-            <Route path='/day/:employeeId/:month/:day/:year' component={EmployeeDayContainer} />
+            <Route path='/day/:employeeId/:month/:day/:year' component={ScheduleDayContainer} />
           </Switch>
           :
           <Switch>
