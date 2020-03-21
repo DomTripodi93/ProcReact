@@ -21,7 +21,6 @@ const Calendar = props => {
       "Saturday"
     ];
 
-
     useEffect(()=>{
         setMonth(props.month);
         setYear(props.year);
