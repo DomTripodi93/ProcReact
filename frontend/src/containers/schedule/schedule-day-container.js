@@ -43,6 +43,7 @@ const ScheduleDayContainer = props => {
     const fetchSchedulesForDate = props.fetchSchedulesByDate;
     const fetchSchedulesForEmployee = props.fetchSchedulesByEmployee;
     const scheduledTasksCalled = props.scheduledTasksCalled;
+    const resetAllSchedules = props.resetSchedules;
 
     useEffect(()=>{
         if (!scheduledTasksCalled){
@@ -63,6 +64,9 @@ const ScheduleDayContainer = props => {
         year
     ])
 
+    useEffect(()=>{
+        return ()=>{resetAllSchedules()}
+    },[resetAllSchedules])
 
     const employeeMap = props.employeeMap;
     const fetchEmployees = props.fetchEmployees;
@@ -72,6 +76,7 @@ const ScheduleDayContainer = props => {
         if (Object.keys(employeeMap) < 1){
             fetchEmployees();
         }
+        return 
     },[
         fetchEmployees,
         employeeMap
