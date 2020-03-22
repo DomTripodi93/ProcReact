@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Calendar from '../../components/schedule/schedule/calendar';
-import CalendarNew from '../../components/schedule/schedule/calendar-new';
+import Calendar from '../../components/schedule/calendar/calendar';
+import CalendarNew from '../../components/schedule/calendar/calendar-new';
 
 
 const ScheduleContainer = props => {

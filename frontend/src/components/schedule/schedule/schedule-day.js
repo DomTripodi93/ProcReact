@@ -2,24 +2,9 @@ import React from 'react';
 import SingleScheduledTask from './single-scheduled-task';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 
-const Days = props => {
+const ScheduleDay = props => {
     return(
         <div>
-            <div className="grid50">
-                <div className="middle">
-                    <CustomButton 
-                        label="< Previous Day"
-                        buttonStyle="blue"
-                        action={()=>props.callback('last')}/>
-                </div>
-                <div className="middle">
-                    <CustomButton 
-                        label="Next Day >"
-                        buttonStyle="blue"
-                        action={()=>props.callback('next')}/>
-                </div>
-            </div>
-            <br />
             {props.scheduledTasks.length > 0 ?
                 <div className='flex'>
                     {props.scheduledTasks.map(scheduledTask=>(
@@ -62,9 +47,24 @@ const Days = props => {
                 }
                 </div>
             }
+            <br />
+            <div className="grid50">
+                <div className="middle">
+                    <CustomButton 
+                        label="< Previous Day"
+                        buttonStyle="soft-green"
+                        action={()=>props.action('last')}/>
+                </div>
+                <div className="middle">
+                    <CustomButton 
+                        label="Next Day >"
+                        buttonStyle="soft-green"
+                        action={()=>props.action('next')}/>
+                </div>
+            </div>
         </div>
     )
 }
 
 
-export default Days;
+export default ScheduleDay;

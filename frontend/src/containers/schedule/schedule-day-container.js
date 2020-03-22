@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CalendarHelper from '../../shared/calendar-helper';
 import { fetchSchedulesByEmployee, fetchSchedulesByDate, resetSchedules } from '../../reducers/schedule/schedule/schedule.actions';
 import { connect } from 'react-redux';
-import Day from '../../components/schedule/schedule/day';
+import ScheduleDay from '../../components/schedule/schedule/schedule-day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
 import { fetchDepartments } from '../../reducers/process/department/department.actions';
 import { fetchObjectivesByDepartment } from '../../reducers/process/objective/objective.actions';
@@ -103,7 +103,7 @@ const ScheduleDayContainer = props => {
             }
         }
         props.resetSchedules();
-        props.history.push("/day/" + route) 
+        props.history.push("/day/" + route);
     }
 
 
@@ -123,9 +123,9 @@ const ScheduleDayContainer = props => {
                 month={month}
                 day={day}
                 employeeMap={employeeMap}/>
-            <Day 
+            <ScheduleDay 
                 scheduledTasks={props.scheduledTasks} 
-                callback={changeDay}
+                action={changeDay}
                 employeeId={employeeId}
                 year={year}
                 month={month}

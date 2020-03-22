@@ -23,6 +23,10 @@ export const CustomizedButton = styled.button`
     background-color:  rgb(70, 181, 255);
   }
 
+  &.soft-green {
+    background-color: rgb(110, 224, 70);
+  }
+
   &.green {
     background-color: rgb(39, 194, 39);
   }
