@@ -52,10 +52,10 @@ const ScheduleDay = props => {
                         <div>
                             <div className="grid-all-employees-button size-holder middle">
                                 <div className="grid-all-employees">
-                                    <div className="inner-border-left-header"><h5>Employee</h5></div>
-                                    <div className="inner-border-left-header"><h5>Time</h5></div>
-                                    <div className="inner-border-left-header"><h5>Department</h5></div>
-                                    <div className="inner-border-left-header"><h5>Objective</h5></div>
+                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Employee</h5></div>
+                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Time</h5></div>
+                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Department</h5></div>
+                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Objective</h5></div>
                                 </div>
                                 <div className="inner-border-right-header"></div>
                             </div>
@@ -72,13 +72,13 @@ const ScheduleDay = props => {
                                         month={props.month}
                                         day={props.day}
                                         className='sized30' />
-                                        <div className="grid50 inner-border-right">
+                                        <div className="grid50-colapse inner-border-right">
                                             <CustomButton 
-                                                buttonStyle="blue"
+                                                buttonStyle="blue small"
                                                 action={setEditMode}
                                                 label="Edit"/>
                                             <CustomButton 
-                                                buttonStyle="red"
+                                                buttonStyle="red small"
                                                 action={()=>{handleDelete(scheduledTask)}}
                                                 label="Delete"/>
                                         </div>

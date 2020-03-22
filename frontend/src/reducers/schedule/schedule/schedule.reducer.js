@@ -23,6 +23,13 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 scheduledTasks: [...state.scheduledTasks, action.payload]
+                    .sort((first, second)=>{ 
+                        if (first.date > second.date){
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    })
             };
         case ScheduleActionTypes.UPDATE_SCHEDULES:
             return {
@@ -34,7 +41,7 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
                             return value.id !== action.payload.id 
                         })]
                         .sort((first, second)=>{
-                            if(first.id > second.id){
+                            if (first.date > second.date){
                                 return 1
                             } else {
                                 return -1

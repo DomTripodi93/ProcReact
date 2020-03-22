@@ -10,16 +10,16 @@ const SingleScheduledTask = props => {
         <div>
             {props.employeeId ?
                 <div className="grid-one-employee">
-                    <div className="inner-border-left"><h5>{time}</h5></div>
-                    <div className="inner-border-left"><h5>{props.scheduledTask.deptName}</h5></div>
-                    <div className="inner-border-left"><h5>{props.scheduledTask.objectiveName}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{time}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{props.scheduledTask.deptName}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{props.scheduledTask.objectiveName}</h5></div>
                 </div>
             :
                 <div className="grid-all-employees">
-                    <div className="inner-border-left"><h5>{props.scheduledTask.employeeId} - {props.scheduledTask.employeeName}</h5></div>
-                    <div className="inner-border-left"><h5>{time}</h5></div>
-                    <div className="inner-border-left"><h5>{props.scheduledTask.deptName}</h5></div>
-                    <div className="inner-border-left"><h5>{props.scheduledTask.objectiveName}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{props.scheduledTask.employeeId} - {props.scheduledTask.employeeName}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{time}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{props.scheduledTask.deptName}</h5></div>
+                    <div className="inner-border-left"><h5 className="grid-text">{props.scheduledTask.objectiveName}</h5></div>
                 </div>
             }
         </div>

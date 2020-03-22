@@ -7,7 +7,7 @@ import {
 
 const CustomButton = ({ label, buttonStyle, action }) => (
   <CustomizedButton onClick={action} className={buttonStyle}>
-    <ButtonText>{label}</ButtonText>
+    <ButtonText className={buttonStyle}>{label}</ButtonText>
   </CustomizedButton>
 );
 

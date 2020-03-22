@@ -43,6 +43,14 @@ export const CustomizedButton = styled.button`
     background-color: rgb(200, 55, 10);
   }
 
+  &.small{
+    font-size: 10px;
+  
+    @media (max-width: 570px) {
+      font-size: 16px;
+    }
+  }
+
   @media (max-width: 400px) {
     font-size: 4vw;
   }
@@ -60,6 +68,12 @@ CustomizedButton.displayName = 'CustomizedButton';
 
 export const ButtonText = styled.h5`
   margin: 10px 10px 10px 10px;
+
+  &.small{
+    @media (max-width: 570px){
+      margin: 0
+    }
+  }
 `;
 
 ButtonText.displayName = 'ButtonText'

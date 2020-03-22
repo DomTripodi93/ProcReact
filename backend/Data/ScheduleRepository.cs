@@ -88,7 +88,7 @@ namespace backend.Data
                 .Where(s => s.Date.Day == Day)
                 .ToListAsync();
 
-            return scheduledTasks;
+            return scheduledTasks.OrderBy(s => s.Date);
         }
 
         public async Task<IEnumerable<Schedule>> GetScheduledTasksForEmployeeDay(int userId, int employeeId, int Month, int Year, int Day)
@@ -101,7 +101,7 @@ namespace backend.Data
                 .Where(s => s.Date.Day == Day)
                 .ToListAsync();
 
-            return scheduledTasks;
+            return scheduledTasks.OrderBy(s => s.Date);
         }
     }
 }

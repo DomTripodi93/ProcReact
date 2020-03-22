@@ -154,6 +154,16 @@ a, ul{
   text-align: center;
 }
 
+.grid-text{
+  line-height: 0;
+  font-size: 10px;
+}
+
+.grid-header-text{
+  line-height: 0;
+  font-size: 16px;
+}
+
 .danger{
   background-color: rgb(165, 2, 2);
   color: white;
@@ -189,6 +199,11 @@ a, ul{
 }
 
 .grid50 { 
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.grid50-colapse { 
   display: grid;
   grid-template-columns: 50% 50%;
 }
@@ -305,6 +320,21 @@ h3{
   
   .label-text{
       font-size: 10px;
+  }
+}
+
+
+@media only screen and (max-width: 570px) {
+  .grid50-colapse{
+      grid-template-columns: 100%
+  }
+
+  .grid-text{
+    font-size: 11px;
+  }
+  
+  .grid-header-text{
+    font-size: 14px;
   }
 }
 
