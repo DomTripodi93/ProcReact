@@ -107,6 +107,9 @@ const ScheduleDayContainer = props => {
                 }
             }
         }
+        if (employeeId){
+            route = employeeId + "/" + route;
+        }
         props.resetSchedules();
         props.history.push("/day/" + route);
     }
@@ -128,6 +131,11 @@ const ScheduleDayContainer = props => {
                 month={month}
                 day={day}
                 employeeMap={employeeMap}/>
+            {employeeMap[employeeId] ?
+                <h3 className="centered">{employeeMap[employeeId]}'s Schedule for {month}-{day}-{year}</h3>
+            :
+                <h3 className="centered">Schedule for {month}-{day}-{year}</h3>
+            }
             <ScheduleDay 
                 scheduledTasks={props.scheduledTasks} 
                 action={changeDay}

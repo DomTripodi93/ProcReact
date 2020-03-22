@@ -120,6 +120,7 @@ a, ul{
 
 .inner-border-left{
   height: 100%;
+  width: 100%;
   border-style: solid hidden solid solid;
   border-color: black;
   background-color: rgb(255, 255, 255);
@@ -129,6 +130,7 @@ a, ul{
 
 .inner-border-right{
   height: 100%;
+  width: 100%;
   border-style: solid solid solid solid;
   border-color: black;
   background-color: rgb(255, 255, 255);
@@ -138,6 +140,7 @@ a, ul{
 
 .inner-border-left-header{
   height: 100%;
+  width: 100%;
   border-style: solid hidden solid solid;
   border-color: black;
   background-color: rgb(228, 188, 255);
@@ -147,6 +150,7 @@ a, ul{
 
 .inner-border-right-header{
   height: 100%;
+  width: 100%;
   border-style: solid;
   border-color: black;
   background-color: rgb(228, 188, 255);
