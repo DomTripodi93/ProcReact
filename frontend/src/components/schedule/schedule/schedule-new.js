@@ -9,6 +9,11 @@ const ScheduleNew = (props) =>{
                 <div className='border'>
                     <ScheduleForm 
                         callback={props.action} 
+                        objectives={props.objectives}
+                        employeeMap={props.employeeMap}
+                        year={props.year}
+                        month={props.month}
+                        day={props.day}
                         editMode={false}/>
                 </div>
             :

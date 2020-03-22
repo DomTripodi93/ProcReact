@@ -26,8 +26,7 @@ export function fetchSchedulesByEmployee(employeeId, month, day, year){
 }
 //Gets all schedules for a specific day
 
-export function addSchedule(schedule, callback){
-    schedule = prepScheduleValues(schedule);
+export function addScheduledTask(schedule, callback){
     return dispatch =>{
         http.addItem("schedule", schedule)
             .then(addedSchedule =>{
@@ -38,8 +37,7 @@ export function addSchedule(schedule, callback){
 }
 //Posts new schedule to API
 
-export function updateSchedule(schedule, callback){
-    schedule = prepScheduleValues(schedule);
+export function updateScheduledTask(schedule, callback){
     return dispatch =>{
         http.updateItemById("schedule", schedule, schedule.id)
             .then(() =>{
@@ -96,16 +94,4 @@ export function resetSchedules(){
     return {
         type: ScheduleActionTypes.RESET_SCHEDULES
     }
-}
-
-function prepScheduleValues(schedule){
-    schedule.practice = helper.capitalizeAll(schedule.practice);
-    if (schedule.method){
-        schedule.method = helper.capitalize(schedule.method);
-    }
-    if (schedule.purpose){
-        schedule.purpose = helper.capitalize(schedule.purpose);
-    }
-
-    return schedule;
 }

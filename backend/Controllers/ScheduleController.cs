@@ -42,7 +42,7 @@ namespace backend.Controllers
 
             if (await _repo.SaveAll())
             {
-                var jobToReturn = _mapper.Map<ScheduleForCreationDto>(schedule);
+                var jobToReturn = _mapper.Map<ScheduleForReturnDto>(schedule);
                 return CreatedAtRoute("GetScheduledTask", new {Id = schedule.Id, userId = userId }, jobToReturn);
             }
             

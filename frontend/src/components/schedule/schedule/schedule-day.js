@@ -2,6 +2,7 @@ import React from 'react';
 import SingleScheduledTask from './single-scheduled-task';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 
+
 const ScheduleDay = props => {
     return(
         <div>
@@ -15,6 +16,9 @@ const ScheduleDay = props => {
                                 objectives={props.objectives}
                                 scheduledTask={scheduledTask}
                                 employeeMap={props.employeeMap}
+                                year={props.year}
+                                month={props.month}
+                                day={props.day}
                                 className='sized30' />
                         </div>
                     ))}
