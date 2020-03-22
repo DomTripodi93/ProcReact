@@ -14,18 +14,28 @@ const ScheduledTaskForm = props => {
         return { value: key, label: key + " - " + props.employeeMap[key]};
     });
     const deptOptions = [{value: "None", label: "None"}, ...Object.keys(props.objectives).map(key =>{
-        props.objectives[key] = props.objectives[key].map(key =>{
-            return {value: key.objectiveName, label: key.objectiveName}
-        })
         return {value: key, label: key}
     })];
+
+    const setObjectiveOptionSets = (options) =>{
+        let newOptions = {};
+        let keys = Object.keys(options);
+        keys.forEach((key)=>{
+            newOptions[key] = options[key].map(option =>{
+                return {value: option.objectiveName, label: option.objectiveName};
+            });
+        });
+        return newOptions;
+    }
+    const objectiveOptionSets = setObjectiveOptionSets(props.objectives);
+
     const [objectiveOptions, setObjectiveOptions] = useState([{value: "None", label: "None"}]);
     const [scheduledTaskInfo, setScheduledTaskInfo] = useState({
-      employeeId: employeeIdOptions[0].value,
-      employeeName: props.employeeMap[employeeIdOptions[0].value],
-      deptName: 'None',
-      objectiveName: 'None',
-      date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
+        employeeId: employeeIdOptions[0].value,
+        employeeName: props.employeeMap[employeeIdOptions[0].value],
+        deptName: 'None',
+        objectiveName: 'None',
+        date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
     });
     const { employeeId, deptName, objectiveName, date } = scheduledTaskInfo;
 
@@ -36,7 +46,6 @@ const ScheduledTaskForm = props => {
     },[props])
 
     const handleSubmit = async event => {
-        console.log(scheduledTaskInfo)
         event.preventDefault();
         if (props.editMode){
             if (scheduledTaskInfo !== props.scheduledTaskInput){
@@ -53,8 +62,8 @@ const ScheduledTaskForm = props => {
         const { name, value } = event.target;
 
         if (name === "deptName"){
-            setScheduledTaskInfo({ ...scheduledTaskInfo, [name]: value });
-            setObjectiveOptions(props.objectives[value])
+            setObjectiveOptions(objectiveOptionSets[value])
+            setScheduledTaskInfo({ ...scheduledTaskInfo, deptName: value, objectiveName: objectiveOptionSets[value][0].value });
         } else if (name === "employeeId") {
             setScheduledTaskInfo({ 
                 ...scheduledTaskInfo, 

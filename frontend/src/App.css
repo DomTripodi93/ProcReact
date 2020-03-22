@@ -120,7 +120,7 @@ a, ul{
 
 .inner-border-left{
   height: 100%;
-  border-style: hidden hidden solid solid;
+  border-style: solid hidden solid solid;
   border-color: black;
   background-color: rgb(255, 255, 255);
   border-width: 2px;
@@ -129,7 +129,7 @@ a, ul{
 
 .inner-border-right{
   height: 100%;
-  border-style: hidden solid solid solid;
+  border-style: solid solid solid solid;
   border-color: black;
   background-color: rgb(255, 255, 255);
   border-width: 2px;

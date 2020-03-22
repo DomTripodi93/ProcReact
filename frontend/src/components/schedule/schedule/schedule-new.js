@@ -11,6 +11,7 @@ const ScheduleNew = (props) =>{
                         callback={props.action} 
                         objectives={props.objectives}
                         employeeMap={props.employeeMap}
+                        employeeId={props.employeeId}
                         year={props.year}
                         month={props.month}
                         day={props.day}
