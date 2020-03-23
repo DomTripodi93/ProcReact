@@ -3,13 +3,17 @@ import SingleScheduledTask from './single-scheduled-task';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import { connect } from 'react-redux';
 import { deleteSchedule } from '../../../reducers/schedule/schedule/schedule.actions';
+import ScheduledTaskForm from './schedule-form';
+
 
 
 const ScheduleDay = props => {
-    const [editMode, updateEditMode] = useState(false)
+    const [editMode, updateEditMode] = useState(false);
+    const [selectedTask, setSelectedTask] = useState("");
 
-    const setEditMode = () => {
-        updateEditMode(!editMode)
+    const setEditMode = (task) => {
+        setSelectedTask(task);
+        updateEditMode(!editMode);
     }
 
     const handleDelete = (task) => {
@@ -19,8 +23,25 @@ const ScheduleDay = props => {
             props.deleteSchedule(task.id);
         }
     }
+
     return(
         <div>
+            {editMode ?
+                <div>
+                    <ScheduledTaskForm
+                        callback={setEditMode} 
+                        objectives={props.objectives}
+                        employeeMap={props.employeeMap}
+                        employeeId={props.employeeId}
+                        editMode={editMode}
+                        scheduledTaskInput={selectedTask}
+                        year={props.year}
+                        month={props.month}
+                        day={props.day} />
+                </div>
+            :
+                null
+            }
             {props.scheduledTasks.length > 0 ?
                 <div>
                     {props.employeeId ?
@@ -49,7 +70,7 @@ const ScheduleDay = props => {
                                         <div className="grid50-colapse inner-border-right">
                                             <CustomButton 
                                                 buttonStyle="blue small"
-                                                action={setEditMode}
+                                                action={()=>{setEditMode(scheduledTask)}}
                                                 label="Edit"/>
                                             <CustomButton 
                                                 buttonStyle="red small"
@@ -86,7 +107,7 @@ const ScheduleDay = props => {
                                         <div className="grid50-colapse inner-border-right">
                                             <CustomButton 
                                                 buttonStyle="blue small"
-                                                action={setEditMode}
+                                                action={()=>{setEditMode(scheduledTask)}}
                                                 label="Edit"/>
                                             <CustomButton 
                                                 buttonStyle="red small"

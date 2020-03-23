@@ -140,6 +140,7 @@ const ScheduleDayContainer = props => {
                 scheduledTasks={props.scheduledTasks} 
                 action={changeDay}
                 employeeId={employeeId}
+                objectives={props.objectives}
                 year={year}
                 month={month}
                 day={day}

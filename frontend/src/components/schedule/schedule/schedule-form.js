@@ -13,6 +13,7 @@ const ScheduledTaskForm = props => {
     const employeeIdOptions = Object.keys(props.employeeMap).map(key =>{
         return { value: key, label: key + " - " + props.employeeMap[key]};
     });
+    
     const deptOptions = [{value: "None", label: "None"}, ...Object.keys(props.objectives).map(key =>{
         return {value: key, label: key}
     })];
@@ -40,8 +41,12 @@ const ScheduledTaskForm = props => {
     const { employeeId, deptName, objectiveName, date } = scheduledTaskInfo;
 
     useEffect(()=>{
-        if (props.editMode){
+        if (props.employeeId){
+            setScheduledTaskInfo({...scheduledTaskInfo, employeeId: props.employeeId})
+        }
+        if (props.scheduledTaskInput){
             setScheduledTaskInfo(props.scheduledTaskInput);
+            setObjectiveOptions(objectiveOptionSets[props.scheduledTaskInput.deptName])
         }
     },[props])
 
@@ -54,6 +59,7 @@ const ScheduledTaskForm = props => {
                 props.callback();
             }
         } else {
+            props.callback();
             props.addScheduledTask(scheduledTaskInfo, props.callback);
         }
     };
@@ -83,28 +89,28 @@ const ScheduledTaskForm = props => {
                 </h3>
             :
                 <h3 className='centered'>
-                    {props.scheduledTaskInput.scheduledTaskId}: {props.scheduledTaskInput.name}
+                    Edit the scheduled task below
                 </h3>
             }
             <form onSubmit={handleSubmit}>
                 <FormSelect
                     label="Employee"
                     name='employeeId'
-                    value={employeeId}
+                    value={scheduledTaskInfo.employeeId}
                     options={employeeIdOptions}
                     onChange={handleChange}
                     />
                 <FormSelect
                     label="Department"
                     name='deptName'
-                    value={deptName}
+                    value={scheduledTaskInfo.deptName}
                     options={deptOptions}
                     onChange={handleChange}
                     />
                 <FormSelect
                     label="Objective"
                     name='objectiveName'
-                    value={objectiveName}
+                    value={scheduledTaskInfo.objectiveName}
                     options={objectiveOptions}
                     onChange={handleChange}
                     />
