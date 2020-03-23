@@ -10,10 +10,8 @@ import helpers from '../../../shared/helpers';
 
 const ScheduledTaskForm = props => {
     const helper = new helpers();
-    const employeeIdOptions = Object.keys(props.employeeMap).map(key =>{
-        return { value: key, label: key + " - " + props.employeeMap[key]};
-    });
-    
+    const [employeeIdOptions, setEmployeeIdOptions] = useState([]);
+        
     const deptOptions = [{value: "None", label: "None"}, ...Object.keys(props.objectives).map(key =>{
         return {value: key, label: key}
     })];
@@ -81,67 +79,79 @@ const ScheduledTaskForm = props => {
         }
     };
 
+    const setBaseValues = () => {
+        let employeeOptionUpdate = Object.keys(props.employeeMap).map(key =>{
+            return { value: key, label: key + " - " + props.employeeMap[key]};
+        });
+    }
+
     return (
-        <div className='middle'>
-            {!props.editMode?
-                <h3 className='centered'>
-                    Fill out the form below to add an ScheduledTask
-                </h3>
+        <div>
+            {props.hasNeededData ?
+                <div className='middle'>
+                    {!props.editMode?
+                        <h3 className='centered'>
+                            Fill out the form below to add an ScheduledTask
+                        </h3>
+                    :
+                        <h3 className='centered'>
+                            Edit the scheduled task below
+                        </h3>
+                    }
+                    <form onSubmit={handleSubmit}>
+                        <FormSelect
+                            label="Employee"
+                            name='employeeId'
+                            value={employeeId}
+                            options={employeeIdOptions}
+                            onChange={handleChange}
+                            />
+                        <FormSelect
+                            label="Department"
+                            name='deptName'
+                            value={deptName}
+                            options={deptOptions}
+                            onChange={handleChange}
+                            />
+                        <FormSelect
+                            label="Objective"
+                            name='objectiveName'
+                            value={objectiveName}
+                            options={objectiveOptions}
+                            onChange={handleChange}
+                            />
+                        <FormInput
+                            label='Date'
+                            type='datetime-local' 
+                            name='date'
+                            value={date}
+                            onChange={handleChange}
+                            />
+                            <div className="grid50">
+                                {!props.editMode ?
+                                    <CustomButton
+                                        buttonStyle="blue"
+                                        type="submit"
+                                        label="Add"
+                                        />
+                                :
+                                    <CustomButton
+                                        buttonStyle="blue"
+                                        type="submit"
+                                        label="Update"
+                                        />
+                                }
+                                <CustomButton
+                                    buttonStyle="red"
+                                    action={props.callback}
+                                    label="Cancel"
+                                />
+                            </div>
+                    </form>
+                </div>
             :
-                <h3 className='centered'>
-                    Edit the scheduled task below
-                </h3>
+                null
             }
-            <form onSubmit={handleSubmit}>
-                <FormSelect
-                    label="Employee"
-                    name='employeeId'
-                    value={employeeId}
-                    options={employeeIdOptions}
-                    onChange={handleChange}
-                    />
-                <FormSelect
-                    label="Department"
-                    name='deptName'
-                    value={deptName}
-                    options={deptOptions}
-                    onChange={handleChange}
-                    />
-                <FormSelect
-                    label="Objective"
-                    name='objectiveName'
-                    value={objectiveName}
-                    options={objectiveOptions}
-                    onChange={handleChange}
-                    />
-                <FormInput
-                    label='Date'
-                    type='datetime-local' 
-                    name='date'
-                    value={date}
-                    onChange={handleChange}
-                    />
-                    <div className="grid50">
-                        {!props.editMode ?
-                            <CustomButton
-                                buttonStyle="blue"
-                                type="submit"
-                                label="Add"
-                                />
-                        :
-                            <CustomButton
-                                buttonStyle="blue"
-                                type="submit"
-                                label="Update"
-                                />
-                        }
-                        <CustomButton
-                            buttonStyle="red"
-                            action={props.callback}
-                            label="Cancel"
-                        />
-                    </div>
-            </form>
         </div>
     );
 }

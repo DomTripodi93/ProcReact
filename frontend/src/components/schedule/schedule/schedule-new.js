@@ -15,7 +15,8 @@ const ScheduleNew = (props) =>{
                         year={props.year}
                         month={props.month}
                         day={props.day}
-                        editMode={false}/>
+                        editMode={false}
+                        hasNeededData={props.hasNeededData}/>
                 </div>
             :
                 <div className='top'>

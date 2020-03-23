@@ -37,7 +37,8 @@ const ScheduleDay = props => {
                         scheduledTaskInput={selectedTask}
                         year={props.year}
                         month={props.month}
-                        day={props.day} />
+                        day={props.day}
+                        hasNeededData={props.hasNeededData} />
                 </div>
             :
                 null

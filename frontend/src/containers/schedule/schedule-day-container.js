@@ -10,6 +10,7 @@ import { fetchEmployeesForMap } from '../../reducers/schedule/employee/employee.
 
 
 const ScheduleDayContainer = props => {
+    const [hasNeededData, setNeededDataState] = useState(true);
     const [addMode, setAddMode] = useState(false);
     const helper = new CalendarHelper();
     const employeeId = props.match.params.employeeId;
@@ -28,10 +29,12 @@ const ScheduleDayContainer = props => {
     useEffect(()=>{
         if (!deptCalled){
             fetchAllDepartments();
-        } else if (!objCalled){
+        } else if (!objCalled && departments.length > 0){
             departments.forEach(dept =>{
                 fetchObjectivesForDepartment(dept.deptName);
             })
+        } else if (departments.length === 0){
+            setNeededDataState(false);
         }
     },[
         departments, 
@@ -74,8 +77,9 @@ const ScheduleDayContainer = props => {
     useEffect(()=>{
         if (!employeeCalled){
             fetchEmployees();
+        } else if (Object.keys(employeeMap).length === 0){
+            setNeededDataState(false);
         }
-        return 
     },[
         fetchEmployees,
         employeeMap
@@ -134,7 +138,9 @@ const ScheduleDayContainer = props => {
                 year={year}
                 month={month}
                 day={day}
-                employeeMap={employeeMap}/>
+                employeeMap={employeeMap}
+                hasNeededData={hasNeededData}/>
+
             {employeeMap[employeeId] ?
                 <h3 className="centered">{employeeMap[employeeId]}'s Schedule for {month}-{day}-{year}</h3>
             :
@@ -148,7 +154,8 @@ const ScheduleDayContainer = props => {
                 year={year}
                 month={month}
                 day={day}
-                employeeMap={employeeMap}/>
+                employeeMap={employeeMap}
+                hasNeededData={hasNeededData}/>
         </div>
     )
 }
