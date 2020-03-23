@@ -149,16 +149,16 @@ const ScheduleDay = props => {
                 </div>
             }
             <br />
-            <div className="grid50">
+            <div className="grid50 size-holder middle">
                 <div className="middle">
                     <CustomButton 
-                        label="< Previous Day"
+                        label="&#8656; Previous Day"
                         buttonStyle="soft-green"
                         action={()=>props.action('last')}/>
                 </div>
                 <div className="middle">
                     <CustomButton 
-                        label="Next Day >"
+                        label="Next Day &#8658;"
                         buttonStyle="soft-green"
                         action={()=>props.action('next')}/>
                 </div>

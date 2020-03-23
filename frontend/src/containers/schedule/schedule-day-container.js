@@ -40,7 +40,9 @@ const ScheduleDayContainer = props => {
         departments, 
         objectives,
         fetchAllDepartments, 
-        fetchObjectivesForDepartment
+        fetchObjectivesForDepartment,
+        deptCalled,
+        objCalled
     ])
 
 
@@ -82,7 +84,8 @@ const ScheduleDayContainer = props => {
         }
     },[
         fetchEmployees,
-        employeeMap
+        employeeMap,
+        employeeCalled
     ]);
 
 

@@ -1,10 +1,8 @@
 import rootHttp from '../../root-http';
 import ScheduleActionTypes from './schedule.types';
-import helpers from '../../../shared/helpers';
 
 
 const http = new rootHttp();
-const helper = new helpers();
 
 export function fetchSchedulesByDate(month, day, year){
     return dispatch => {

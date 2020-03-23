@@ -10,13 +10,35 @@ import helpers from '../../../shared/helpers';
 
 const ScheduledTaskForm = props => {
     const helper = new helpers();
-    const [employeeIdOptions, setEmployeeIdOptions] = useState([]);
-        
-    const deptOptions = [{value: "None", label: "None"}, ...Object.keys(props.objectives).map(key =>{
-        return {value: key, label: key}
-    })];
 
-    const setObjectiveOptionSets = (options) =>{
+    const [scheduledTaskInfo, setScheduledTaskInfo] = useState({
+        employeeId: 1,
+        employeeName: "Nobody",
+        deptName: 'None',
+        objectiveName: 'None',
+        date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
+    });
+    const { 
+        employeeId, 
+        deptName, 
+        objectiveName, 
+        date 
+    } = scheduledTaskInfo;
+
+    const [options, setOptions] = useState({
+        employeeIdOptions: [],
+        deptOptions: [],
+        objectiveOptions: [],
+        objectiveOptionSets: {}
+    })
+    const {
+        employeeIdOptions, 
+        deptOptions, 
+        objectiveOptions, 
+        objectiveOptionSets
+    } = options;
+
+    const intializeObjectiveOptionSets = (options) =>{
         let newOptions = {};
         let keys = Object.keys(options);
         keys.forEach((key)=>{
@@ -26,27 +48,43 @@ const ScheduledTaskForm = props => {
         });
         return newOptions;
     }
-    const objectiveOptionSets = setObjectiveOptionSets(props.objectives);
-
-    const [objectiveOptions, setObjectiveOptions] = useState([{value: "None", label: "None"}]);
-    const [scheduledTaskInfo, setScheduledTaskInfo] = useState({
-        employeeId: employeeIdOptions[0].value,
-        employeeName: props.employeeMap[employeeIdOptions[0].value],
-        deptName: 'None',
-        objectiveName: 'None',
-        date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
-    });
-    const { employeeId, deptName, objectiveName, date } = scheduledTaskInfo;
 
     useEffect(()=>{
         if (props.employeeId){
-            setScheduledTaskInfo({...scheduledTaskInfo, employeeId: props.employeeId})
+            setScheduledTaskInfo({employeeId: props.employeeId})
         }
         if (props.scheduledTaskInput){
             setScheduledTaskInfo(props.scheduledTaskInput);
-            setObjectiveOptions(objectiveOptionSets[props.scheduledTaskInput.deptName])
+            setOptions({objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]})
         }
-    },[props])
+    },[props, objectiveOptionSets])
+
+    useEffect(()=>{
+        if (props.hasNeededData){
+            setScheduledTaskInfo({
+                employeeId: Object.keys(props.employeeMap)[0],
+                employeeName: props.employeeMap[Object.keys(props.employeeMap)[0]],
+                deptName: 'None',
+                objectiveName: 'None',
+                date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
+            });
+            setOptions({
+                employeeIdOptions: Object.keys(props.employeeMap)
+                    .map(key =>{
+                        return { value: key, label: key + " - " + props.employeeMap[key]};
+                    }),
+                objectiveOptionSets: intializeObjectiveOptionSets(props.objectives),
+                objectiveOptions: props.objectives[Object.keys(props.objectives)[0]]
+                    .map(objective =>{
+                        return {value: objective.objectiveName, label: objective.objectiveName}
+                    }),
+                deptOptions: [{value: "None", label: "None"}, ...Object.keys(props.objectives)
+                    .map(key =>{
+                        return {value: key, label: key};
+                    })]
+            });
+        }
+    },[props, helper])
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -57,7 +95,6 @@ const ScheduledTaskForm = props => {
                 props.callback();
             }
         } else {
-            props.callback();
             props.addScheduledTask(scheduledTaskInfo, props.callback);
         }
     };
@@ -66,7 +103,7 @@ const ScheduledTaskForm = props => {
         const { name, value } = event.target;
 
         if (name === "deptName"){
-            setObjectiveOptions(objectiveOptionSets[value])
+            setOptions({objectiveOptions: objectiveOptionSets[value]})
             setScheduledTaskInfo({ ...scheduledTaskInfo, deptName: value, objectiveName: objectiveOptionSets[value][0].value });
         } else if (name === "employeeId") {
             setScheduledTaskInfo({ 
@@ -78,12 +115,6 @@ const ScheduledTaskForm = props => {
             setScheduledTaskInfo({ ...scheduledTaskInfo, [name]: value });
         }
     };
-
-    const setBaseValues = () => {
-        let employeeOptionUpdate = Object.keys(props.employeeMap).map(key =>{
-            return { value: key, label: key + " - " + props.employeeMap[key]};
-        });
-    }
 
     return (
         <div>
@@ -150,7 +181,12 @@ const ScheduledTaskForm = props => {
                     </form>
                 </div>
             :
-                null
+                <div className="size-holder centered">
+                    <h4>To start scheduling tasks add the following:</h4>
+                    <h4>&#10547; One Employee</h4>
+                    <h4>&#10547; One Department</h4>
+                    <h4>&#10547; One Objective</h4>
+                </div>
             }
         </div>
     );

@@ -264,6 +264,15 @@ a, ul{
   margin: 0px 0px 3% 3%;
 }
 
+.left-top{
+  margin: 0px 0px 3% 3%;
+}
+
+.right-top{
+  text-align: right;
+  margin: 0px 3% 3% 0px;
+}
+
 .date{
   margin: 10% 10% 10% 10%;
 }
@@ -311,6 +320,14 @@ h3{
 @media only screen and (max-width: 768px) {
   .top{
       margin: 0px 0px 3% 11.5%;
+  }
+
+  .left-top{
+    margin: 0px 0px 3% 18.4%;
+  }
+  
+  .right-top{
+    margin: 0px 18.4% 3% 0px;
   }
   
   .sized30{

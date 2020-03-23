@@ -6,7 +6,9 @@ import {
   FormSelector
 } from './form-select.styles';
 
-const FormSelect = ({ handleChange, label, options, ...props }) => (
+const FormSelect = ({ handleChange, label, options, ...props }) => {
+  console.log(options)
+  return(
   <FormSelectContainer className="input-width grid100" onChange={handleChange}>
     <FormSelector {...props}>
       {options.map(option=>(
@@ -19,6 +21,6 @@ const FormSelect = ({ handleChange, label, options, ...props }) => (
       </FormSelectLabel>
     ) : null}
   </FormSelectContainer>
-);
+)};
 
 export default FormSelect;
