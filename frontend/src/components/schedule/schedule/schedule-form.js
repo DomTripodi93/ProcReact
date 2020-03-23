@@ -96,21 +96,21 @@ const ScheduledTaskForm = props => {
                 <FormSelect
                     label="Employee"
                     name='employeeId'
-                    value={scheduledTaskInfo.employeeId}
+                    value={employeeId}
                     options={employeeIdOptions}
                     onChange={handleChange}
                     />
                 <FormSelect
                     label="Department"
                     name='deptName'
-                    value={scheduledTaskInfo.deptName}
+                    value={deptName}
                     options={deptOptions}
                     onChange={handleChange}
                     />
                 <FormSelect
                     label="Objective"
                     name='objectiveName'
-                    value={scheduledTaskInfo.objectiveName}
+                    value={objectiveName}
                     options={objectiveOptions}
                     onChange={handleChange}
                     />

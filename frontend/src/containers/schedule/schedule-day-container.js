@@ -19,14 +19,16 @@ const ScheduleDayContainer = props => {
     const lastDay = helper.checkDays(year, month);
     
     const departments = props.departments;
+    const deptCalled = props.deptCalled;
     const objectives = props.objectives;
+    const objCalled = props.objCalled;
     const fetchAllDepartments = props.fetchDepartments;
     const fetchObjectivesForDepartment = props.fetchObjectivesByDepartment;
 
     useEffect(()=>{
-        if (departments.length < 1){
+        if (!deptCalled){
             fetchAllDepartments();
-        } else if (Object.keys(objectives).length < 1){
+        } else if (!objCalled){
             departments.forEach(dept =>{
                 fetchObjectivesForDepartment(dept.deptName);
             })
@@ -64,16 +66,13 @@ const ScheduleDayContainer = props => {
         year
     ])
 
-    useEffect(()=>{
-        return ()=>{resetAllSchedules()}
-    },[resetAllSchedules])
-
     const employeeMap = props.employeeMap;
+    const employeeCalled = props.employeeCalled;
     const fetchEmployees = props.fetchEmployees;
 
 
     useEffect(()=>{
-        if (Object.keys(employeeMap) < 1){
+        if (!employeeCalled){
             fetchEmployees();
         }
         return 
@@ -81,6 +80,11 @@ const ScheduleDayContainer = props => {
         fetchEmployees,
         employeeMap
     ]);
+
+
+    useEffect(()=>{
+        return ()=>{resetAllSchedules()}
+    },[resetAllSchedules])
 
 
     const changeDay = (movement) => {
@@ -164,8 +168,11 @@ const mapStateToProps = state => ({
     scheduledTasks: state.schedule.scheduledTasks,
     scheduledTasksCalled: state.schedule.scheduledTasksCalled,
     departments: state.department.departments,
+    deptCalled: state.department.called,
     objectives: state.objective.objectives,
-    employeeMap: state.employee.employeeMap
+    objCalled: state.objective.called,
+    employeeMap: state.employee.employeeMap,
+    employeeCalled: state.employee.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDayContainer);

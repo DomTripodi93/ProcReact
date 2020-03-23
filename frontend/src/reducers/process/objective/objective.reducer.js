@@ -2,7 +2,8 @@ import ObjectiveActionTypes from './objective.types';
 
 const INITIAL_STATE = {
     objectives: {},
-    selectedObjective: {}
+    selectedObjective: {},
+    called: false
 }
 
 const objectiveReducer = (state = INITIAL_STATE, action) => {
@@ -21,7 +22,8 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
             }
             return {
                 ...state,
-                objectives: objectiveHold
+                objectives: objectiveHold,
+                called: true
             };
         case ObjectiveActionTypes.ADD_OBJECTIVE:
             objectiveHold[action.payload.deptName].push(action.payload)

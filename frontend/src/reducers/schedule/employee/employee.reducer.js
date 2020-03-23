@@ -2,7 +2,8 @@ import EmployeeActionTypes from './employee.types';
 
 const INITIAL_STATE = {
     employees: [],
-    employeeMap: {}
+    employeeMap: {},
+    called: false
 }
 
 const employeeReducer = (state = INITIAL_STATE, action) => {
@@ -14,7 +15,8 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
             });
             return {
                 ...state,
-                employeeMap: employeesHold
+                employeeMap: employeesHold,
+                called: true
             };
         case EmployeeActionTypes.SET_EMPLOYEES:
             return {

@@ -1,7 +1,8 @@
 import DepartmentActionTypes from './department.types';
 
 const INITIAL_STATE = {
-    departments: []
+    departments: [],
+    called: false
 }
 
 const departmentReducer = (state = INITIAL_STATE, action) => {
@@ -9,7 +10,8 @@ const departmentReducer = (state = INITIAL_STATE, action) => {
         case DepartmentActionTypes.SET_DEPARTMENTS:
             return {
                 ...state,
-                departments: action.payload.data
+                departments: action.payload.data,
+                called: true
             };
         case DepartmentActionTypes.ADD_DEPARTMENT:
             return {
