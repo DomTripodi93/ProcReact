@@ -20,11 +20,17 @@ const SingleScheduledTask = props => {
                             {props.scheduledTask.deptName}
                         </h5>
                     </div>
-                    <div className="inner-border-left">
+                    <Link 
+                        to={
+                            "/objective/" + 
+                            props.scheduledTask.deptName + "/" +
+                            props.scheduledTask.objectiveName
+                        } 
+                        className="inner-border-left">
                         <h5 className="grid-text">
                             {props.scheduledTask.objectiveName}
                         </h5>
-                    </div>
+                    </Link>
                 </div>
             :
                 <div className="grid-all-employees">
@@ -51,11 +57,17 @@ const SingleScheduledTask = props => {
                             {props.scheduledTask.deptName}
                         </h5>
                     </div>
-                    <div className="inner-border-left">
+                    <Link 
+                        to={
+                            "/objective/" + 
+                            props.scheduledTask.deptName + "/" +
+                            props.scheduledTask.objectiveName
+                        } 
+                        className="inner-border-left">
                         <h5 className="grid-text">
                             {props.scheduledTask.objectiveName}
                         </h5>
-                    </div>
+                    </Link>
                 </div>
             }
         </div>
