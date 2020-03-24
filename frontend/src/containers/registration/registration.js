@@ -4,7 +4,7 @@ import CustomButton from '../../shared/elements/button/custom-button.component';
 import { registerUser } from '../../reducers/user/user.actions';
 import { connect } from "react-redux";
 
-
+import './registration.styles.scss';
 
 
 const Registration = (props) => {

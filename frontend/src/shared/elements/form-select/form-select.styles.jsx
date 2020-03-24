@@ -12,6 +12,11 @@ const shrinkLabelStyles = css`
 export const FormSelectContainer = styled.div`
   position: relative;
   margin: auto;
+
+  &.input-width{
+    width: 80%;
+    margin: auto;
+  }
 `
 
 FormSelectContainer.displayName = 'FormSelectContainer'

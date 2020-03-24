@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import store from './reducers/store';
-import './App.css';
+import './App.scss';
 import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
 import { checkUser } from './reducers/user/user.actions';
 import Header from './shared/header/header';

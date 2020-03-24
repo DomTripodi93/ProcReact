@@ -39,7 +39,7 @@ const ScheduledTaskForm = props => {
     } = options;
 
     const intializeObjectiveOptionSets = (options) =>{
-        let newOptions = {};
+        let newOptions = {None: [{value: 'None', label: "None"}]};
         let keys = Object.keys(options);
         keys.forEach((key)=>{
             newOptions[key] = options[key].map(option =>{
@@ -55,12 +55,15 @@ const ScheduledTaskForm = props => {
         }
         if (props.scheduledTaskInput){
             setScheduledTaskInfo(props.scheduledTaskInput);
-            setOptions({objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]})
+            setOptions({
+                ...options, 
+                objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]
+            })
         }
     },[props, objectiveOptionSets])
 
     useEffect(()=>{
-        if (props.hasNeededData){
+        if (props.hasNeededData && deptOptions.length < 2){
             setScheduledTaskInfo({
                 employeeId: Object.keys(props.employeeMap)[0],
                 employeeName: props.employeeMap[Object.keys(props.employeeMap)[0]],
@@ -74,10 +77,7 @@ const ScheduledTaskForm = props => {
                         return { value: key, label: key + " - " + props.employeeMap[key]};
                     }),
                 objectiveOptionSets: intializeObjectiveOptionSets(props.objectives),
-                objectiveOptions: props.objectives[Object.keys(props.objectives)[0]]
-                    .map(objective =>{
-                        return {value: objective.objectiveName, label: objective.objectiveName}
-                    }),
+                objectiveOptions: [{value: 'None', label: "None"}],
                 deptOptions: [{value: "None", label: "None"}, ...Object.keys(props.objectives)
                     .map(key =>{
                         return {value: key, label: key};
@@ -103,8 +103,12 @@ const ScheduledTaskForm = props => {
         const { name, value } = event.target;
 
         if (name === "deptName"){
-            setOptions({objectiveOptions: objectiveOptionSets[value]})
-            setScheduledTaskInfo({ ...scheduledTaskInfo, deptName: value, objectiveName: objectiveOptionSets[value][0].value });
+            setOptions({...options, objectiveOptions: objectiveOptionSets[value]})
+            setScheduledTaskInfo({ 
+                ...scheduledTaskInfo, 
+                deptName: value, 
+                objectiveName: objectiveOptionSets[value][0].value 
+            });
         } else if (name === "employeeId") {
             setScheduledTaskInfo({ 
                 ...scheduledTaskInfo, 

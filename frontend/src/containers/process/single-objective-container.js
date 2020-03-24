@@ -3,6 +3,8 @@ import { fetchSingleObjective } from '../../reducers/process/objective/objective
 import { connect } from 'react-redux';
 import SingleObjective from '../../components/process/objective/single-objective';
 
+import './process.styles.scss';
+
 
 const SingleObjectiveContainer = props =>{
     const deptName = props.match.params.deptName;

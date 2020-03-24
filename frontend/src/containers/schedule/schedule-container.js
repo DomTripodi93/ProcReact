@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Calendar from '../../components/schedule/calendar/calendar';
 import CalendarNew from '../../components/schedule/calendar/calendar-new';
 
+import './schedule.styles.scss';
+
 
 const ScheduleContainer = props => {
     const date = new Date();

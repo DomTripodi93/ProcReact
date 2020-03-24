@@ -5,6 +5,8 @@ import EmployeeNew from '../../components/schedule/employee/employee-new';
 import Employees from '../../components/schedule/employee/employees';
 import { fetchDepartments } from '../../reducers/process/department/department.actions';
 
+import './schedule.styles.scss';
+
 
 const EmployeeContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

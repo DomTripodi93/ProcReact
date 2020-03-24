@@ -6,6 +6,8 @@ import { signInUser } from '../../reducers/user/user.actions';
 import FormInput from '../../shared/elements/form-input/form-input.component';
 import CustomButton from '../../shared/elements/button/custom-button.component';
 
+import './registration.styles.scss';
+
 
 const Signin = props => {
     const [userCredentials, setUserCredentials] = useState({

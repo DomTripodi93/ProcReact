@@ -1,0 +1,15 @@
+.full-button{
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+}
+
+.grid50-to-100 { 
+    display: grid;
+    grid-template-columns: 50% 50%;
+    
+    @media only screen and (max-width: 915px){
+        display: grid;
+        grid-template-columns: 100%;
+    }
+}

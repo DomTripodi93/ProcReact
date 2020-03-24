@@ -4,6 +4,8 @@ import { fetchStepsByDepartmentAndObjective } from '../../reducers/process/step/
 import StepNew from '../../components/process/step/step-new';
 import Steps from '../../components/process/step/steps';
 
+import './process.styles.scss';
+
 
 const StepContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

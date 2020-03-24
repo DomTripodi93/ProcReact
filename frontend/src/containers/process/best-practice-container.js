@@ -4,6 +4,8 @@ import { fetchBestPracticesByStep } from '../../reducers/process/best-practice/b
 import BestPracticeNew from '../../components/process/best-practice/best-practice-new';
 import BestPractices from '../../components/process/best-practice/best-practices';
 
+import './process.styles.scss';
+
 
 const BestPracticeContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

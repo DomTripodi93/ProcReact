@@ -4,6 +4,8 @@ import { fetchDepartments } from '../../reducers/process/department/department.a
 import DepartmentNew from '../../components/process/department/department-new';
 import Departments from '../../components/process/department/departments';
 
+import './process.styles.scss';
+
 
 const DepartmentContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

@@ -7,7 +7,6 @@ import {
 } from './form-select.styles';
 
 const FormSelect = ({ handleChange, label, options, ...props }) => {
-  console.log(options)
   return(
   <FormSelectContainer className="input-width grid100" onChange={handleChange}>
     <FormSelector {...props}>

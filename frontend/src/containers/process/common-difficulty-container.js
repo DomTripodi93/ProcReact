@@ -4,6 +4,8 @@ import { fetchCommonDifficultiesByStep } from '../../reducers/process/common-dif
 import CommonDifficultyNew from '../../components/process/common-difficulty/common-difficulty-new';
 import CommonDifficulties from '../../components/process/common-difficulty/common-difficulties';
 
+import './process.styles.scss';
+
 
 const CommonDifficultyContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

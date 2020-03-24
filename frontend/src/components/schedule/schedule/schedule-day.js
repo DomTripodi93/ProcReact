@@ -28,17 +28,20 @@ const ScheduleDay = props => {
         <div>
             {editMode ?
                 <div>
-                    <ScheduledTaskForm
-                        callback={setEditMode} 
-                        objectives={props.objectives}
-                        employeeMap={props.employeeMap}
-                        employeeId={props.employeeId}
-                        editMode={editMode}
-                        scheduledTaskInput={selectedTask}
-                        year={props.year}
-                        month={props.month}
-                        day={props.day}
-                        hasNeededData={props.hasNeededData} />
+                    <div className="border">
+                        <ScheduledTaskForm
+                            callback={setEditMode} 
+                            objectives={props.objectives}
+                            employeeMap={props.employeeMap}
+                            employeeId={props.employeeId}
+                            editMode={editMode}
+                            scheduledTaskInput={selectedTask}
+                            year={props.year}
+                            month={props.month}
+                            day={props.day}
+                            hasNeededData={props.hasNeededData} />
+                    </div>
+                    <br />
                 </div>
             :
                 null

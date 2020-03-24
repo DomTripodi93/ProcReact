@@ -4,6 +4,8 @@ import { fetchObjectivesByDepartment } from '../../reducers/process/objective/ob
 import ObjectiveNew from '../../components/process/objective/objective-new';
 import Objectives from '../../components/process/objective/objectives';
 
+import './process.styles.scss';
+
 
 const ObjectiveContainer = (props) => {
     const [addMode, setAddMode] = useState(false);

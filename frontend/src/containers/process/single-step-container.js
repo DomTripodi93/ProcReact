@@ -3,6 +3,8 @@ import { fetchSingleStep } from '../../reducers/process/step/step.actions';
 import { connect } from 'react-redux';
 import SingleStep from '../../components/process/step/single-step';
 
+import './process.styles.scss';
+
 
 const SingleStepContainer = props =>{
     const deptName = props.match.params.deptName;

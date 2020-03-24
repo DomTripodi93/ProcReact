@@ -8,6 +8,8 @@ import { fetchDepartments } from '../../reducers/process/department/department.a
 import { fetchObjectivesByDepartment } from '../../reducers/process/objective/objective.actions';
 import { fetchEmployeesForMap } from '../../reducers/schedule/employee/employee.actions';
 
+import './schedule.styles.scss';
+
 
 const ScheduleDayContainer = props => {
     const [hasNeededData, setNeededDataState] = useState(true);
