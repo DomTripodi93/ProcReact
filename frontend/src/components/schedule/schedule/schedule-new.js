@@ -1,19 +1,29 @@
 import React from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import ScheduleForm from './schedule-form';
+import { Link } from 'react-router-dom';
+
 
 const ScheduleNew = (props) =>{
     return(
         <div>
             {props.addMode ?
                 <div>
-                    <div className='middle size-holder grid50'>
-                        <div>
+                    {props.employeeId ?
+                        <div className='middle size-holder grid50'>
+                            <div>
+                            </div>
+                            <Link 
+                                to={"/day/" + props.month + "/" + props.day + "/" + props.year} 
+                                className="right-top">
+                                <CustomButton 
+                                    label="Show Full Day" 
+                                    buttonStyle="blue"/>
+                            </Link>
                         </div>
-                        <div className="right-top">
-                            <CustomButton label="Show Full Day" buttonStyle="blue"/>
-                        </div>
-                    </div>
+                    :
+                        null
+                    }
                     <div className='border'>
                         <ScheduleForm 
                             callback={props.action} 
@@ -28,17 +38,35 @@ const ScheduleNew = (props) =>{
                     </div>
                 </div>
             :
-                <div className='middle size-holder grid50'>
-                    <div className='left-top'>
-                        <CustomButton 
-                            buttonStyle="blue"
-                            label="Add Schedules Task"
-                            action={props.action} 
-                            />
-                    </div>
-                    <div className="right-top">
-                        <CustomButton label="Show Full Day" buttonStyle="blue"/>
-                    </div>
+                <div>
+                    {props.employeeId ?
+                        <div className='middle size-holder grid50'>
+                            <div className='left-top'>
+                                <CustomButton 
+                                    buttonStyle="blue"
+                                    label="Add Schedules Task"
+                                    action={props.action} 
+                                    />
+                            </div>
+                            <Link 
+                                to={"/day/" + props.month + "/" + props.day + "/" + props.year} 
+                                className="right-top">
+                                <CustomButton 
+                                    label="Show Full Day" 
+                                    buttonStyle="blue"/>
+                            </Link>
+                        </div>
+                    :
+                        <div className='middle size-holder grid50'>
+                            <div className='left-top'>
+                                <CustomButton 
+                                    buttonStyle="blue"
+                                    label="Add Schedules Task"
+                                    action={props.action} 
+                                    />
+                            </div>
+                        </div>
+                    }
                 </div>
             }
         </div>

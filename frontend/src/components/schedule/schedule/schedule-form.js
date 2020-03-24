@@ -55,9 +55,11 @@ const ScheduledTaskForm = props => {
         }
         if (props.scheduledTaskInput){
             setScheduledTaskInfo(props.scheduledTaskInput);
-            setOptions({
-                ...options, 
-                objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]
+            setOptions(options=>{ 
+                return{
+                    ...options, 
+                    objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]
+                }
             })
         }
     },[props, objectiveOptionSets])
@@ -84,10 +86,11 @@ const ScheduledTaskForm = props => {
                     })]
             });
         }
-    },[props, helper])
+    },[props, helper, deptOptions])
 
     const handleSubmit = async event => {
         event.preventDefault();
+        
         if (props.editMode){
             if (scheduledTaskInfo !== props.scheduledTaskInput){
                 props.updateScheduledTask(scheduledTaskInfo, props.callback);
