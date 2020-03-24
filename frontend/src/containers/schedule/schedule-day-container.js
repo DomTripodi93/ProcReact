@@ -64,7 +64,11 @@ const ScheduleDayContainer = props => {
     const resetAllSchedules = props.resetSchedules;
 
     useEffect(()=>{
-        if (!scheduledTasksCalled){
+        let setFor = "all";
+        if (employeeId){
+            setFor = employeeId
+        }
+        if (scheduledTasksCalled !== setFor){
             if (employeeId){
                 fetchSchedulesForEmployee(employeeId, month, day, year);
             } else {

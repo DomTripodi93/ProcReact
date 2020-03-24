@@ -8,7 +8,7 @@ export function fetchSchedulesByDate(month, day, year){
     return dispatch => {
         http.fetchAll("schedule/byUser/" + month + "&" + year + "&" + day)
             .then((schedules) => {
-                dispatch(setSchedules(schedules));
+                dispatch(setSchedules(schedules, "all"));
             });
     }
 }
@@ -18,7 +18,7 @@ export function fetchSchedulesByEmployee(employeeId, month, day, year){
     return dispatch => {
         http.fetchAll("schedule/byEmployee/" + employeeId + "&" + month + "&" + year + "&" + day)
             .then((schedules) => {
-                dispatch(setSchedules(schedules));
+                dispatch(setSchedules(schedules, employeeId));
             });
     }
 }
@@ -64,10 +64,11 @@ export function addScheduleToState(schedule){
 }
 //Adds new schedule from post to state
 
-export function setSchedules(schedules){
+export function setSchedules(schedules, setFor){
     return {
         type: ScheduleActionTypes.SET_SCHEDULES,
-        payload: schedules
+        payload: schedules,
+        setFor
     }
 }
 //Sets all schedules in state

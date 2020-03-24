@@ -11,7 +11,7 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 scheduledTasks: action.payload.data,
-                scheduledTasksCalled: true
+                scheduledTasksCalled: action.setFor
             };
         case ScheduleActionTypes.RESET_SCHEDULES:
             return {
