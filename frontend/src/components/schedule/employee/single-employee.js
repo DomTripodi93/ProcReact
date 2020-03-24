@@ -14,10 +14,17 @@ const SingleEmployee = props =>{
     }
 
     const handleDelete = () => {
-        if (window.confirm(
-          "Are you sure you want to delete this employee: " +props.employee.name+ "?"
-          )){
-            props.deleteEmployee(props.employee.employeeId);
+        if (props.employee.employeeId !== 1){
+            if (window.confirm(
+              "Are you sure you want to delete this employee: " + props.employee.name + "?"
+              )){
+                props.deleteEmployee(props.employee.employeeId);
+            }
+        } else {
+            window.alert(
+                "Cannot delete account owner, to replace account owner, " +
+                "change name of employee with id of 1"
+            )
         }
     }
 

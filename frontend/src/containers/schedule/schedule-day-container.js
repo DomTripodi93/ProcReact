@@ -23,10 +23,20 @@ const ScheduleDayContainer = props => {
     
     const departments = props.departments;
     const deptCalled = props.deptCalled;
-    const objectives = props.objectives;
     const objCalled = props.objCalled;
     const fetchAllDepartments = props.fetchDepartments;
     const fetchObjectivesForDepartment = props.fetchObjectivesByDepartment;
+
+    const setObjectivesToPass = (allObjectives) =>{
+        let objectivesHold = {}
+        Object.keys(allObjectives).forEach(key=>{
+            if (allObjectives[key].length > 0){
+                objectivesHold[key] = allObjectives[key];
+            }
+        })
+        return objectivesHold
+    }
+    const objectivesToPass = setObjectivesToPass(props.objectives);
 
     useEffect(()=>{
         if (!deptCalled){
@@ -40,7 +50,6 @@ const ScheduleDayContainer = props => {
         }
     },[
         departments, 
-        objectives,
         fetchAllDepartments, 
         fetchObjectivesForDepartment,
         deptCalled,
@@ -138,7 +147,7 @@ const ScheduleDayContainer = props => {
             <ScheduleNew 
                 addMode={addMode}
                 action={showScheduleForm}
-                objectives={props.objectives}
+                objectives={objectivesToPass}
                 employeeId={employeeId}
                 year={year}
                 month={month}
@@ -155,7 +164,7 @@ const ScheduleDayContainer = props => {
                 scheduledTasks={props.scheduledTasks} 
                 action={changeDay}
                 employeeId={employeeId}
-                objectives={props.objectives}
+                objectives={objectivesToPass}
                 year={year}
                 month={month}
                 day={day}
