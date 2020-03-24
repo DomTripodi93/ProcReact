@@ -80,17 +80,19 @@ const ScheduledTaskForm = props => {
                     }),
                 objectiveOptionSets: intializeObjectiveOptionSets(props.objectives),
                 objectiveOptions: [{value: 'None', label: "None"}],
-                deptOptions: [{value: "None", label: "None"}, ...Object.keys(props.objectives)
-                    .map(key =>{
+                deptOptions: [
+                    {value: "None", label: "None"}, 
+                    ...Object.keys(props.objectives).map(key =>{
                         return {value: key, label: key};
-                    })]
+                    })
+                ]
             });
         }
     },[props, helper, deptOptions])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        
+
         if (props.editMode){
             if (scheduledTaskInfo !== props.scheduledTaskInput){
                 props.updateScheduledTask(scheduledTaskInfo, props.callback);

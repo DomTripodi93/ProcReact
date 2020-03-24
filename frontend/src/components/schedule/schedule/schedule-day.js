@@ -18,7 +18,7 @@ const ScheduleDay = props => {
 
     const handleDelete = (task) => {
         if (window.confirm(
-          "Are you sure you want to delete this scheduled task: " +task.objectiveName+ "?"
+          "Are you sure you want to delete this scheduled task: " + task.objectiveName + "?"
           )){
             props.deleteSchedule(task.id);
         }
@@ -52,9 +52,15 @@ const ScheduleDay = props => {
                         <div>
                             <div className="grid-one-employee-button size-holder middle">
                                 <div className="grid-one-employee">
-                                    <div className="inner-border-left-header"><h5>Time</h5></div>
-                                    <div className="inner-border-left-header"><h5>Department</h5></div>
-                                    <div className="inner-border-left-header"><h5>Objective</h5></div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Time</h5>
+                                    </div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Department</h5>
+                                    </div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Objective</h5>
+                                    </div>
                                 </div>
                                 <div className="inner-border-right-header"></div>
                             </div>
@@ -88,10 +94,18 @@ const ScheduleDay = props => {
                         <div>
                             <div className="grid-all-employees-button size-holder middle">
                                 <div className="grid-all-employees">
-                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Employee</h5></div>
-                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Time</h5></div>
-                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Department</h5></div>
-                                    <div className="inner-border-left-header"><h5 className="grid-header-text">Objective</h5></div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Employee</h5>
+                                    </div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Time</h5>
+                                    </div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Department</h5>
+                                    </div>
+                                    <div className="inner-border-left-header">
+                                        <h5 className="grid-header-text">Objective</h5>
+                                    </div>
                                 </div>
                                 <div className="inner-border-right-header"></div>
                             </div>

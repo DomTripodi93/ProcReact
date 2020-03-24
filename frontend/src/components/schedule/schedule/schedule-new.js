@@ -14,7 +14,12 @@ const ScheduleNew = (props) =>{
                             <div>
                             </div>
                             <Link 
-                                to={"/day/" + props.month + "/" + props.day + "/" + props.year} 
+                                to={
+                                    "/day/" + 
+                                    props.month + "/" + 
+                                    props.day + "/" + 
+                                    props.year
+                                } 
                                 className="right-top">
                                 <CustomButton 
                                     label="Show Full Day" 
@@ -49,7 +54,12 @@ const ScheduleNew = (props) =>{
                                     />
                             </div>
                             <Link 
-                                to={"/day/" + props.month + "/" + props.day + "/" + props.year} 
+                                to={
+                                    "/day/" + 
+                                    props.month + "/" + 
+                                    props.day + "/" + 
+                                    props.year
+                                } 
                                 className="right-top">
                                 <CustomButton 
                                     label="Show Full Day" 
