@@ -9,11 +9,12 @@ import './process.styles.scss';
 
 const DepartmentContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
-    const fetchDepartments = props.fetchDepartments;
 
     useEffect(()=>{
-        fetchDepartments();
-    },[fetchDepartments]);
+        if (!props.deptCalled){
+            props.fetchDepartments();
+        }
+    },[props]);
 
     const showDepartmentForm = () =>{
         setAddMode(!addMode)
@@ -39,7 +40,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => ({
-  departments: state.department.departments
+  departments: state.department.departments,
+  deptCalled: state.department.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepartmentContainer);
