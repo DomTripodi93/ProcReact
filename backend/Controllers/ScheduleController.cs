@@ -103,7 +103,7 @@ namespace backend.Controllers
             _mapper.Map(scheduleForUpdateDto, scheduleFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetScheduledTask", new {Id = scheduleFromRepo.Id, userId = userId }, scheduleForUpdateDto);
+                return CreatedAtRoute("GetScheduledTask", new {Id = scheduleFromRepo.Id, userId = userId }, scheduleFromRepo);
 
             throw new Exception($"Updating schedule item {Id} failed on save");
         }

@@ -108,7 +108,7 @@ namespace backend.Controllers
             _mapper.Map(employeeForUpdateDto, employeeFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetEmployee", new {employeeId = employeeFromRepo.EmployeeId, userId = userId }, employeeForUpdateDto);
+                return CreatedAtRoute("GetEmployee", new {employeeId = employeeFromRepo.EmployeeId, userId = userId }, employeeFromRepo);
 
             throw new Exception($"Updating employee {employeeId} failed on save");
         }

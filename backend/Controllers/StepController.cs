@@ -89,7 +89,7 @@ namespace backend.Controllers
             _mapper.Map(stepForUpdateDto, stepFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetStep", new {stepNumber = stepFromRepo.StepNumber, deptName = stepFromRepo.deptName, objectiveName = stepFromRepo.objectiveName, userId = userId }, stepForUpdateDto);
+                return CreatedAtRoute("GetStep", new {stepNumber = stepFromRepo.StepNumber, deptName = stepFromRepo.deptName, objectiveName = stepFromRepo.objectiveName, userId = userId }, stepFromRepo);
 
             throw new Exception($"Updating step {stepNumber}&{deptName} failed on save");
         }

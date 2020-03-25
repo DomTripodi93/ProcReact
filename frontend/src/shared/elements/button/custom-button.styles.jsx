@@ -44,8 +44,12 @@ export const CustomizedButton = styled.button`
   }
 
   &.small{
-    font-size: 12px;
+    font-size: 2vw;
   
+    @media (min-width: 900px) {
+      font-size: 17px;
+    }
+    
     @media (max-width: 570px) {
       font-size: 16px;
     }

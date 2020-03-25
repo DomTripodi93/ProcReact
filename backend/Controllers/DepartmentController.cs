@@ -93,7 +93,7 @@ namespace backend.Controllers
             _mapper.Map(departmentForUpdateDto, departmentFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetDepartment", new {deptName = departmentFromRepo.DeptName, userId = userId }, departmentForUpdateDto);
+                return CreatedAtRoute("GetDepartment", new {deptName = departmentFromRepo.DeptName, userId = userId }, departmentFromRepo);
 
             throw new Exception($"Updating department {deptName} failed on save");
         }

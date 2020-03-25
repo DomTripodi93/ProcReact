@@ -93,7 +93,7 @@ namespace backend.Controllers
             _mapper.Map(commonDifficultyForUpdateDto, commonDifficultyFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetCommonDifficulty", new {id = commonDifficultyFromRepo.Id, userId = userId }, commonDifficultyForUpdateDto);
+                return CreatedAtRoute("GetCommonDifficulty", new {id = commonDifficultyFromRepo.Id, userId = userId }, commonDifficultyFromRepo);
 
             throw new Exception($"Updating common difficulty {id} failed on save");
         }

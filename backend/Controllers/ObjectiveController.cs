@@ -89,7 +89,7 @@ namespace backend.Controllers
             _mapper.Map(objectiveForUpdateDto, objectiveFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetObjective", new {objectiveName = objectiveFromRepo.ObjectiveName, deptName = objectiveFromRepo.deptName, userId = userId }, objectiveForUpdateDto);
+                return CreatedAtRoute("GetObjective", new {objectiveName = objectiveFromRepo.ObjectiveName, deptName = objectiveFromRepo.deptName, userId = userId }, objectiveFromRepo);
 
             throw new Exception($"Updating objective {objectiveName}&{deptName} failed on save");
         }
