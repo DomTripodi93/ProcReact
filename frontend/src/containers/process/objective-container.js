@@ -9,12 +9,12 @@ import './process.styles.scss';
 
 const ObjectiveContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
-    const fetchObjectives = props.fetchObjectives;
-    const deptName = props.deptName;
 
     useEffect(()=>{
-        fetchObjectives(deptName);
-    },[fetchObjectives, deptName]);
+        if (!props.objectivesCalled){
+            props.fetchObjectives(props.deptName);
+        }
+    },[props]);
 
     const showObjectiveForm = () =>{
         setAddMode(!addMode)
@@ -25,15 +25,15 @@ const ObjectiveContainer = (props) => {
             <h3 className='centered'>Objectives</h3>
             <div className="grid100">
                 <ObjectiveNew 
-                    deptName={deptName}
+                    deptName={props.deptName}
                     addMode={addMode} 
                     action={showObjectiveForm}/>
             </div>
             <br />
-            {props.objectives[deptName] ?
+            {props.objectives[props.deptName] ?
                 <Objectives 
-                    deptName={deptName}
-                    objectives={props.objectives[deptName]}/>
+                    deptName={props.deptName}
+                    objectives={props.objectives[props.deptName]}/>
             :
                 null
             }
@@ -48,7 +48,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => ({
-    objectives: state.objective.objectives
+    objectives: state.objective.objectives,
+    objectivesCalled: state.objective.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ObjectiveContainer);
