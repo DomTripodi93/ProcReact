@@ -34,7 +34,7 @@ const Header = props => {
     ]
 
     return (
-        <div>
+        <div className='header-cover'>
             {authValue ?
                 <div className='header'>
                     <Link to='/' className='logo-holder'>

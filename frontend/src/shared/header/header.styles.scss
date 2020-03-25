@@ -1,6 +1,12 @@
+.header-cover{
+    background: rgb(70, 181, 255);
+}
+
 .header{
     background: rgb(70, 181, 255);
-    width: 100%;
+    width: 93%;
+    max-width: 850px;
+    margin: auto;
     height: 4.25rem;
     display: flex;
     justify-content: space-between;
@@ -50,7 +56,12 @@
     }
 
 
+    @media only screen and (max-width: 700px){
+        width: 100%;
+    }
+
     @media only screen and (max-width: 500px){
+
         a, ul{
           font-size: 15px;
         }
