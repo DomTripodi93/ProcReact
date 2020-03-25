@@ -3,7 +3,8 @@ import EmployeeActionTypes from './employee.types';
 const INITIAL_STATE = {
     employees: [],
     employeeMap: {},
-    called: false
+    mapCalled: false,
+    allCalled: false
 }
 
 const employeeReducer = (state = INITIAL_STATE, action) => {
@@ -16,12 +17,13 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 employeeMap: employeesHold,
-                called: true
+                mapCalled: true
             };
         case EmployeeActionTypes.SET_EMPLOYEES:
             return {
                 ...state,
-                employees: action.payload.data
+                employees: action.payload.data,
+                allCalled: true
             };
         case EmployeeActionTypes.ADD_EMPLOYEE:
             return {

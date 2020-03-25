@@ -10,8 +10,6 @@ import './schedule.styles.scss';
 
 const EmployeeContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
-    const fetchEmployees = props.fetchEmployees;
-    const fetchDepartments = props.fetchDepartments;
     const deptOptions = [{value: 'None', label: 'None'}];
 
     props.departments.forEach(department =>{
@@ -22,9 +20,13 @@ const EmployeeContainer = (props) => {
     })
 
     useEffect(()=>{
-        fetchEmployees();
-        fetchDepartments();
-    },[fetchEmployees, fetchDepartments]);
+        if (!props.employeesCalled){
+            props.fetchEmployees();
+            if (!props.deptCalled){
+                props.fetchDepartments();
+            }
+        }
+    },[props]);
 
     const showEmployeeForm = () =>{
         setAddMode(!addMode)
@@ -53,7 +55,9 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => ({
     employees: state.employee.employees,
-    departments: state.department.departments
+    employeesCalled: state.employee.allCalled,
+    departments: state.department.departments,
+    deptCalled: state.department.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EmployeeContainer);

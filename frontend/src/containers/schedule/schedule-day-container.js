@@ -197,7 +197,7 @@ const mapStateToProps = state => ({
     objectives: state.objective.objectives,
     objCalled: state.objective.called,
     employeeMap: state.employee.employeeMap,
-    employeeCalled: state.employee.called
+    employeeCalled: state.employee.mapCalled
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDayContainer);
