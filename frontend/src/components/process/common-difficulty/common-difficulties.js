@@ -14,6 +14,7 @@ const CommonDifficulties = props => {
                                 <SingleCommonDifficulty
                                     commonDifficulty={commonDifficulty}
                                     inDept={true} />
+                                <br />
                             </div>
                         ))}
                     </div>

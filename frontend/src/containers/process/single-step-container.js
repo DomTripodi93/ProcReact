@@ -12,14 +12,12 @@ const SingleStepContainer = props =>{
     const stepNumber = props.match.params.stepNumber;
 
     useEffect(()=>{
-        if (!props.inDept){
-            if (
-                stepNumber !== props.selectedStep.stepNumber ||
-                deptName !== props.selectedStep.deptName ||
-                objectiveName !== props.selectedStep.objectiveName
-            ){
-                props.fetchSingleStep(stepNumber, objectiveName, deptName);
-            }
+        if (
+            stepNumber !== props.selectedStep.stepNumber ||
+            deptName !== props.selectedStep.deptName ||
+            objectiveName !== props.selectedStep.objectiveName
+        ){
+            props.fetchSingleStep(stepNumber, objectiveName, deptName);
         }
     },[props, deptName, objectiveName, stepNumber])
 

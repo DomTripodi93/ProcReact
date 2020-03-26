@@ -25,7 +25,7 @@ const SingleCommonDifficulty = props =>{
 
     return(
         <div>
-            <div className='border centered'>
+            <div className='border-difficulty centered'>
                 {!editMode ?
                     <div>
                         <h3>{props.commonDifficulty.difficulty}</h3>

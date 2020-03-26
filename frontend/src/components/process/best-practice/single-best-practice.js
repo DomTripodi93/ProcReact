@@ -25,7 +25,7 @@ const SingleBestPractice = props =>{
 
     return(
         <div>
-            <div className='border centered'>
+            <div className='border-practice centered'>
                 {!editMode ?
                     <div>
                         <h3>{props.bestPractice.practice}</h3>

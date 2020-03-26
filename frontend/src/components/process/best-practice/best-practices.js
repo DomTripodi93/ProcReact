@@ -14,6 +14,7 @@ const BestPractices = props => {
                                 <SingleBestPractice
                                     bestPractice={bestPractice}
                                     inDept={true} />
+                                <br />
                             </div>
                         ))}
                     </div>

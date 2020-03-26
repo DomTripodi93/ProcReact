@@ -11,13 +11,11 @@ const SingleObjectiveContainer = props =>{
     const objectiveName = props.match.params.objectiveName;
 
     useEffect(()=>{
-        if (!props.inDept){
-            if (
-                objectiveName !== props.selectedObjective.objectiveName ||
-                deptName !== props.selectedObjective.deptName
-            ){
-                props.fetchSingleObjective(objectiveName, deptName);
-            }
+        if (
+            objectiveName !== props.selectedObjective.objectiveName ||
+            deptName !== props.selectedObjective.deptName
+        ){
+            props.fetchSingleObjective(objectiveName, deptName);
         }
     },[props, deptName, objectiveName])
 

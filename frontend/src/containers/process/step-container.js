@@ -14,11 +14,7 @@ const StepContainer = (props) => {
     const objectiveName = props.objectiveName;
 
     useEffect(()=>{
-        if (
-            deptName !== undefined && 
-            objectiveName !== undefined && 
-            deptName !== ""
-        ){
+        if (objectiveName){
             fetchSteps(deptName, objectiveName);
         }
     },[fetchSteps, deptName, objectiveName]);

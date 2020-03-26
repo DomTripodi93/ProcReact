@@ -15,12 +15,7 @@ const BestPracticeContainer = (props) => {
     const stepNumber = props.stepNumber;
 
     useEffect(()=>{
-        if (
-            deptName !== undefined && 
-            objectiveName !== undefined && 
-            deptName !== "" &&
-            stepNumber !== undefined
-        ){
+        if (stepNumber){
             fetchBestPractices(deptName, objectiveName, stepNumber);
         }
     },[fetchBestPractices, deptName, objectiveName, stepNumber]);
