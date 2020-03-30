@@ -19,10 +19,20 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                 }
         case StepActionTypes.SET_ALL_OBJECTIVES:
             let objectives = {};
-            action.payload.data.forEach(objective =>{
-                objectives[objective.objectiveName] = []; 
-            })
-            stepsHold[action.deptName] = objectives;
+            if (stepsHold[action.deptName]){
+                objectives = stepsHold[action.deptName];
+                action.payload.data.forEach(objective =>{
+                    if (!stepsHold[action.deptName][objective.objectiveName]){
+                        objectives[objective.objectiveName] = []; 
+                    }
+                })
+                stepsHold[action.deptName] = objectives;
+            } else {
+                action.payload.data.forEach(objective =>{
+                    objectives[objective.objectiveName] = []; 
+                })
+                stepsHold[action.deptName] = objectives;
+            }
                 return {
                     ...state,
                     steps: stepsHold
