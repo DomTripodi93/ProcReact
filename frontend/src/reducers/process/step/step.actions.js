@@ -70,7 +70,7 @@ export function deleteStep(stepNumber, objectiveName, deptName){
     return dispatch =>{
         http.deleteItem("step", deptName + "&" + objectiveName  + "&" + stepNumber)
             .then(()=>{
-                dispatch(deleteStepFromState(stepNumber, deptName));
+                dispatch(deleteStepFromState(stepNumber));
             });
     }
 }

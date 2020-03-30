@@ -25,34 +25,47 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                 steps: stepsHold
             };
         case StepActionTypes.ADD_STEP:
+            stepsHold[action.payload.deptName][action.payload.objectiveName] = [
+                action.payload,
+                ...stepsHold[action.payload.deptName][action.payload.objectiveName]
+            ].sort((first, second)=>{
+                if(first.stepNumber > second.stepNumber){
+                    return 1;
+                } else {
+                    return -1;
+                }}
+            );
             return {
                 ...state,
-                steps: [...state.steps, action.payload]
+                steps: stepsHold
             };
         case StepActionTypes.UPDATE_STEPS:
+            stepsHold[action.payload.deptName][action.payload.objectiveName] = [
+                action.payload,
+                ...stepsHold[action.payload.deptName][action.payload.objectiveName]
+                    .filter((value)=>{
+                        return value.stepNumber !== action.payload.stepNumber;
+                    })]
+                    .sort((first, second)=>{
+                        if(first.stepNumber > second.stepNumber){
+                            return 1;
+                        } else {
+                            return -1;
+                        }}
+                    );
             return {
                 ...state,
-                steps: [
-                    action.payload,
-                    ...state.steps
-                        .filter((value)=>{
-                            return value.stepNumber !== action.payload.stepNumber 
-                        })]
-                        .sort((first, second)=>{
-                            if(first.stepNumber > second.stepNumber){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                steps: stepsHold
             };
         case StepActionTypes.DELETE_STEP:
+            stepsHold[action.payload.deptName][action.payload.objectiveName] = [
+                ...stepsHold[action.payload.deptName][action.payload.objectiveName]
+                    .filter((value)=>{
+                        return value.stepNumber !== action.payload;
+                    })]
             return {
                 ...state,
-                steps: [...state.steps
-                    .filter((value)=>{
-                        return value.stepNumber !== action.payload
-                    })]
+                steps: stepsHold
             };
         default:
             return state;
@@ -60,58 +73,3 @@ const stepReducer = (state = INITIAL_STATE, action) => {
 }
 
 export default stepReducer;
-
-
-// switch (action.type) {
-//     case ObjectiveActionTypes.SET_SINGLE_OBJECTIVE:
-//         return {
-//             ...state,
-//             selectedObjective: action.payload
-//         };
-//     case ObjectiveActionTypes.SET_OBJECTIVES:
-//         if (action.payload.data.length > 0){
-//             objectiveHold[action.deptName] = action.payload.data;
-//         } else {
-//             objectiveHold[action.deptName] = [];
-//         }
-//         return {
-//             ...state,
-//             objectives: objectiveHold,
-//             called: true
-//         };
-//     case ObjectiveActionTypes.ADD_OBJECTIVE:
-//         objectiveHold[action.payload.deptName].push(action.payload)
-//         return {
-//             ...state,
-//             objectives: objectiveHold
-//         };
-//     case ObjectiveActionTypes.UPDATE_OBJECTIVES:
-//         objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
-//             .filter((value)=>{
-//                 return value.objectiveName !== action.payload.objectiveName 
-//             })
-//         objectiveHold[action.payload.deptName].push(action.payload)
-//         objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
-//             .sort((first, second)=>{
-//                 if(first.objectiveName > second.objectiveName){
-//                     return 1
-//                 } else {
-//                     return -1
-//                 }}
-//             )
-//         return {
-//             ...state,
-//             objectives: objectiveHold
-//         };
-//     case ObjectiveActionTypes.DELETE_OBJECTIVE:
-//         objectiveHold[action.deptName] = objectiveHold[action.deptName]
-//             .filter((value)=>{
-//                 return value.objectiveName !== action.payload
-//             })
-//         return {
-//             ...state,
-//             objectives: objectiveHold
-//         };
-//     default:
-//         return state;
-// }
