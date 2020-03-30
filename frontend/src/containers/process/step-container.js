@@ -12,12 +12,19 @@ const StepContainer = (props) => {
     const fetchSteps = props.fetchSteps;
     const deptName = props.deptName;
     const objectiveName = props.objectiveName;
+    const called = props.called;
+    const steps = props.steps
+    const [stepsToPass, setSteps] = useState([]);
 
     useEffect(()=>{
         if (objectiveName){
-            fetchSteps(deptName, objectiveName);
+            if (!called[deptName + "-" + objectiveName]){
+                fetchSteps(deptName, objectiveName);
+            } else {
+                setSteps(steps[deptName][objectiveName]);
+            }
         }
-    },[fetchSteps, deptName, objectiveName]);
+    },[fetchSteps, deptName, objectiveName, steps]);
 
 
     const showStepForm = () =>{
@@ -40,7 +47,7 @@ const StepContainer = (props) => {
                     deptName={deptName}
                     objectiveName={objectiveName}
                     action={showStepForm} 
-                    steps={props.steps}/>
+                    steps={stepsToPass}/>
             :
                 null
             }
@@ -55,7 +62,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => ({
-    steps: state.step.steps
+    steps: state.step.steps,
+    called: state.step.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepContainer);
