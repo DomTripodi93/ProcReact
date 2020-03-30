@@ -21,7 +21,7 @@ export function fetchStepsByDepartmentAndObjective(deptName, objectiveName){
     return dispatch => {
         http.fetchAll("step/byObjective/" + deptName + "&" + objectiveName)
             .then((steps) => {
-                dispatch(setSteps(steps));
+                dispatch(setSteps(steps, deptName, objectiveName));
             });
     }
 }
@@ -84,10 +84,12 @@ export function addStepToState(step){
 }
 //Adds new step from post to state
 
-export function setSteps(steps){
+export function setSteps(steps, deptName, objectiveName){
     return {
         type: StepActionTypes.SET_STEPS,
-        payload: steps
+        payload: steps,
+        deptName,
+        objectiveName
     }
 }
 //Sets all steps in state
