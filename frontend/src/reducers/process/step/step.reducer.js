@@ -79,8 +79,8 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                     steps: stepsHold
                 };
         case StepActionTypes.DELETE_STEP:
-            stepsHold[action.payload.deptName][action.payload.objectiveName] = [
-                ...stepsHold[action.payload.deptName][action.payload.objectiveName]
+            stepsHold[action.deptName][action.objectiveName] = [
+                ...stepsHold[action.deptName][action.objectiveName]
                     .filter((value)=>{
                         return value.stepNumber !== action.payload;
                     })]

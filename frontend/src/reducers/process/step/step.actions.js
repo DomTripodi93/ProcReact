@@ -70,7 +70,7 @@ export function deleteStep(stepNumber, objectiveName, deptName){
     return dispatch =>{
         http.deleteItem("step", deptName + "&" + objectiveName  + "&" + stepNumber)
             .then(()=>{
-                dispatch(deleteStepFromState(stepNumber));
+                dispatch(deleteStepFromState(stepNumber, deptName, objectiveName));
             });
     }
 }
@@ -110,10 +110,12 @@ export function updateStepsInState(step){
 }
 //Updates function for step
 
-export function deleteStepFromState(stepNumber){
+export function deleteStepFromState(stepNumber, deptName, objectiveName){
     return {
         type: StepActionTypes.DELETE_STEP,
-        payload: stepNumber
+        payload: stepNumber,
+        deptName,
+        objectiveName
     }
 }
 //Deletes selected step
