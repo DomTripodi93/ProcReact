@@ -9,6 +9,16 @@ const http = new rootHttp();
 const helper = new helpers();
 
 export function fetchSingleObjective(objectiveName, deptName){
+    let objectives = store.getState().objective.objectives;
+    if(Object.keys(objectives).length > 0){
+        return dispatch =>{
+            dispatch(setSingleObjective(
+                objectives[deptName].find(objective=>{
+                    return objective.objectiveName === objectiveName
+                })
+            ))
+        }
+    }
     return dispatch => {
         http.fetchByValue("objective", deptName + "&" + objectiveName)
             .then((objective) => {
