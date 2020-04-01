@@ -57,20 +57,14 @@ namespace backend.Data
             return user;
         }
 
-        public async void InitializeEmployeeIdForIncrement (User user)
+        public async Task InitializeEmployeeIdForIncrement (User user)
         {
-            EmployeeIdIncrement employeeIdIncrement = new EmployeeIdIncrement
-            {
-                userId = user.Id,
-                employeeId = 1
-            };
 
             Employee accountOwner = new Employee
             {
-                EmployeeId = employeeIdIncrement.employeeId,
+                EmployeeId = 1,
                 User = user,
                 userId = user.Id,
-                Department = null,
                 deptName = null,
                 Name = user.Name,
                 Title = "Owner",
@@ -78,7 +72,6 @@ namespace backend.Data
             };
 
             await _context.Employees.AddAsync(accountOwner);
-            await _context.EmployeeIdIncrementors.AddAsync(employeeIdIncrement);
             await _context.SaveChangesAsync();
         }
 
@@ -97,6 +90,5 @@ namespace backend.Data
                 return true;
             return false;
         }
-
     }
 }

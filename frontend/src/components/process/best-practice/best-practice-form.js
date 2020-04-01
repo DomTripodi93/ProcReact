@@ -29,7 +29,6 @@ const BestPracticeForm = props => {
     },[props])
 
     const handleSubmit = async event => {
-        console.log(bestPracticeInfo)
         event.preventDefault();
         if (props.editMode){
             if (bestPracticeInfo !== props.bestPracticeInput){

@@ -29,19 +29,18 @@ namespace backend.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEmployee(int userId, EmployeeForCreationDto employeeForCreation)
         {
-            EmployeeIdIncrement employeeIdIncrement = await _repo.GetEmployeeIdForIncrement(userId);
-            employeeIdIncrement.employeeId = employeeIdIncrement.employeeId + 1;
+            User user = await _repo.GetUserForEmployeeIdIncrement(userId);
+            user.EmployeeIdIncrement = user.EmployeeIdIncrement + 1;
 
-            var creator = await _userRepo.GetUser(userId);
-
-            if (creator.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (user.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var employee = _mapper.Map<Employee>(employeeForCreation);
 
-            employee.User = creator;
+            employee.User = user;
 
-            employee.EmployeeId = employeeIdIncrement.employeeId;
+            employee.EmployeeId = user.EmployeeIdIncrement;
+
 
             _repo.Add(employee);
 

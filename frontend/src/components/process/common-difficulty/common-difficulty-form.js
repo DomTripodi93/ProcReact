@@ -29,7 +29,6 @@ const CommonDifficultyForm = props => {
     },[props])
 
     const handleSubmit = async event => {
-        console.log(commonDifficultyInfo)
         event.preventDefault();
         if (props.editMode){
             if (commonDifficultyInfo !== props.commonDifficultyInput){

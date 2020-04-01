@@ -45,12 +45,13 @@ namespace backend.Controllers
             var userToCreate = new User
             {
                 Email = userForRegisterDto.Email,
-                Name = userForRegisterDto.Name
+                Name = userForRegisterDto.Name,
+                EmployeeIdIncrement = 1
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            _repo.InitializeEmployeeIdForIncrement(createdUser);
+            await _repo.InitializeEmployeeIdForIncrement(createdUser);
 
             return StatusCode(201);
         }

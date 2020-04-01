@@ -10,7 +10,7 @@ namespace backend.Data
         void Delete<T>(T entity) where T: class;
         Task<bool> SaveAll();
         Task<Employee> GetEmployee(int userId, int employeeId);
-        Task<EmployeeIdIncrement> GetEmployeeIdForIncrement(int userId);
+        Task<User> GetUserForEmployeeIdIncrement(int userId);
         Task<IEnumerable<Employee>> GetEmployees(int userId);
         Task<IEnumerable<Employee>> GetEmployeesByDepartment(int userId, string deptName);
         Task<Schedule> GetScheduledTask(int id);

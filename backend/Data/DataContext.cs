@@ -10,7 +10,6 @@ namespace backend.Data
         public DbSet<CommonDifficulty> CommonDifficulties { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeIdIncrement> EmployeeIdIncrementors { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Step> Steps { get; set; }
         public DbSet<Objective> Objectives { get; set; }
@@ -22,8 +21,6 @@ namespace backend.Data
                 .HasKey(d => new {d.userId, d.DeptName});
             modelBuilder.Entity<Employee>()
                 .HasKey(e => new {e.userId, e.EmployeeId});
-            modelBuilder.Entity<EmployeeIdIncrement>()
-                .HasKey(e => new {e.userId});
             modelBuilder.Entity<Step>()
                 .HasKey(s => new {s.userId, s.deptName, s.objectiveName, s.StepNumber});
             modelBuilder.Entity<Objective>()

@@ -42,13 +42,13 @@ namespace backend.Data
             return employee;
         }
 
-        public async Task<EmployeeIdIncrement> GetEmployeeIdForIncrement(int userId)
+        public async Task<User> GetUserForEmployeeIdIncrement(int userId)
         {
-            var employee = await _context.EmployeeIdIncrementors
-                .Where(e => e.userId == userId)
+            var user = await _context.Users
+                .Where(e => e.Id == userId)
                 .FirstOrDefaultAsync();
             
-            return employee;
+            return user;
         }
 
         public async Task<IEnumerable<Employee>> GetEmployees(int userId)

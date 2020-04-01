@@ -1,35 +1,23 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace backend.Migrations
+namespace Backend.Migrations
 {
     public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "EmployeeIdIncrementors",
-                columns: table => new
-                {
-                    userId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    employeeId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EmployeeIdIncrementors", x => x.userId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
-                    PasswordSalt = table.Column<byte[]>(nullable: true)
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    EmployeeIdIncrement = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,7 +48,7 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(nullable: false),
                     EmployeeName = table.Column<string>(nullable: true),
                     EmployeeId = table.Column<int>(nullable: false),
@@ -85,12 +73,12 @@ namespace backend.Migrations
                 {
                     EmployeeId = table.Column<int>(nullable: false),
                     userId = table.Column<int>(nullable: false),
-                    DepartmentuserId = table.Column<int>(nullable: true),
-                    DepartmentDeptName = table.Column<string>(nullable: true),
                     deptName = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Title = table.Column<string>(nullable: true),
-                    CanEdit = table.Column<bool>(nullable: false)
+                    CanEdit = table.Column<bool>(nullable: false),
+                    DepartmentDeptName = table.Column<string>(nullable: true),
+                    DepartmentuserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -127,7 +115,7 @@ namespace backend.Migrations
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Objectives_Departments_userId_deptName",
                         columns: x => new { x.userId, x.deptName },
@@ -155,13 +143,13 @@ namespace backend.Migrations
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Steps_Departments_userId_deptName",
                         columns: x => new { x.userId, x.deptName },
                         principalTable: "Departments",
                         principalColumns: new[] { "userId", "DeptName" },
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Steps_Objectives_userId_deptName_objectiveName",
                         columns: x => new { x.userId, x.deptName, x.objectiveName },
@@ -175,7 +163,7 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(nullable: false),
                     StepNumber = table.Column<string>(nullable: true),
                     ObjectiveName = table.Column<string>(nullable: true),
@@ -210,7 +198,7 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     userId = table.Column<int>(nullable: false),
                     StepNumber = table.Column<string>(nullable: true),
                     ObjectiveName = table.Column<string>(nullable: true),
@@ -278,9 +266,6 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "CommonDifficulties");
-
-            migrationBuilder.DropTable(
-                name: "EmployeeIdIncrementors");
 
             migrationBuilder.DropTable(
                 name: "Employees");
