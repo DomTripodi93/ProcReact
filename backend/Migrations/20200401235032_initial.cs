@@ -12,7 +12,7 @@ namespace Backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     PasswordHash = table.Column<byte[]>(nullable: true),
@@ -48,7 +48,7 @@ namespace Backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     userId = table.Column<int>(nullable: false),
                     EmployeeName = table.Column<string>(nullable: true),
                     EmployeeId = table.Column<int>(nullable: false),
@@ -115,7 +115,7 @@ namespace Backend.Migrations
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Objectives_Departments_userId_deptName",
                         columns: x => new { x.userId, x.deptName },
@@ -143,13 +143,13 @@ namespace Backend.Migrations
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Steps_Departments_userId_deptName",
                         columns: x => new { x.userId, x.deptName },
                         principalTable: "Departments",
                         principalColumns: new[] { "userId", "DeptName" },
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Steps_Objectives_userId_deptName_objectiveName",
                         columns: x => new { x.userId, x.deptName, x.objectiveName },
@@ -163,7 +163,7 @@ namespace Backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     userId = table.Column<int>(nullable: false),
                     StepNumber = table.Column<string>(nullable: true),
                     ObjectiveName = table.Column<string>(nullable: true),
@@ -198,7 +198,7 @@ namespace Backend.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("Sqlite:Autoincrement", true),
                     userId = table.Column<int>(nullable: false),
                     StepNumber = table.Column<string>(nullable: true),
                     ObjectiveName = table.Column<string>(nullable: true),

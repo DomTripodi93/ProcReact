@@ -55,6 +55,13 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
                         return value.employeeId !== action.payload
                     })]
             };
+        case EmployeeActionTypes.SIGNOUT_USER:
+            return {
+                employees: [],
+                employeeMap: {},
+                mapCalled: false,
+                allCalled: false
+            }
         default:
             return state;
     }

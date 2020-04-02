@@ -56,6 +56,11 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
                         return value.id !== action.payload
                     })]
             };
+        case ScheduleActionTypes.SIGNOUT_USER:
+            return {
+                scheduledTasks: [],
+                scheduledTasksCalled: false
+            }
         default:
             return state;
     }
