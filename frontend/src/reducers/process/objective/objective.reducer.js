@@ -58,6 +58,12 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 objectives: objectiveHold
             };
+        case ObjectiveActionTypes.SIGNOUT_USER:
+            return {
+                objectives: {},
+                selectedObjective: {},
+                called: false
+            };
         default:
             return state;
     }

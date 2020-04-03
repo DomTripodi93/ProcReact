@@ -98,6 +98,12 @@ const stepReducer = (state = INITIAL_STATE, action) => {
                     ...state,
                     steps: stepsHold
                 };
+        case StepActionTypes.SIGNOUT_USER:
+            return {
+                steps: {},
+                selectedStep: {},
+                called: {}
+            };
         default:
                 return state;
     }

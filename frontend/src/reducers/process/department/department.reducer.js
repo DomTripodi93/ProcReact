@@ -43,6 +43,11 @@ const departmentReducer = (state = INITIAL_STATE, action) => {
                         return value.deptName !== action.payload
                     })]
             };
+        case DepartmentActionTypes.SIGNOUT_USER:
+            return {
+                departments: [],
+                called: false
+            };
         default:
             return state;
     }
