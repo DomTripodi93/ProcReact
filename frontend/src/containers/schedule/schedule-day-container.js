@@ -132,12 +132,18 @@ const ScheduleDayContainer = props => {
                     route = "12/31/" + (year-1);
                 }
             }
+        } 
+        if (movement === "back"){
+            route = "/schedule";
+        } else {
+            if (employeeId){
+                route = employeeId + "/" + route;
+            }
+            route = "/day/" + route;
         }
-        if (employeeId){
-            route = employeeId + "/" + route;
-        }
+        
         props.resetSchedules();
-        props.history.push("/day/" + route);
+        props.history.push(route);
     }
 
 
@@ -148,6 +154,7 @@ const ScheduleDayContainer = props => {
 
     return(
         <div>
+        <p className="pull-right">x</p>
             <ScheduleNew 
                 addMode={addMode}
                 action={showScheduleForm}

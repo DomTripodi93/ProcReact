@@ -24,7 +24,7 @@ const StepContainer = (props) => {
                 setSteps(steps[deptName][objectiveName]);
             }
         }
-    },[fetchSteps, deptName, objectiveName, steps]);
+    },[fetchSteps, deptName, objectiveName, steps, called]);
 
 
     const showStepForm = () =>{

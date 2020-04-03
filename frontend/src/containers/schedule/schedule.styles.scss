@@ -44,6 +44,7 @@
     background-color: rgb(255, 255, 255);
     border-width: 2px;
     text-align: center;
+    overflow: hidden;
 }
 
 .inner-border-right{
@@ -98,6 +99,10 @@
   
     @media only screen and (max-width: 570px) {
         font-size: 11px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        font-size: 10.5px;
     }
 }
 
@@ -156,15 +161,19 @@
 
 .grid-one-employee-button { 
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 75% 24%;
 }
 
 .grid-all-employees-button { 
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 80% 19%;
 }
 
 .grid7split { 
     display: grid;
     grid-template-columns: 14.289% 14.289% 14.289% 14.289% 14.289% 14.289% 14.289%;
+}
+
+.pull-right{
+    text-align: right;
 }
