@@ -94,6 +94,7 @@
 .grid-text{
     line-height: 0;
     font-size: 14px;
+    white-space: nowrap;
   
     @media only screen and (max-width: 570px) {
         font-size: 11px;
