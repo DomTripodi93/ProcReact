@@ -1,65 +1,58 @@
 import ScheduleActionTypes from './schedule.types';
 
 const INITIAL_STATE = {
-    scheduledTasks: [],
-    scheduledTasksCalled: false
+    scheduledTasks: {}
 }
 
 const scheduleReducer = (state = INITIAL_STATE, action) => {
+    let taskHold = state.scheduledTasks;
     switch (action.type) {
         case ScheduleActionTypes.SET_SCHEDULES:
+            taskHold[action.date] = action.payload.data; 
             return {
                 ...state,
-                scheduledTasks: action.payload.data,
-                scheduledTasksCalled: action.setFor
-            };
-        case ScheduleActionTypes.RESET_SCHEDULES:
-            return {
-                ...state,
-                scheduledTasks: [],
-                scheduledTasksCalled: false
+                scheduledTasks: action.payload.data
             };
         case ScheduleActionTypes.ADD_SCHEDULE:
+            taskHold[action.date].push(action.payload)
+            taskHold[action.date] = taskHold[action.date]
+                .sort((first, second)=>{ 
+                    if (first.date > second.date){
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                });
             return {
-                ...state,
-                scheduledTasks: [...state.scheduledTasks, action.payload]
-                    .sort((first, second)=>{ 
-                        if (first.date > second.date){
-                            return 1;
-                        } else {
-                            return -1;
-                        }
-                    })
+                scheduledTasks: taskHold
             };
         case ScheduleActionTypes.UPDATE_SCHEDULES:
+            taskHold[action.date].push(action.payload)
+            taskHold[action.date] = taskHold[action.date]
+                .filter((value)=>{
+                    return value.id !== action.payload.id 
+                })
+                .sort((first, second)=>{
+                    if (first.date > second.date){
+                        return 1
+                    } else {
+                        return -1
+                    }}
+                )
             return {
-                ...state,
-                scheduledTasks: [
-                    action.payload,
-                    ...state.scheduledTasks
-                        .filter((value)=>{
-                            return value.id !== action.payload.id 
-                        })]
-                        .sort((first, second)=>{
-                            if (first.date > second.date){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                scheduledTasks: taskHold
             };
         case ScheduleActionTypes.DELETE_SCHEDULE:
+            taskHold[action.date] = taskHold[action.date]
+                .filter((value)=>{
+                    return value.id !== action.payload
+                })
             return {
-                ...state,
-                scheduledTasks: [...state.scheduledTasks
-                    .filter((value)=>{
-                        return value.id !== action.payload
-                    })]
+                scheduledTasks: taskHold
             };
         case ScheduleActionTypes.SIGNOUT_USER:
             return {
-                scheduledTasks: [],
-                scheduledTasksCalled: false
+                scheduledTasks: {}
             }
         default:
             return state;

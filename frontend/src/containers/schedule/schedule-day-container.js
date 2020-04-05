@@ -154,7 +154,6 @@ const ScheduleDayContainer = props => {
 
     return(
         <div>
-        <p className="pull-right">x</p>
             <ScheduleNew 
                 addMode={addMode}
                 action={showScheduleForm}
