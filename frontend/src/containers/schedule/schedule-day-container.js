@@ -68,7 +68,8 @@ const ScheduleDayContainer = props => {
             let setForId = employeeId + "/" + setFor;
             if (!scheduledTasks[setForId]){
                 if (scheduledTasks[setFor]){
-                    selectSchedules(setForId);
+                    // extractSchedules(setForId);
+                    fetchSchedulesForEmployee(employeeId, month, day, year);
                 } else {
                     fetchSchedulesForEmployee(employeeId, month, day, year);
                 }

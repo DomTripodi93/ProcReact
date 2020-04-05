@@ -24,43 +24,44 @@ export function fetchSchedulesByEmployee(employeeId, month, day, year){
 }
 //Gets all schedules for a specific day
 
-export function addScheduledTask(schedule, callback, date){
+export function addScheduledTask(schedule, callback, date, employeeId){
     return dispatch =>{
         http.addItem("schedule", schedule)
             .then(addedSchedule =>{
-                dispatch(addScheduleToState(addedSchedule.data, date));
+                dispatch(addScheduleToState(addedSchedule.data, date, employeeId));
                 callback();
             });
     }
 }
 //Posts new schedule to API
 
-export function updateScheduledTask(schedule, callback, date){
+export function updateScheduledTask(schedule, callback, date, employeeId){
     return dispatch =>{
         http.updateItemById("schedule", schedule, schedule.id)
             .then(() =>{
-                dispatch(updateSchedulesInState(schedule, date));
+                dispatch(updateSchedulesInState(schedule, date, employeeId));
                 callback();
             });
     }
 }
 //Updates schedule in database
 
-export function deleteSchedule(id, date){
+export function deleteSchedule(id, date, employeeId){
     return dispatch =>{
         http.deleteItemById("schedule", id)
             .then(()=>{
-                dispatch(deleteScheduleFromState(id, date));
+                dispatch(deleteScheduleFromState(id, date, employeeId));
             });
     }
 }
 //Deletes selected schedule
 
-export function addScheduleToState(schedule, date){
+export function addScheduleToState(schedule, date, employeeId){
     return {
         type: ScheduleActionTypes.ADD_SCHEDULE,
         payload: schedule,
-        date
+        date, 
+        employeeId
     }
 }
 //Adds new schedule from post to state
@@ -74,20 +75,22 @@ export function setSchedules(schedules, date){
 }
 //Sets all schedules in state
 
-export function updateSchedulesInState(schedule, date){
+export function updateSchedulesInState(schedule, date, employeeId){
     return {
         type: ScheduleActionTypes.UPDATE_SCHEDULES,
         payload: schedule,
-        date
+        date, 
+        employeeId
     }
 }
 //Updates function for schedule
 
-export function deleteScheduleFromState(id, date){
+export function deleteScheduleFromState(id, date, employeeId){
     return {
         type: ScheduleActionTypes.DELETE_SCHEDULE,
         payload: id,
-        date
+        date, 
+        employeeId
     }
 }
 //Deletes selected schedule

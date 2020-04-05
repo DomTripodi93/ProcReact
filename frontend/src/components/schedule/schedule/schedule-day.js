@@ -20,8 +20,9 @@ const ScheduleDay = props => {
     const handleDelete = (task) => {
         if (window.confirm(
           "Are you sure you want to delete this scheduled task: " + task.objectiveName + "?"
-          )){
-            props.deleteSchedule(task.id);
+        )){
+            let date = props.year + "/" + props.month + "/" + props.day
+            props.deleteSchedule(task.id, date, task.employeeId);
         }
     }
 

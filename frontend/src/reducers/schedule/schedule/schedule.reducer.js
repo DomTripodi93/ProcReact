@@ -8,6 +8,7 @@ const INITIAL_STATE = {
 const scheduleReducer = (state = INITIAL_STATE, action) => {
     let taskHold = state.scheduledTasks;
     let selectedHold = state.selectedScheduledTasks;
+    let dateWithEmployee = action.employeeId + "/" + action.date;
     const filterTasks = (taskArray, id) =>{
         return taskArray.filter((value)=>{
             return value.id !== id 
@@ -37,24 +38,52 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
                 selectedScheduledTasks: selectedHold
             };
         case ScheduleActionTypes.ADD_SCHEDULE:
-            taskHold[action.date].push(action.payload);
-            taskHold[action.date] = sortTasks(taskHold[action.date])
-            selectedHold = taskHold[action.date]
+            if (taskHold[action.date]){
+                taskHold[action.date].push(action.payload);
+                taskHold[action.date] = sortTasks(taskHold[action.date]);
+            }
+            if (taskHold[dateWithEmployee]){
+                taskHold[dateWithEmployee].push(dateWithEmployee);
+                taskHold[dateWithEmployee] = sortTasks(taskHold[dateWithEmployee]);
+            }
+            selectedHold.push(action.payload);
+            selectedHold = sortTasks(selectedHold);
+
             return {
                 scheduledTasks: taskHold,
                 selectedScheduledTasks: selectedHold
             };
         case ScheduleActionTypes.UPDATE_SCHEDULES:
-            taskHold[action.date].push(action.payload)
-            taskHold[action.date] = sortTasks(filterTasks(taskHold[action.date], action.payload.id));
-            selectedHold = taskHold[action.date]
+            if (taskHold[action.date]){
+                taskHold[action.date].push(action.payload);
+                taskHold[action.date] = sortTasks([
+                    action.payload, 
+                    ...filterTasks(taskHold[action.date], action.payload.id)
+                ]);
+            }
+            if (taskHold[dateWithEmployee]){
+                taskHold[dateWithEmployee].push(dateWithEmployee);
+                taskHold[dateWithEmployee] = sortTasks([
+                    action.payload, 
+                    ...filterTasks(taskHold[dateWithEmployee], action.payload.id)
+                ]);
+            }
+            selectedHold = sortTasks([
+                action.payload, 
+                ...filterTasks(selectedHold, action.payload.id)
+            ]);
             return {
                 scheduledTasks: taskHold,
                 selectedScheduledTasks: selectedHold
             };
         case ScheduleActionTypes.DELETE_SCHEDULE:
-            taskHold[action.date] = filterTasks(taskHold[action.date], action.payload.id);
-            selectedHold = taskHold[action.date]
+            if (taskHold[action.date]){
+                taskHold[action.date] = filterTasks(taskHold[action.date], action.payload.id);
+            }
+            if (taskHold[dateWithEmployee]){
+                taskHold[dateWithEmployee] = filterTasks(taskHold[dateWithEmployee], action.payload.id);
+            }
+            selectedHold = filterTasks(selectedHold, action.payload.id);
             return {
                 scheduledTasks: taskHold,
                 selectedScheduledTasks: selectedHold

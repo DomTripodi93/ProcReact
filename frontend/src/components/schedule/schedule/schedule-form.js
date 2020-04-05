@@ -92,15 +92,16 @@ const ScheduledTaskForm = props => {
 
     const handleSubmit = async event => {
         event.preventDefault();
+        let date = props.year + "/" + props.month + "/" + props.day
 
         if (props.editMode){
             if (scheduledTaskInfo !== props.scheduledTaskInput){
-                props.updateScheduledTask(scheduledTaskInfo, props.callback);
+                props.updateScheduledTask(scheduledTaskInfo, props.callback, date, employeeId);
             } else {
                 props.callback();
             }
         } else {
-            props.addScheduledTask(scheduledTaskInfo, props.callback);
+            props.addScheduledTask(scheduledTaskInfo, props.callback, date, employeeId);
         }
     };
 
