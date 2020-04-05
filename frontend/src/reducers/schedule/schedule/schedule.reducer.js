@@ -11,8 +11,8 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
     let dateWithEmployee = action.employeeId + "/" + action.date;
     const filterTasks = (taskArray, id) =>{
         return taskArray.filter((value)=>{
-            return value.id !== id 
-        })
+            return value.id !== id;
+        });
     }
     const sortTasks = (taskArray) =>{
         return taskArray.sort((first, second)=>{ 
@@ -35,6 +35,15 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
             selectedHold = taskHold[action.payload];
             return {
                 ...state,
+                selectedScheduledTasks: selectedHold
+            };
+        case ScheduleActionTypes.EXTRACT_SCHEDULES:
+            taskHold[dateWithEmployee] = taskHold[action.date].filter((value)=>{
+                return value.employeeId === +action.employeeId;
+            });
+            selectedHold = taskHold[dateWithEmployee];
+            return {
+                scheduledTasks: taskHold,
                 selectedScheduledTasks: selectedHold
             };
         case ScheduleActionTypes.ADD_SCHEDULE:

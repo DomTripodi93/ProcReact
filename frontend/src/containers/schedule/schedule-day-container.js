@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CalendarHelper from '../../shared/calendar-helper';
-import { fetchSchedulesByEmployee, fetchSchedulesByDate, selectSchedulesInState } from '../../reducers/schedule/schedule/schedule.actions';
+import { 
+        fetchSchedulesByEmployee, 
+        fetchSchedulesByDate, 
+        selectSchedulesInState, 
+        extractScheduledTasksForEmployee 
+    } from '../../reducers/schedule/schedule/schedule.actions';
 import { connect } from 'react-redux';
 import ScheduleDay from '../../components/schedule/schedule/schedule-day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
@@ -61,6 +66,7 @@ const ScheduleDayContainer = props => {
     const fetchSchedulesForDate = props.fetchSchedulesByDate;
     const fetchSchedulesForEmployee = props.fetchSchedulesByEmployee;
     const selectSchedules = props.selectSchedulesInState;
+    const extractSchedules = props.extractScheduledTasksForEmployee;
 
     useEffect(()=>{
         let setFor = year + "/" + month + "/" + day;
@@ -68,8 +74,7 @@ const ScheduleDayContainer = props => {
             let setForId = employeeId + "/" + setFor;
             if (!scheduledTasks[setForId]){
                 if (scheduledTasks[setFor]){
-                    // extractSchedules(setForId);
-                    fetchSchedulesForEmployee(employeeId, month, day, year);
+                    extractSchedules(setFor, employeeId);
                 } else {
                     fetchSchedulesForEmployee(employeeId, month, day, year);
                 }
@@ -86,6 +91,7 @@ const ScheduleDayContainer = props => {
         fetchSchedulesForEmployee,
         fetchSchedulesForDate,
         selectSchedules,
+        extractSchedules,
         employeeId,
         month,
         day,
@@ -191,7 +197,8 @@ const mapDispatchToProps = dispatch => {
         fetchDepartments: () => dispatch(fetchDepartments()),
         fetchObjectivesByDepartment: (deptName) => dispatch(fetchObjectivesByDepartment(deptName)),
         fetchEmployees: () => dispatch(fetchEmployeesForMap()),
-        selectSchedulesInState: (date) => dispatch(selectSchedulesInState(date))
+        selectSchedulesInState: (date) => dispatch(selectSchedulesInState(date)),
+        extractScheduledTasksForEmployee: (date, employeeId) => dispatch(extractScheduledTasksForEmployee(date, employeeId))
     }
 }
 

@@ -8,7 +8,6 @@ import ScheduledTaskForm from './schedule-form';
 
 
 const ScheduleDay = props => {
-    console.log(props.scheduledTask)
     const [editMode, updateEditMode] = useState(false);
     const [selectedTask, setSelectedTask] = useState("");
 

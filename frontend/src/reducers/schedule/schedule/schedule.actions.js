@@ -100,10 +100,20 @@ export function resetSchedules(){
         type: ScheduleActionTypes.RESET_SCHEDULES
     }
 }
+//Resets values for scheduled tasks
 
 export function selectSchedulesInState(date){
     return{
         type: ScheduleActionTypes.SELECT_SCHEDULES,
         payload: date
+    }
+}
+//selects scheduled tasks for display from cached data
+
+export function extractScheduledTasksForEmployee(date, employeeId){
+    return{
+        type: ScheduleActionTypes.EXTRACT_SCHEDULES,
+        date, 
+        employeeId
     }
 }
