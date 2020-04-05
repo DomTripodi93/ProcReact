@@ -31,7 +31,7 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
                 selectedScheduledTasks: selectedHold
             };
         case ScheduleActionTypes.SELECT_SCHEDULES:
-            selectedHold = action.payload;
+            selectedHold = taskHold[action.payload];
             return {
                 ...state,
                 selectedScheduledTasks: selectedHold

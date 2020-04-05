@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CalendarHelper from '../../shared/calendar-helper';
-import { fetchSchedulesByEmployee, fetchSchedulesByDate } from '../../reducers/schedule/schedule/schedule.actions';
+import { fetchSchedulesByEmployee, fetchSchedulesByDate, selectSchedulesInState } from '../../reducers/schedule/schedule/schedule.actions';
 import { connect } from 'react-redux';
 import ScheduleDay from '../../components/schedule/schedule/schedule-day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
@@ -60,6 +60,7 @@ const ScheduleDayContainer = props => {
     const scheduledTasks = props.scheduledTasks;
     const fetchSchedulesForDate = props.fetchSchedulesByDate;
     const fetchSchedulesForEmployee = props.fetchSchedulesByEmployee;
+    const selectSchedules = props.selectSchedulesInState;
 
     useEffect(()=>{
         let setFor = year + "/" + month + "/" + day;
@@ -67,22 +68,23 @@ const ScheduleDayContainer = props => {
             let setForId = employeeId + "/" + setFor;
             if (!scheduledTasks[setForId]){
                 if (scheduledTasks[setFor]){
-
+                    selectSchedules(setForId);
                 } else {
                     fetchSchedulesForEmployee(employeeId, month, day, year);
                 }
             } else {
-
+                selectSchedules(setForId);
             }
         } else if (!scheduledTasks[setFor]){
             fetchSchedulesForDate(month, day, year);
         } else {
-            
+            selectSchedules(setFor);
         }
     },[
         scheduledTasks,
         fetchSchedulesForEmployee,
         fetchSchedulesForDate,
+        selectSchedules,
         employeeId,
         month,
         day,
@@ -187,7 +189,8 @@ const mapDispatchToProps = dispatch => {
         fetchSchedulesByDate: (month, day, year) => dispatch(fetchSchedulesByDate(month, day, year)),
         fetchDepartments: () => dispatch(fetchDepartments()),
         fetchObjectivesByDepartment: (deptName) => dispatch(fetchObjectivesByDepartment(deptName)),
-        fetchEmployees: () => dispatch(fetchEmployeesForMap())
+        fetchEmployees: () => dispatch(fetchEmployeesForMap()),
+        selectSchedulesInState: (date) => dispatch(selectSchedulesInState(date))
     }
 }
 

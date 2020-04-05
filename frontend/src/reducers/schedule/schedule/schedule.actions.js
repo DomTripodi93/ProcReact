@@ -97,3 +97,10 @@ export function resetSchedules(){
         type: ScheduleActionTypes.RESET_SCHEDULES
     }
 }
+
+export function selectSchedulesInState(date){
+    return{
+        type: ScheduleActionTypes.SELECT_SCHEDULES,
+        payload: date
+    }
+}
