@@ -55,7 +55,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => ({
     employees: state.employee.employees,
-    employeesCalled: state.employee.allCalled,
+    employeesCalled: state.employee.called,
     departments: state.department.departments,
     deptCalled: state.department.called
 });

@@ -17,16 +17,6 @@ export function fetchEmployees(){
 }
 //Gets all employees
 
-export function fetchEmployeesForMap(){
-    return dispatch => {
-        http.fetchAll("employee/byUser")
-            .then((employees) => {
-                dispatch(mapEmployees(employees));
-            });
-    }
-}
-//Gets all employees
-
 export function fetchEmployeesByDepartment(department){
     return dispatch => {
         http.fetchAll("employee/byDepartment/" + department)
@@ -82,14 +72,6 @@ export function addEmployeeToState(employee){
 export function setEmployees(employees){
     return {
         type: EmployeeActionTypes.SET_EMPLOYEES,
-        payload: employees
-    }
-}
-//Sets all employees in state
-
-export function mapEmployees(employees){
-    return {
-        type: EmployeeActionTypes.SET_EMPLOYEE_MAP,
         payload: employees
     }
 }

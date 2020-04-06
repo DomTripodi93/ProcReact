@@ -11,7 +11,7 @@ import ScheduleDay from '../../components/schedule/schedule/schedule-day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
 import { fetchDepartments } from '../../reducers/process/department/department.actions';
 import { fetchObjectivesByDepartment } from '../../reducers/process/objective/objective.actions';
-import { fetchEmployeesForMap } from '../../reducers/schedule/employee/employee.actions';
+import { fetchEmployees } from '../../reducers/schedule/employee/employee.actions';
 
 import './schedule.styles.scss';
 
@@ -196,7 +196,7 @@ const mapDispatchToProps = dispatch => {
         fetchSchedulesByDate: (month, day, year) => dispatch(fetchSchedulesByDate(month, day, year)),
         fetchDepartments: () => dispatch(fetchDepartments()),
         fetchObjectivesByDepartment: (deptName) => dispatch(fetchObjectivesByDepartment(deptName)),
-        fetchEmployees: () => dispatch(fetchEmployeesForMap()),
+        fetchEmployees: () => dispatch(fetchEmployees()),
         selectSchedulesInState: (date) => dispatch(selectSchedulesInState(date)),
         extractScheduledTasksForEmployee: (date, employeeId) => dispatch(extractScheduledTasksForEmployee(date, employeeId))
     }
@@ -210,7 +210,7 @@ const mapStateToProps = state => ({
     objectives: state.objective.objectives,
     objCalled: state.objective.called,
     employeeMap: state.employee.employeeMap,
-    employeeCalled: state.employee.mapCalled
+    employeeCalled: state.employee.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ScheduleDayContainer);
