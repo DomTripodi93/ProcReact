@@ -51,10 +51,7 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
                 .filter((value)=>{
                     return value.employeeId !== action.payload
                 });
-            mapHold = {};
-            employeeHold.forEach(employee => {
-                mapHold[employee.employeeId] = employee.name;
-            });
+            delete mapHold[action.payload];
             return {
                 ...state,
                 employees: employeeHold,

@@ -16,10 +16,10 @@ const scheduleReducer = (state = INITIAL_STATE, action) => {
     }
     const sortTasks = (taskArray) =>{
         return taskArray.sort((first, second)=>{ 
-            if (first.date > second.date){
-                return 1;
-            } else {
+            if (first.date < second.date){
                 return -1;
+            } else {
+                return 1;
             }
         });
     }
