@@ -14,19 +14,19 @@ const ScheduleContainer = props => {
     const updateMonth = (selectedMonth) => {
         let monthSplit = selectedMonth.split("-");
         setYear(monthSplit[0]);
-        setMonth(+monthSplit[1] -1);
+        setMonth(+monthSplit[1] - 1);
     }
 
-    return(
+    return (
         <div>
-            <CalendarNew 
-                callback={updateMonth} 
-                month={month} 
+            <CalendarNew
+                callback={updateMonth}
+                month={month}
                 year={year} />
-            <Calendar 
-                employeeId={props.match.params.employeeId} 
-                date={date} 
-                month={month} 
+            <Calendar
+                employeeId={props.match.params.employeeId}
+                date={date}
+                month={month}
                 thisMonth={thisMonth}
                 year={year} />
         </div>

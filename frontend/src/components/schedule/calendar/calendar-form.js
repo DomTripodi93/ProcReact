@@ -3,11 +3,11 @@ import CustomButton from '../../../shared/elements/button/custom-button.componen
 
 
 const CalendarForm = props => {
-    
-    const initializeMonth = () =>{
-        let monthHold = props.month+1
-        if (monthHold < 10){
-          monthHold = "0" + monthHold;
+
+    const initializeMonth = () => {
+        let monthHold = props.month + 1
+        if (monthHold < 10) {
+            monthHold = "0" + monthHold;
         }
         monthHold = props.year + "-" + monthHold;
 
@@ -21,7 +21,7 @@ const CalendarForm = props => {
         event.preventDefault();
         props.callback(selectedMonth)
     }
-    
+
     const handleChange = event => {
         setSelectedMonth(event.target.value)
     }

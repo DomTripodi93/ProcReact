@@ -4,7 +4,7 @@ import BestPracticeForm from './best-practice-form';
 import { deleteBestPractice } from '../../../reducers/process/best-practice/best-practice.actions';
 import { connect } from 'react-redux';
 
-const SingleBestPractice = props =>{
+const SingleBestPractice = props => {
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -14,16 +14,16 @@ const SingleBestPractice = props =>{
     const handleDelete = () => {
         if (window.confirm(
             "Are you sure you want to delete this bestPractice: " +
-            props.bestPractice.practice + ": " + 
+            props.bestPractice.practice + ": " +
             props.bestPractice.name + "?"
-        )){
+        )) {
             props.deleteBestPractice(
                 props.bestPractice.id
             );
         }
     }
 
-    return(
+    return (
         <div>
             <div className='border-practice centered'>
                 {!editMode ?
@@ -31,30 +31,30 @@ const SingleBestPractice = props =>{
                         <h3>{props.bestPractice.practice}</h3>
                         {props.bestPractice.method ?
                             <h4>Method: <br /> {props.bestPractice.method}</h4>
-                        :
+                            :
                             null
                         }
                         {props.bestPractice.purpose ?
                             <h4>Purpose: <br /> {props.bestPractice.purpose}</h4>
-                        :
+                            :
                             null
                         }
                         <div className="grid50">
-                            <CustomButton 
-                                action={setEditMode} 
-                                buttonStyle="blue" 
+                            <CustomButton
+                                action={setEditMode}
+                                buttonStyle="blue"
                                 label="Edit" />
-                            <CustomButton 
-                                action={handleDelete} 
-                                buttonStyle="red" 
+                            <CustomButton
+                                action={handleDelete}
+                                buttonStyle="red"
                                 label="Delete" />
                         </div>
                     </div>
-                :
+                    :
                     <BestPracticeForm
                         editMode={true}
                         inDept={props.inDept}
-                        bestPracticeInput={props.bestPractice} 
+                        bestPracticeInput={props.bestPractice}
                         callback={setEditMode} />
                 }
             </div>

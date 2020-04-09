@@ -16,22 +16,22 @@ const StepContainer = (props) => {
     const steps = props.steps
     const [stepsToPass, setSteps] = useState([]);
 
-    useEffect(()=>{
-        if (objectiveName){
-            if (!called[deptName + "-" + objectiveName]){
+    useEffect(() => {
+        if (objectiveName) {
+            if (!called[deptName + "-" + objectiveName]) {
                 fetchSteps(deptName, objectiveName);
             } else {
                 setSteps(steps[deptName][objectiveName]);
             }
         }
-    },[fetchSteps, deptName, objectiveName, steps, called]);
+    }, [fetchSteps, deptName, objectiveName, steps, called]);
 
 
-    const showStepForm = () =>{
+    const showStepForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
             <h3 className='centered'>Steps</h3>
             <div className="grid100">
@@ -39,23 +39,23 @@ const StepContainer = (props) => {
                     deptName={deptName}
                     objectiveName={objectiveName}
                     addMode={addMode}
-                    action={showStepForm}/>
+                    action={showStepForm} />
             </div>
             <br />
             {props.steps ?
-                <Steps 
+                <Steps
                     deptName={deptName}
                     objectiveName={objectiveName}
-                    action={showStepForm} 
-                    steps={stepsToPass}/>
-            :
+                    action={showStepForm}
+                    steps={stepsToPass} />
+                :
                 null
             }
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchSteps: (deptName, objectiveName) => dispatch(fetchStepsByDepartmentAndObjective(deptName, objectiveName))
     }

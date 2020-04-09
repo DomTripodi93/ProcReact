@@ -10,38 +10,38 @@ import './process.styles.scss';
 const ObjectiveContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
 
-    useEffect(()=>{
-        if (!props.objectivesCalled){
+    useEffect(() => {
+        if (!props.objectivesCalled) {
             props.fetchObjectives(props.deptName);
         }
-    },[props]);
+    }, [props]);
 
-    const showObjectiveForm = () =>{
+    const showObjectiveForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
             <h3 className='centered'>Objectives</h3>
             <div className="grid100">
-                <ObjectiveNew 
+                <ObjectiveNew
                     deptName={props.deptName}
-                    addMode={addMode} 
-                    action={showObjectiveForm}/>
+                    addMode={addMode}
+                    action={showObjectiveForm} />
             </div>
             <br />
             {props.objectives[props.deptName] ?
-                <Objectives 
+                <Objectives
                     deptName={props.deptName}
-                    objectives={props.objectives[props.deptName]}/>
-            :
+                    objectives={props.objectives[props.deptName]} />
+                :
                 null
             }
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchObjectives: (deptName) => dispatch(fetchObjectivesByDepartment(deptName))
     }

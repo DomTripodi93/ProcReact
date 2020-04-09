@@ -4,7 +4,7 @@ import CommonDifficultyForm from './common-difficulty-form';
 import { deleteCommonDifficulty } from '../../../reducers/process/common-difficulty/common-difficulty.actions';
 import { connect } from 'react-redux';
 
-const SingleCommonDifficulty = props =>{
+const SingleCommonDifficulty = props => {
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -14,16 +14,16 @@ const SingleCommonDifficulty = props =>{
     const handleDelete = () => {
         if (window.confirm(
             "Are you sure you want to delete this commonDifficulty: " +
-            props.commonDifficulty.difficulty + ": " + 
+            props.commonDifficulty.difficulty + ": " +
             props.commonDifficulty.name + "?"
-        )){
+        )) {
             props.deleteCommonDifficulty(
                 props.commonDifficulty.id
             );
         }
     }
 
-    return(
+    return (
         <div>
             <div className='border-difficulty centered'>
                 {!editMode ?
@@ -31,30 +31,30 @@ const SingleCommonDifficulty = props =>{
                         <h3>{props.commonDifficulty.difficulty}</h3>
                         {props.commonDifficulty.cause ?
                             <h4>Cause: <br /> {props.commonDifficulty.cause}</h4>
-                        :
+                            :
                             null
                         }
                         {props.commonDifficulty.solution ?
                             <h4>Solution: <br /> {props.commonDifficulty.solution}</h4>
-                        :
+                            :
                             null
                         }
                         <div className="grid50">
-                            <CustomButton 
-                                action={setEditMode} 
-                                buttonStyle="blue" 
+                            <CustomButton
+                                action={setEditMode}
+                                buttonStyle="blue"
                                 label="Edit" />
-                            <CustomButton 
-                                action={handleDelete} 
-                                buttonStyle="red" 
+                            <CustomButton
+                                action={handleDelete}
+                                buttonStyle="red"
                                 label="Delete" />
                         </div>
                     </div>
-                :
+                    :
                     <CommonDifficultyForm
                         editMode={true}
                         inDept={props.inDept}
-                        commonDifficultyInput={props.commonDifficulty} 
+                        commonDifficultyInput={props.commonDifficulty}
                         callback={setEditMode} />
                 }
             </div>

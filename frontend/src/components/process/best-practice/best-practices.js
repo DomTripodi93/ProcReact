@@ -2,15 +2,15 @@ import React from 'react';
 import SingleBestPractice from './single-best-practice';
 
 const BestPractices = props => {
-    return(
+    return (
         <div>
             {props.bestPractices.length > 0 ?
                 <div>
                     <div className='grid50-to-100'>
-                        {props.bestPractices.map(bestPractice=>(
-                            <div 
+                        {props.bestPractices.map(bestPractice => (
+                            <div
                                 key={bestPractice.id}
-                                >
+                            >
                                 <SingleBestPractice
                                     bestPractice={bestPractice}
                                     inDept={true} />
@@ -22,7 +22,7 @@ const BestPractices = props => {
                 :
                 <div className="border centered">
                     <h4 className="spaced">
-                        You currently don't have any best practices! 
+                        You currently don't have any best practices!
                     </h4>
                     <h4 className="spaced">
                         Add some best practices using the button above to see them here.

@@ -24,22 +24,22 @@ const departmentReducer = (state = INITIAL_STATE, action) => {
                 departments: [
                     action.payload,
                     ...state.departments
-                        .filter((value)=>{
-                            return value.deptName !== action.payload.deptName 
+                        .filter((value) => {
+                            return value.deptName !== action.payload.deptName
                         })]
-                        .sort((first, second)=>{
-                            if(first.deptName > second.deptName){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                    .sort((first, second) => {
+                        if (first.deptName > second.deptName) {
+                            return 1
+                        } else {
+                            return -1
+                        }
+                    })
             };
         case DepartmentActionTypes.DELETE_DEPARTMENT:
             return {
                 ...state,
                 departments: [...state.departments
-                    .filter((value)=>{
+                    .filter((value) => {
                         return value.deptName !== action.payload
                     })]
             };

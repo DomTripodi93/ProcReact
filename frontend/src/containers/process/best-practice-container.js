@@ -14,18 +14,18 @@ const BestPracticeContainer = (props) => {
     const objectiveName = props.objectiveName;
     const stepNumber = props.stepNumber;
 
-    useEffect(()=>{
-        if (stepNumber){
+    useEffect(() => {
+        if (stepNumber) {
             fetchBestPractices(deptName, objectiveName, stepNumber);
         }
-    },[fetchBestPractices, deptName, objectiveName, stepNumber]);
+    }, [fetchBestPractices, deptName, objectiveName, stepNumber]);
 
 
-    const showBestPracticeForm = () =>{
+    const showBestPracticeForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
             <h3 className='centered'>Best Practices</h3>
             <div className="grid100">
@@ -34,21 +34,21 @@ const BestPracticeContainer = (props) => {
                     objectiveName={objectiveName}
                     stepNumber={stepNumber}
                     addMode={addMode}
-                    action={showBestPracticeForm}/>
+                    action={showBestPracticeForm} />
             </div>
             <br />
             {props.bestPractices ?
-                <BestPractices 
-                    action={showBestPracticeForm} 
-                    bestPractices={props.bestPractices}/>
-            :
+                <BestPractices
+                    action={showBestPracticeForm}
+                    bestPractices={props.bestPractices} />
+                :
                 null
             }
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchBestPractices: (deptName, objectiveName, stepNumber) => dispatch(fetchBestPracticesByStep(deptName, objectiveName, stepNumber))
     }

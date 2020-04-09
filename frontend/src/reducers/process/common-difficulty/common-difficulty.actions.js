@@ -6,7 +6,7 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchCommonDifficultiesByStep(deptName, objectiveName, stepNumber){
+export function fetchCommonDifficultiesByStep(deptName, objectiveName, stepNumber) {
     return dispatch => {
         http.fetchAll("commonDifficulty/byStep/" + deptName + "&" + objectiveName + "&" + stepNumber)
             .then((commonDifficulties) => {
@@ -16,11 +16,11 @@ export function fetchCommonDifficultiesByStep(deptName, objectiveName, stepNumbe
 }
 //Gets all commonDifficulties for a specific department
 
-export function addCommonDifficulty(commonDifficulty, callback){
+export function addCommonDifficulty(commonDifficulty, callback) {
     commonDifficulty = prepCommonDifficultyValues(commonDifficulty);
-    return dispatch =>{
+    return dispatch => {
         http.addItem("commonDifficulty", commonDifficulty)
-            .then(addedCommonDifficulty =>{
+            .then(addedCommonDifficulty => {
                 dispatch(addCommonDifficultyToState(addedCommonDifficulty.data));
                 callback();
             });
@@ -28,11 +28,11 @@ export function addCommonDifficulty(commonDifficulty, callback){
 }
 //Posts new commonDifficulty to API
 
-export function updateCommonDifficulty(commonDifficulty, callback){
+export function updateCommonDifficulty(commonDifficulty, callback) {
     commonDifficulty = prepCommonDifficultyValues(commonDifficulty);
-    return dispatch =>{
+    return dispatch => {
         http.updateItemById("commonDifficulty", commonDifficulty, commonDifficulty.id)
-            .then(() =>{
+            .then(() => {
                 dispatch(updateCommonDifficultiesInState(commonDifficulty));
                 callback();
             });
@@ -40,17 +40,17 @@ export function updateCommonDifficulty(commonDifficulty, callback){
 }
 //Updates commonDifficulty in database
 
-export function deleteCommonDifficulty(id){
-    return dispatch =>{
+export function deleteCommonDifficulty(id) {
+    return dispatch => {
         http.deleteItemById("commonDifficulty", id)
-            .then(()=>{
+            .then(() => {
                 dispatch(deleteCommonDifficultyFromState(id));
             });
     }
 }
 //Deletes selected commonDifficulty
 
-export function addCommonDifficultyToState(commonDifficulty){
+export function addCommonDifficultyToState(commonDifficulty) {
     return {
         type: CommonDifficultyActionTypes.ADD_COMMON_DIFFICULTY,
         payload: commonDifficulty
@@ -58,7 +58,7 @@ export function addCommonDifficultyToState(commonDifficulty){
 }
 //Adds new commonDifficulty from post to state
 
-export function setCommonDifficulties(commonDifficulties){
+export function setCommonDifficulties(commonDifficulties) {
     return {
         type: CommonDifficultyActionTypes.SET_COMMON_DIFFICULTIES,
         payload: commonDifficulties
@@ -67,7 +67,7 @@ export function setCommonDifficulties(commonDifficulties){
 //Sets all commonDifficulties in state
 
 
-export function updateCommonDifficultiesInState(commonDifficulty){
+export function updateCommonDifficultiesInState(commonDifficulty) {
     return {
         type: CommonDifficultyActionTypes.UPDATE_COMMON_DIFFICULTIES,
         payload: commonDifficulty
@@ -75,7 +75,7 @@ export function updateCommonDifficultiesInState(commonDifficulty){
 }
 //Updates function for commonDifficulty
 
-export function deleteCommonDifficultyFromState(id){
+export function deleteCommonDifficultyFromState(id) {
     return {
         type: CommonDifficultyActionTypes.DELETE_COMMON_DIFFICULTY,
         payload: id
@@ -83,12 +83,12 @@ export function deleteCommonDifficultyFromState(id){
 }
 //Deletes selected commonDifficulty
 
-function prepCommonDifficultyValues(commonDifficulty){
+function prepCommonDifficultyValues(commonDifficulty) {
     commonDifficulty.difficulty = helper.capitalizeAll(commonDifficulty.difficulty);
-    if (commonDifficulty.cause){
+    if (commonDifficulty.cause) {
         commonDifficulty.cause = helper.capitalize(commonDifficulty.cause);
     }
-    if (commonDifficulty.solution){
+    if (commonDifficulty.solution) {
         commonDifficulty.solution = helper.capitalize(commonDifficulty.solution);
     }
 

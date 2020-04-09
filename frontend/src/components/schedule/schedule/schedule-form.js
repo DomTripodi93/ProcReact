@@ -18,11 +18,11 @@ const ScheduledTaskForm = props => {
         objectiveName: 'None',
         date: helper.setDateForIso(props.year, props.month, props.day) + "T07:00:00"
     });
-    const { 
-        employeeId, 
-        deptName, 
-        objectiveName, 
-        date 
+    const {
+        employeeId,
+        deptName,
+        objectiveName,
+        date
     } = scheduledTaskInfo;
 
     const [options, setOptions] = useState({
@@ -32,40 +32,40 @@ const ScheduledTaskForm = props => {
         objectiveOptionSets: {}
     })
     const {
-        employeeIdOptions, 
-        deptOptions, 
-        objectiveOptions, 
+        employeeIdOptions,
+        deptOptions,
+        objectiveOptions,
         objectiveOptionSets
     } = options;
 
-    const intializeObjectiveOptionSets = (options) =>{
-        let newOptions = {None: [{value: 'None', label: "None"}]};
+    const intializeObjectiveOptionSets = (options) => {
+        let newOptions = { None: [{ value: 'None', label: "None" }] };
         let keys = Object.keys(options);
-        keys.forEach((key)=>{
-            newOptions[key] = options[key].map(option =>{
-                return {value: option.objectiveName, label: option.objectiveName};
+        keys.forEach((key) => {
+            newOptions[key] = options[key].map(option => {
+                return { value: option.objectiveName, label: option.objectiveName };
             });
         });
         return newOptions;
     }
 
-    useEffect(()=>{
-        if (props.employeeId){
-            setScheduledTaskInfo({employeeId: props.employeeId})
+    useEffect(() => {
+        if (props.employeeId) {
+            setScheduledTaskInfo({ employeeId: props.employeeId })
         }
-        if (props.scheduledTaskInput){
+        if (props.scheduledTaskInput) {
             setScheduledTaskInfo(props.scheduledTaskInput);
-            setOptions(options=>{ 
-                return{
-                    ...options, 
+            setOptions(options => {
+                return {
+                    ...options,
                     objectiveOptions: objectiveOptionSets[props.scheduledTaskInput.deptName]
                 }
             })
         }
-    },[props, objectiveOptionSets])
+    }, [props, objectiveOptionSets])
 
-    useEffect(()=>{
-        if (props.hasNeededData && deptOptions.length < 2){
+    useEffect(() => {
+        if (props.hasNeededData && deptOptions.length < 2) {
             setScheduledTaskInfo({
                 employeeId: Object.keys(props.employeeMap)[0],
                 employeeName: props.employeeMap[Object.keys(props.employeeMap)[0]],
@@ -75,27 +75,27 @@ const ScheduledTaskForm = props => {
             });
             setOptions({
                 employeeIdOptions: Object.keys(props.employeeMap)
-                    .map(key =>{
-                        return { value: key, label: key + " - " + props.employeeMap[key]};
+                    .map(key => {
+                        return { value: key, label: key + " - " + props.employeeMap[key] };
                     }),
                 objectiveOptionSets: intializeObjectiveOptionSets(props.objectives),
-                objectiveOptions: [{value: 'None', label: "None"}],
+                objectiveOptions: [{ value: 'None', label: "None" }],
                 deptOptions: [
-                    {value: "None", label: "None"}, 
-                    ...Object.keys(props.objectives).map(key =>{
-                        return {value: key, label: key};
+                    { value: "None", label: "None" },
+                    ...Object.keys(props.objectives).map(key => {
+                        return { value: key, label: key };
                     })
                 ]
             });
         }
-    },[props, helper, deptOptions])
+    }, [props, helper, deptOptions])
 
     const handleSubmit = async event => {
         event.preventDefault();
         let date = props.year + "/" + props.month + "/" + props.day
 
-        if (props.editMode){
-            if (scheduledTaskInfo !== props.scheduledTaskInput){
+        if (props.editMode) {
+            if (scheduledTaskInfo !== props.scheduledTaskInput) {
                 props.updateScheduledTask(scheduledTaskInfo, props.callback, date, employeeId);
             } else {
                 props.callback();
@@ -108,16 +108,16 @@ const ScheduledTaskForm = props => {
     const handleChange = event => {
         const { name, value } = event.target;
 
-        if (name === "deptName"){
-            setOptions({...options, objectiveOptions: objectiveOptionSets[value]})
-            setScheduledTaskInfo({ 
-                ...scheduledTaskInfo, 
-                deptName: value, 
-                objectiveName: objectiveOptionSets[value][0].value 
+        if (name === "deptName") {
+            setOptions({ ...options, objectiveOptions: objectiveOptionSets[value] })
+            setScheduledTaskInfo({
+                ...scheduledTaskInfo,
+                deptName: value,
+                objectiveName: objectiveOptionSets[value][0].value
             });
         } else if (name === "employeeId") {
-            setScheduledTaskInfo({ 
-                ...scheduledTaskInfo, 
+            setScheduledTaskInfo({
+                ...scheduledTaskInfo,
                 employeeName: props.employeeMap[value],
                 employeeId: value
             })
@@ -130,11 +130,11 @@ const ScheduledTaskForm = props => {
         <div>
             {props.hasNeededData ?
                 <div className='middle'>
-                    {!props.editMode?
+                    {!props.editMode ?
                         <h3 className='centered'>
                             Fill out the form below to add an ScheduledTask
                         </h3>
-                    :
+                        :
                         <h3 className='centered'>
                             Edit the scheduled task below
                         </h3>
@@ -146,51 +146,51 @@ const ScheduledTaskForm = props => {
                             value={employeeId}
                             options={employeeIdOptions}
                             onChange={handleChange}
-                            />
+                        />
                         <FormSelect
                             label="Department"
                             name='deptName'
                             value={deptName}
                             options={deptOptions}
                             onChange={handleChange}
-                            />
+                        />
                         <FormSelect
                             label="Objective"
                             name='objectiveName'
                             value={objectiveName}
                             options={objectiveOptions}
                             onChange={handleChange}
-                            />
+                        />
                         <FormInput
                             label='Date'
-                            type='datetime-local' 
+                            type='datetime-local'
                             name='date'
                             value={date}
                             onChange={handleChange}
-                            />
-                            <div className="grid50">
-                                {!props.editMode ?
-                                    <CustomButton
-                                        buttonStyle="blue"
-                                        type="submit"
-                                        label="Add"
-                                        />
-                                :
-                                    <CustomButton
-                                        buttonStyle="blue"
-                                        type="submit"
-                                        label="Update"
-                                        />
-                                }
+                        />
+                        <div className="grid50">
+                            {!props.editMode ?
                                 <CustomButton
-                                    buttonStyle="red"
-                                    action={props.callback}
-                                    label="Cancel"
+                                    buttonStyle="blue"
+                                    type="submit"
+                                    label="Add"
                                 />
-                            </div>
+                                :
+                                <CustomButton
+                                    buttonStyle="blue"
+                                    type="submit"
+                                    label="Update"
+                                />
+                            }
+                            <CustomButton
+                                buttonStyle="red"
+                                action={props.callback}
+                                label="Cancel"
+                            />
+                        </div>
                     </form>
                 </div>
-            :
+                :
                 <div className="size-holder centered">
                     <h4>To start scheduling tasks add the following:</h4>
                     <h4>&#10547; One Employee</h4>

@@ -3,12 +3,12 @@ import SingleEmployee from './single-employee';
 
 const Employees = props => {
 
-    return(
+    return (
         <div>
             {props.employees.length > 0 ?
                 <div className='flex'>
-                    {props.employees.map(employee=>(
-                        <div 
+                    {props.employees.map(employee => (
+                        <div
                             key={employee.employeeId}
                             className='sized30'>
                             <SingleEmployee
@@ -21,7 +21,7 @@ const Employees = props => {
                 :
                 <div className="border centered">
                     <h4 className="spaced">
-                        You currently don't have any employees! 
+                        You currently don't have any employees!
                     </h4>
                     <h4 className="spaced">
                         Add some employees using the button above to see them here.

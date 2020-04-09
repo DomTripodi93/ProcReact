@@ -14,24 +14,24 @@ const BestPracticeForm = props => {
         method: '',
         purpose: ''
     });
-  
+
     const { practice, method, purpose } = bestPracticeInfo;
 
-    useEffect(()=>{
-        if (props.editMode){
-            Object.keys(props.bestPracticeInput).forEach(key =>{
-                if (props.bestPracticeInput[key] !== null){
-                    setBestPracticeInfo({[key]: props.bestPracticeInput[key]});
+    useEffect(() => {
+        if (props.editMode) {
+            Object.keys(props.bestPracticeInput).forEach(key => {
+                if (props.bestPracticeInput[key] !== null) {
+                    setBestPracticeInfo({ [key]: props.bestPracticeInput[key] });
                 }
             })
             setBestPracticeInfo(props.bestPracticeInput);
         }
-    },[props])
+    }, [props])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode){
-            if (bestPracticeInfo !== props.bestPracticeInput){
+        if (props.editMode) {
+            if (bestPracticeInfo !== props.bestPracticeInput) {
                 props.updateBestPractice(bestPracticeInfo, props.callback);
             } else {
                 props.callback();
@@ -42,18 +42,18 @@ const BestPracticeForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setBestPracticeInfo({ ...bestPracticeInfo, [name]: value });
+        const { name, value } = event.target;
+
+        setBestPracticeInfo({ ...bestPracticeInfo, [name]: value });
     };
 
     return (
         <div className='middle'>
-            {!props.editMode?
+            {!props.editMode ?
                 <h3 className='centered'>
                     Fill out the form below to add a Best Practice
                 </h3>
-            :
+                :
                 <h3 className='centered'>
                     {props.bestPracticeInput.practice}
                 </h3>
@@ -61,40 +61,40 @@ const BestPracticeForm = props => {
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Practice'
-                    type='text' 
+                    type='text'
                     name='practice'
                     value={practice}
                     onChange={handleChange}
-                    />
+                />
                 <FormInput
                     label='Method'
-                    type='text' 
+                    type='text'
                     name='method'
                     value={method}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Purpose'
-                    type='text' 
+                    type='text'
                     name='purpose'
                     value={purpose}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
-                            />
-                    :
+                        />
+                        :
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Update"
-                            />
+                        />
                     }
                     <CustomButton
                         buttonStyle="red"

@@ -13,29 +13,29 @@ const StepForm = props => {
         name: '',
         goal: ''
     });
-  
+
     const { stepNumber, name, goal } = stepInfo;
 
-    useEffect(()=>{
-        if (props.editMode){
-            Object.keys(props.stepInput).forEach(key =>{
-                if (props.stepInput[key] !== null){
-                    setStepInfo({[key]: props.stepInput[key]});
+    useEffect(() => {
+        if (props.editMode) {
+            Object.keys(props.stepInput).forEach(key => {
+                if (props.stepInput[key] !== null) {
+                    setStepInfo({ [key]: props.stepInput[key] });
                 }
             })
             setStepInfo(props.stepInput);
         }
-    },[props])
+    }, [props])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode && stepInfo !== props.stepInput){
+        if (props.editMode && stepInfo !== props.stepInput) {
             if (props.inDept) {
                 props.updateStep(stepInfo, props.callback);
             } else {
                 props.updateSingleStep(stepInfo, props.callback);
             }
-        } else if (!props.editMode){
+        } else if (!props.editMode) {
             props.addStep(stepInfo, props.callback);
         } else {
             props.callback();
@@ -43,18 +43,18 @@ const StepForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setStepInfo({ ...stepInfo, [name]: value });
+        const { name, value } = event.target;
+
+        setStepInfo({ ...stepInfo, [name]: value });
     };
 
     return (
         <div className='middle'>
-            {!props.editMode?
+            {!props.editMode ?
                 <h3 className='centered'>
                     Fill out the form below to add a Step
                 </h3>
-            :
+                :
                 <h3 className='centered'>
                     {props.stepInput.stepNumber}: {props.stepInput.name}
                 </h3>
@@ -63,43 +63,43 @@ const StepForm = props => {
                 {!props.editMode ?
                     <FormInput
                         label='Step Number'
-                        type='text' 
+                        type='text'
                         name='stepNumber'
                         value={stepNumber}
                         onChange={handleChange}
-                        />
-                :
+                    />
+                    :
                     null
                 }
                 <FormInput
                     label='Name'
-                    type='text' 
+                    type='text'
                     name='name'
                     value={name}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Goal'
-                    type='text' 
+                    type='text'
                     name='goal'
                     value={goal}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
-                            />
-                    :
+                        />
+                        :
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Update"
-                            />
+                        />
                     }
                     <CustomButton
                         buttonStyle="red"

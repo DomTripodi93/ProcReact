@@ -7,7 +7,7 @@ import ObjectiveContainer from '../../../containers/process/objective-container'
 
 
 
-const SingleDepartment = props =>{
+const SingleDepartment = props => {
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -16,13 +16,13 @@ const SingleDepartment = props =>{
 
     const handleDelete = () => {
         if (window.confirm(
-          "Are you sure you want to delete this department: " + props.department.deptName + "?"
-          )){
+            "Are you sure you want to delete this department: " + props.department.deptName + "?"
+        )) {
             props.deleteDepartment(props.department.deptName);
         }
     }
 
-    return(
+    return (
         <div>
             <div className='border centered'>
                 {!editMode ?
@@ -30,7 +30,7 @@ const SingleDepartment = props =>{
                         <h3>{props.department.deptName}</h3>
                         {props.department.funcName ?
                             <h4>Function: {props.department.funcName}</h4>
-                        :
+                            :
                             null
                         }
                         <div className="grid50">
@@ -38,7 +38,7 @@ const SingleDepartment = props =>{
                             <CustomButton action={handleDelete} buttonStyle="red" label="Delete" />
                         </div>
                     </div>
-                :
+                    :
                     <DepartmentForm editMode={true} departmentInput={props.department} callback={setEditMode} />
                 }
             </div>

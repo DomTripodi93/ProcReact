@@ -14,24 +14,24 @@ const CommonDifficultyForm = props => {
         cause: '',
         solution: ''
     });
-  
+
     const { difficulty, cause, solution } = commonDifficultyInfo;
 
-    useEffect(()=>{
-        if (props.editMode){
-            Object.keys(props.commonDifficultyInput).forEach(key =>{
-                if (props.commonDifficultyInput[key] !== null){
-                    setCommonDifficultyInfo({[key]: props.commonDifficultyInput[key]});
+    useEffect(() => {
+        if (props.editMode) {
+            Object.keys(props.commonDifficultyInput).forEach(key => {
+                if (props.commonDifficultyInput[key] !== null) {
+                    setCommonDifficultyInfo({ [key]: props.commonDifficultyInput[key] });
                 }
             })
             setCommonDifficultyInfo(props.commonDifficultyInput);
         }
-    },[props])
+    }, [props])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode){
-            if (commonDifficultyInfo !== props.commonDifficultyInput){
+        if (props.editMode) {
+            if (commonDifficultyInfo !== props.commonDifficultyInput) {
                 props.updateCommonDifficulty(commonDifficultyInfo, props.callback);
             } else {
                 props.callback();
@@ -42,18 +42,18 @@ const CommonDifficultyForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setCommonDifficultyInfo({ ...commonDifficultyInfo, [name]: value });
+        const { name, value } = event.target;
+
+        setCommonDifficultyInfo({ ...commonDifficultyInfo, [name]: value });
     };
 
     return (
         <div className='middle'>
-            {!props.editMode?
+            {!props.editMode ?
                 <h3 className='centered'>
                     Fill out the form below to add a CommonDifficulty
                 </h3>
-            :
+                :
                 <h3 className='centered'>
                     {props.commonDifficultyInput.difficulty}
                 </h3>
@@ -61,40 +61,40 @@ const CommonDifficultyForm = props => {
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Difficulty'
-                    type='text' 
+                    type='text'
                     name='difficulty'
                     value={difficulty}
                     onChange={handleChange}
-                    />
+                />
                 <FormInput
                     label='Cause'
-                    type='text' 
+                    type='text'
                     name='cause'
                     value={cause}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Solution'
-                    type='text' 
+                    type='text'
                     name='solution'
                     value={solution}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
-                            />
-                    :
+                        />
+                        :
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Update"
-                            />
+                        />
                     }
                     <CustomButton
                         buttonStyle="red"

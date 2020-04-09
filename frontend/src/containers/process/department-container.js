@@ -10,38 +10,38 @@ import './process.styles.scss';
 const DepartmentContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
 
-    useEffect(()=>{
-        if (!props.deptCalled){
+    useEffect(() => {
+        if (!props.deptCalled) {
             props.fetchDepartments();
         }
-    },[props]);
+    }, [props]);
 
-    const showDepartmentForm = () =>{
+    const showDepartmentForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
-            <DepartmentNew 
-                addMode={addMode} 
-                action={showDepartmentForm}/>
+            <DepartmentNew
+                addMode={addMode}
+                action={showDepartmentForm} />
             <h2 className='centered'>Departments</h2>
             <br />
-            <Departments 
-                departments={props.departments}/>
+            <Departments
+                departments={props.departments} />
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchDepartments: () => dispatch(fetchDepartments())
     }
 }
 
 const mapStateToProps = state => ({
-  departments: state.department.departments,
-  deptCalled: state.department.called
+    departments: state.department.departments,
+    deptCalled: state.department.called
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DepartmentContainer);

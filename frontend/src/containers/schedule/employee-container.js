@@ -10,43 +10,43 @@ import './schedule.styles.scss';
 
 const EmployeeContainer = (props) => {
     const [addMode, setAddMode] = useState(false);
-    const deptOptions = [{value: 'None', label: 'None'}];
+    const deptOptions = [{ value: 'None', label: 'None' }];
 
-    props.departments.forEach(department =>{
+    props.departments.forEach(department => {
         deptOptions.push({
             value: department.deptName,
             label: department.deptName
         });
     })
 
-    useEffect(()=>{
-        if (!props.employeesCalled){
+    useEffect(() => {
+        if (!props.employeesCalled) {
             props.fetchEmployees();
-            if (!props.deptCalled){
+            if (!props.deptCalled) {
                 props.fetchDepartments();
             }
         }
-    },[props]);
+    }, [props]);
 
-    const showEmployeeForm = () =>{
+    const showEmployeeForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
-            <EmployeeNew 
+            <EmployeeNew
                 deptOptions={deptOptions}
-                addMode={addMode} 
-                action={showEmployeeForm}/>
+                addMode={addMode}
+                action={showEmployeeForm} />
             <h2 className='centered'>Employees</h2>
             <Employees
                 deptOptions={deptOptions}
-                employees={props.employees}/>
+                employees={props.employees} />
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchEmployees: () => dispatch(fetchEmployees()),
         fetchDepartments: () => dispatch(fetchDepartments())

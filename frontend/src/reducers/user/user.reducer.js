@@ -1,6 +1,6 @@
 import UserActionTypes from './user.types';
 
-const INITIAL_STATE ={
+const INITIAL_STATE = {
     userToken: null,
     userId: null,
     isAuthenticated: false

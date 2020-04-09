@@ -6,7 +6,7 @@ import { deleteEmployee } from '../../../reducers/schedule/employee/employee.act
 import { connect } from 'react-redux';
 
 
-const SingleEmployee = props =>{
+const SingleEmployee = props => {
     const [editMode, updateEditMode] = useState(false)
 
     const setEditMode = () => {
@@ -14,10 +14,10 @@ const SingleEmployee = props =>{
     }
 
     const handleDelete = () => {
-        if (props.employee.employeeId !== 1){
+        if (props.employee.employeeId !== 1) {
             if (window.confirm(
-              "Are you sure you want to delete this employee: " + props.employee.name + "?"
-              )){
+                "Are you sure you want to delete this employee: " + props.employee.name + "?"
+            )) {
                 props.deleteEmployee(props.employee.employeeId);
             }
         } else {
@@ -28,7 +28,7 @@ const SingleEmployee = props =>{
         }
     }
 
-    return(
+    return (
         <div>
             <div className='border centered'>
                 {!editMode ?
@@ -36,12 +36,12 @@ const SingleEmployee = props =>{
                         <h3>{props.employee.employeeId}: {props.employee.name}</h3>
                         {props.employee.title ?
                             <h4>Title: {props.employee.title}</h4>
-                        :
+                            :
                             null
                         }
                         {props.employee.deptName ?
                             <h4>Department: {props.employee.deptName}</h4>
-                        :
+                            :
                             null
                         }
                         <div className="grid50">
@@ -49,21 +49,21 @@ const SingleEmployee = props =>{
                             <CustomButton action={handleDelete} buttonStyle="red" label="Delete" />
                         </div>
                     </div>
-                :
-                    <EmployeeForm 
+                    :
+                    <EmployeeForm
                         deptOptions={props.deptOptions}
-                        editMode={true} 
-                        employeeInput={props.employee} 
+                        editMode={true}
+                        employeeInput={props.employee}
                         callback={setEditMode} />
                 }
             </div>
             {!props.inFull ?
                 <Link to={'schedule/' + props.employee.employeeId} className='grid100 spaced'>
-                    <CustomButton 
-                        buttonStyle='green' 
+                    <CustomButton
+                        buttonStyle='green'
                         label="View Schedule" />
                 </Link>
-            :
+                :
                 null
             }
         </div>

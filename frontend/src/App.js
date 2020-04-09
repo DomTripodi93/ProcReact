@@ -29,14 +29,14 @@ const App = (props) => {
   useEffect(() => {
     let token = localStorage.getItem('token');
     let userId = localStorage.getItem('id');
-    if (!props.isAuthenticated){
+    if (!props.isAuthenticated) {
       props.checkUser(userId, token);
     }
     setAuthValue(props.isAuthenticated)
   }, [props]);
 
   const checkDropDown = () => {
-    if (!store.getState().dropDown.hidden){
+    if (!store.getState().dropDown.hidden) {
       props.toggleDropDown();
     }
   }
@@ -45,15 +45,15 @@ const App = (props) => {
     <div id="page" onClick={checkDropDown}>
       <Header />
       <div>
-        {authValue ? 
+        {authValue ?
           <Switch>
             <Route exact path='/' component={ScheduleContainer} />
             <Route exact path='/signout' component={Signout} />
-            
+
             <Route exact path='/departments' component={DepartmentContainer} />
             <Route path='/objective/:deptName/:objectiveName' component={SingleObjectiveContainer} />
             <Route path='/step/:deptName/:objectiveName/:stepNumber' component={SingleStepContainer} />
-            
+
             <Route exact path='/employees' component={EmployeeContainer} />
             <Route exact path='/schedule' component={ScheduleContainer} />
             <Route path='/schedule/:employeeId' component={ScheduleContainer} />
@@ -66,7 +66,7 @@ const App = (props) => {
             <Route exact path='/register' component={Register} />
             <Route exact path='/signin' component={Signin} />
           </Switch>
-      }
+        }
       </div>
     </div>
   );

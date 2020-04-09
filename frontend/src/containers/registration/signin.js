@@ -11,54 +11,54 @@ import './registration.styles.scss';
 
 const Signin = props => {
     const [userCredentials, setUserCredentials] = useState({
-      email: '',
-      password: ''
+        email: '',
+        password: ''
     });
-  
+
     const { email, password } = userCredentials;
 
     const handleSubmit = async event => {
         event.preventDefault();
-        
-        props.signInUser(userCredentials, ()=>{props.history.push('/')});
+
+        props.signInUser(userCredentials, () => { props.history.push('/') });
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setUserCredentials({ ...userCredentials, [name]: value });
+        const { name, value } = event.target;
+
+        setUserCredentials({ ...userCredentials, [name]: value });
     };
 
     return (
         <div className='size-holder middle'>
             <h3 className='centered'>
-                Fill out the form below to register your Scheduling 
+                Fill out the form below to register your Scheduling
                 and Direction account!
             </h3>
             <br />
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Email'
-                    type='email' 
+                    type='email'
                     name='email'
                     value={email}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Password'
-                    type='password' 
+                    type='password'
                     name='password'
                     value={password}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="input-width">
                     <CustomButton
                         buttonStyle="blue round form-button"
                         type="submit"
                         label="Sign In"
-                        />
+                    />
                 </div>
             </form>
         </div>
@@ -66,9 +66,9 @@ const Signin = props => {
 };
 
 const mapDispatchToProps = dispatch => ({
-        signInUser: (userCredentials, callback) => {
-            dispatch(signInUser(userCredentials, callback))
-        }
+    signInUser: (userCredentials, callback) => {
+        dispatch(signInUser(userCredentials, callback))
+    }
 });
 
 export default connect(null, mapDispatchToProps)(Signin);

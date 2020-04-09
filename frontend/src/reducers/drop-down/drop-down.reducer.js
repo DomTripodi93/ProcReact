@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 const DropDownAction = { TOGGLE_DROP_DOWN: 'TOGGLE_DROP_DOWN' };
 
 export const toggleDropDown = () => {
-    return {type: DropDownAction.TOGGLE_DROP_DOWN}
+    return { type: DropDownAction.TOGGLE_DROP_DOWN }
 }
 
 export const dropDownReducer = (state = INITIAL_STATE, action) => {

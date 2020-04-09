@@ -6,25 +6,25 @@ import SingleObjective from '../../components/process/objective/single-objective
 import './process.styles.scss';
 
 
-const SingleObjectiveContainer = props =>{
+const SingleObjectiveContainer = props => {
     const deptName = props.match.params.deptName;
     const objectiveName = props.match.params.objectiveName;
 
-    useEffect(()=>{
+    useEffect(() => {
         if (
             objectiveName !== props.selectedObjective.objectiveName ||
             deptName !== props.selectedObjective.deptName
-        ){
+        ) {
             props.fetchSingleObjective(objectiveName, deptName);
         }
-    },[props, deptName, objectiveName])
+    }, [props, deptName, objectiveName])
 
-    return(
+    return (
         <div>
-            <SingleObjective 
+            <SingleObjective
                 objective={props.selectedObjective}
                 deptName={deptName}
-                inDept={false}/>
+                inDept={false} />
         </div>
     )
 }

@@ -15,7 +15,7 @@ const Signout = props => {
         props.signOutUser(handleCancel);
     };
 
-    return(
+    return (
         <div className='border'>
             <h1 className='centered spaced'>Are you sure you want to log out?</h1>
             <div className='grid50 spaced'>
@@ -31,9 +31,9 @@ const Signout = props => {
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    signOutUser: (callback) => dispatch(signOutUser(callback))
-  };
+    return {
+        signOutUser: (callback) => dispatch(signOutUser(callback))
+    };
 }
 
 export default connect(null, mapDispatchToProps)(Signout);

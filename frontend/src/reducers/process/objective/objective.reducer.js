@@ -15,7 +15,7 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
                 selectedObjective: action.payload
             };
         case ObjectiveActionTypes.SET_OBJECTIVES:
-            if (action.payload.data.length > 0){
+            if (action.payload.data.length > 0) {
                 objectiveHold[action.deptName] = action.payload.data;
             } else {
                 objectiveHold[action.deptName] = [];
@@ -33,25 +33,25 @@ const objectiveReducer = (state = INITIAL_STATE, action) => {
             };
         case ObjectiveActionTypes.UPDATE_OBJECTIVES:
             objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
-                .filter((value)=>{
-                    return value.objectiveName !== action.payload.objectiveName 
+                .filter((value) => {
+                    return value.objectiveName !== action.payload.objectiveName
                 })
             objectiveHold[action.payload.deptName].push(action.payload)
             objectiveHold[action.payload.deptName] = objectiveHold[action.payload.deptName]
-                .sort((first, second)=>{
-                    if(first.objectiveName > second.objectiveName){
+                .sort((first, second) => {
+                    if (first.objectiveName > second.objectiveName) {
                         return 1
                     } else {
                         return -1
-                    }}
-                )
+                    }
+                })
             return {
                 ...state,
                 objectives: objectiveHold
             };
         case ObjectiveActionTypes.DELETE_OBJECTIVE:
             objectiveHold[action.deptName] = objectiveHold[action.deptName]
-                .filter((value)=>{
+                .filter((value) => {
                     return value.objectiveName !== action.payload
                 })
             return {

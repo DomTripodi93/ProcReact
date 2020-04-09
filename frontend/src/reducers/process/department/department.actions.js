@@ -6,7 +6,7 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchDepartments(){
+export function fetchDepartments() {
     return dispatch => {
         http.fetchAll("department/byUser")
             .then((departments) => {
@@ -16,11 +16,11 @@ export function fetchDepartments(){
 }
 //Gets all departments
 
-export function addDepartment(department, callback){
+export function addDepartment(department, callback) {
     department = prepDepartmentValues(department);
-    return dispatch =>{
+    return dispatch => {
         http.addItem("department", department)
-            .then(addedDepartment =>{
+            .then(addedDepartment => {
                 dispatch(addDepartmentToState(addedDepartment.data));
                 callback();
             });
@@ -28,11 +28,11 @@ export function addDepartment(department, callback){
 }
 //Posts new department to API
 
-export function updateDepartment(department, callback){
+export function updateDepartment(department, callback) {
     department = prepDepartmentValues(department);
-    return dispatch =>{
+    return dispatch => {
         http.updateItem("department", department, department.deptName)
-            .then(() =>{
+            .then(() => {
                 dispatch(updateDepartmentInState(department));
                 callback();
             });
@@ -40,17 +40,17 @@ export function updateDepartment(department, callback){
 }
 //Updates department in database
 
-export function deleteDepartment(name){
-    return dispatch =>{
+export function deleteDepartment(name) {
+    return dispatch => {
         http.deleteItem("department", name)
-            .then(()=>{
+            .then(() => {
                 dispatch(deleteDepartmentFromState(name));
             });
     }
 }
 //Deletes selected department
 
-export function addDepartmentToState(department){
+export function addDepartmentToState(department) {
     return {
         type: DepartmentActionTypes.ADD_DEPARTMENT,
         payload: department
@@ -58,7 +58,7 @@ export function addDepartmentToState(department){
 }
 //Adds new department from post to state
 
-export function setDepartments(departments){
+export function setDepartments(departments) {
     return {
         type: DepartmentActionTypes.SET_DEPARTMENTS,
         payload: departments
@@ -66,7 +66,7 @@ export function setDepartments(departments){
 }
 //Sets all departments in state
 
-export function updateDepartmentInState(department){
+export function updateDepartmentInState(department) {
     return {
         type: DepartmentActionTypes.UPDATE_DEPARTMENT,
         payload: department
@@ -74,7 +74,7 @@ export function updateDepartmentInState(department){
 }
 //Updates function for department
 
-export function deleteDepartmentFromState(id){
+export function deleteDepartmentFromState(id) {
     return {
         type: DepartmentActionTypes.DELETE_DEPARTMENT,
         payload: id
@@ -82,9 +82,9 @@ export function deleteDepartmentFromState(id){
 }
 //Deletes selected department
 
-function prepDepartmentValues(department){
+function prepDepartmentValues(department) {
     department.deptName = helper.capitalizeAll(department.deptName);
-    if (department.funcName){
+    if (department.funcName) {
         department.funcName = helper.capitalize(department.funcName);
     }
 

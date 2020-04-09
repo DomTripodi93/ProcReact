@@ -22,24 +22,27 @@ const commonDifficultyReducer = (state = INITIAL_STATE, action) => {
                 commonDifficulties: [
                     action.payload,
                     ...state.commonDifficulties
-                        .filter((value)=>{
-                            return value.id !== action.payload.id 
-                        })]
-                        .sort((first, second)=>{
-                            if(first.id > second.id){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                        .filter((value) => {
+                            return value.id !== action.payload.id
+                        })
+                ]
+                    .sort((first, second) => {
+                        if (first.id > second.id) {
+                            return 1
+                        } else {
+                            return -1
+                        }
+                    }
+                    )
             };
         case CommonDifficultyActionTypes.DELETE_COMMON_DIFFICULTY:
             return {
                 ...state,
                 commonDifficulties: [...state.commonDifficulties
-                    .filter((value)=>{
+                    .filter((value) => {
                         return value.id !== action.payload
-                    })]
+                    })
+                ]
             };
         case CommonDifficultyActionTypes.SIGNOUT_USER:
             return {

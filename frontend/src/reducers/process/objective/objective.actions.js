@@ -8,12 +8,12 @@ import store from '../../store';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchSingleObjective(objectiveName, deptName){
+export function fetchSingleObjective(objectiveName, deptName) {
     let objectives = store.getState().objective.objectives;
-    if(Object.keys(objectives).length > 0){
-        return dispatch =>{
+    if (Object.keys(objectives).length > 0) {
+        return dispatch => {
             dispatch(setSingleObjective(
-                objectives[deptName].find(objective=>{
+                objectives[deptName].find(objective => {
                     return objective.objectiveName === objectiveName
                 })
             ))
@@ -24,13 +24,13 @@ export function fetchSingleObjective(objectiveName, deptName){
             .then((objective) => {
                 dispatch(setSingleObjective(objective.data));
             });
-    }  
+    }
 }
 //Gets specific objective by name
 
-export function fetchObjectivesByDepartment(deptName){
+export function fetchObjectivesByDepartment(deptName) {
     return dispatch => {
-        http.fetchAll("objective/byDepartment/"+deptName)
+        http.fetchAll("objective/byDepartment/" + deptName)
             .then((objectives) => {
                 dispatch(setObjectives(objectives, deptName));
             });
@@ -38,11 +38,11 @@ export function fetchObjectivesByDepartment(deptName){
 }
 //Gets all objectives for a specific department
 
-export function addObjective(objective, callback){
+export function addObjective(objective, callback) {
     objective = prepObjectiveValues(objective);
-    return dispatch =>{
+    return dispatch => {
         http.addItem("objective", objective)
-            .then(addedObjective =>{
+            .then(addedObjective => {
                 dispatch(addObjectiveToState(addedObjective.data));
                 callback();
             });
@@ -50,11 +50,11 @@ export function addObjective(objective, callback){
 }
 //Posts new objective to API
 
-export function updateObjective(objective, callback){
+export function updateObjective(objective, callback) {
     objective = prepObjectiveValues(objective);
-    return dispatch =>{
+    return dispatch => {
         http.updateItem("objective", objective, objective.deptName + "&" + objective.objectiveName)
-            .then(() =>{
+            .then(() => {
                 dispatch(updateObjectivesInState(objective));
                 callback();
             });
@@ -62,12 +62,12 @@ export function updateObjective(objective, callback){
 }
 //Updates objective in database
 
-export function updateSingleObjective(objective, callback){
+export function updateSingleObjective(objective, callback) {
     objective = prepObjectiveValues(objective);
-    return dispatch =>{
+    return dispatch => {
         http.updateItem("objective", objective, objective.deptName + "&" + objective.objectiveName)
-            .then(() =>{
-                if (Object.keys(store.getState().objective.objectives).length > 0){
+            .then(() => {
+                if (Object.keys(store.getState().objective.objectives).length > 0) {
                     dispatch(updateObjectivesInState(objective));
                 }
                 dispatch(setSingleObjective(objective));
@@ -77,17 +77,17 @@ export function updateSingleObjective(objective, callback){
 }
 //Updates objective in database
 
-export function deleteObjective(objectiveName, deptName){
-    return dispatch =>{
+export function deleteObjective(objectiveName, deptName) {
+    return dispatch => {
         http.deleteItem("objective", deptName + "&" + objectiveName)
-            .then(()=>{
+            .then(() => {
                 dispatch(deleteObjectiveFromState(objectiveName, deptName));
             });
     }
 }
 //Deletes selected objective
 
-export function addObjectiveToState(objective){
+export function addObjectiveToState(objective) {
     return {
         type: ObjectiveActionTypes.ADD_OBJECTIVE,
         payload: objective
@@ -95,7 +95,7 @@ export function addObjectiveToState(objective){
 }
 //Adds new objective from post to state
 
-export function setObjectives(objectives, deptName){
+export function setObjectives(objectives, deptName) {
     return {
         type: ObjectiveActionTypes.SET_OBJECTIVES,
         payload: objectives,
@@ -104,7 +104,7 @@ export function setObjectives(objectives, deptName){
 }
 //Sets all objectives in state
 
-export function setSingleObjective(objective){
+export function setSingleObjective(objective) {
     return {
         type: ObjectiveActionTypes.SET_SINGLE_OBJECTIVE,
         payload: objective
@@ -112,7 +112,7 @@ export function setSingleObjective(objective){
 }
 //Sets selected objective in state
 
-export function updateObjectivesInState(objective){
+export function updateObjectivesInState(objective) {
     return {
         type: ObjectiveActionTypes.UPDATE_OBJECTIVES,
         payload: objective
@@ -120,7 +120,7 @@ export function updateObjectivesInState(objective){
 }
 //Updates function for objective
 
-export function deleteObjectiveFromState(objectiveName, deptName){
+export function deleteObjectiveFromState(objectiveName, deptName) {
     return {
         type: ObjectiveActionTypes.DELETE_OBJECTIVE,
         payload: objectiveName,
@@ -129,9 +129,9 @@ export function deleteObjectiveFromState(objectiveName, deptName){
 }
 //Deletes selected objective
 
-function prepObjectiveValues(objective){
+function prepObjectiveValues(objective) {
     objective.objectiveName = helper.capitalizeAll(objective.objectiveName);
-    if (objective.funcName){
+    if (objective.funcName) {
         objective.funcName = helper.capitalize(objective.funcName);
     }
 

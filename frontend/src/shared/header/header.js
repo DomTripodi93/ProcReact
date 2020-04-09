@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -12,25 +12,25 @@ const Header = props => {
     const [dropDownHidden, toggleDropDownHidden] = useState(props.hidden);
 
     const toggleDropDown = () => {
-        if (dropDownHidden){
-            setTimeout(()=>{props.toggleDropDown()},1);
+        if (dropDownHidden) {
+            setTimeout(() => { props.toggleDropDown() }, 1);
         } else {
             props.toggleDropDown();
         }
     };
-  
+
     useEffect(() => {
-      setAuthValue(props.isAuthenticated);
-      toggleDropDownHidden(props.hidden);
+        setAuthValue(props.isAuthenticated);
+        toggleDropDownHidden(props.hidden);
     }, [props]);
 
     const scheduleItems = [
-            (<Link to='/schedule' className='drop-down-item' key='1'>
-                Schedule
-            </Link>),
-            (<Link to='/employees' className='drop-down-item' key='2'>
-                Employees
-            </Link>)
+        (<Link to='/schedule' className='drop-down-item' key='1'>
+            Schedule
+        </Link>),
+        (<Link to='/employees' className='drop-down-item' key='2'>
+            Employees
+        </Link>)
     ]
 
     return (
@@ -46,7 +46,7 @@ const Header = props => {
                         </Link>
                         <ul onClick={toggleDropDown} className='route'>
                             &#x21af; Schedule &#x21af;
-                            {!dropDownHidden ? 
+                            {!dropDownHidden ?
                                 <div className='drop-down grid100'>{scheduleItems}</div>
                                 :
                                 null
@@ -59,7 +59,7 @@ const Header = props => {
                     <div className='edge'>
                         <Link to='/signout' className='route'>
                             Log Out
-                        </Link>            
+                        </Link>
                     </div>
                 </div>
                 :

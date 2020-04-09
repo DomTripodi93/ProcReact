@@ -7,7 +7,7 @@ const http = new rootHttp();
 const helper = new helpers();
 
 
-export function fetchEmployees(){
+export function fetchEmployees() {
     return dispatch => {
         http.fetchAll("employee/byUser")
             .then((employees) => {
@@ -17,7 +17,7 @@ export function fetchEmployees(){
 }
 //Gets all employees
 
-export function fetchEmployeesByDepartment(department){
+export function fetchEmployeesByDepartment(department) {
     return dispatch => {
         http.fetchAll("employee/byDepartment/" + department)
             .then((employees) => {
@@ -27,11 +27,11 @@ export function fetchEmployeesByDepartment(department){
 }
 //Gets all employees for a department
 
-export function addEmployee(employee, callback){
+export function addEmployee(employee, callback) {
     employee = prepEmployeeValues(employee);
-    return dispatch =>{
+    return dispatch => {
         http.addItem("employee", employee)
-            .then(addedEmployee =>{
+            .then(addedEmployee => {
                 dispatch(addEmployeeToState(addedEmployee.data));
                 callback();
             });
@@ -39,11 +39,11 @@ export function addEmployee(employee, callback){
 }
 //Posts new employee to API
 
-export function updateEmployee(employee, callback){
+export function updateEmployee(employee, callback) {
     employee = prepEmployeeValues(employee);
-    return dispatch =>{
+    return dispatch => {
         http.updateItemById("employee", employee, employee.employeeId)
-            .then(() =>{
+            .then(() => {
                 dispatch(updateEmployeeInState(employee));
                 callback();
             });
@@ -51,17 +51,17 @@ export function updateEmployee(employee, callback){
 }
 //Updates employee in database
 
-export function deleteEmployee(id){
-    return dispatch =>{
+export function deleteEmployee(id) {
+    return dispatch => {
         http.deleteItemById("employee", id)
-            .then(()=>{
+            .then(() => {
                 dispatch(deleteEmployeeFromState(id));
             });
     }
 }
 //Deletes selected employee
 
-export function addEmployeeToState(employee){
+export function addEmployeeToState(employee) {
     return {
         type: EmployeeActionTypes.ADD_EMPLOYEE,
         payload: employee
@@ -69,7 +69,7 @@ export function addEmployeeToState(employee){
 }
 //Adds new employee from post to state
 
-export function setEmployees(employees){
+export function setEmployees(employees) {
     return {
         type: EmployeeActionTypes.SET_EMPLOYEES,
         payload: employees
@@ -77,7 +77,7 @@ export function setEmployees(employees){
 }
 //Sets all employees in state
 
-export function setSingleEmployee(employee){
+export function setSingleEmployee(employee) {
     return {
         type: EmployeeActionTypes.SET_SINGLE_EMPLOYEE,
         payload: employee
@@ -85,7 +85,7 @@ export function setSingleEmployee(employee){
 }
 //Sets selected employee in state
 
-export function updateEmployeeInState(employee){
+export function updateEmployeeInState(employee) {
     return {
         type: EmployeeActionTypes.UPDATE_EMPLOYEE,
         payload: employee
@@ -93,7 +93,7 @@ export function updateEmployeeInState(employee){
 }
 //Updates function for employee
 
-export function deleteEmployeeFromState(id){
+export function deleteEmployeeFromState(id) {
     return {
         type: EmployeeActionTypes.DELETE_EMPLOYEE,
         payload: id
@@ -101,9 +101,9 @@ export function deleteEmployeeFromState(id){
 }
 //Deletes selected employee
 
-function prepEmployeeValues(employee){
+function prepEmployeeValues(employee) {
     employee.name = helper.capitalizeAll(employee.name);
-    if (employee.title){
+    if (employee.title) {
         employee.title = helper.capitalizeAll(employee.title);
     }
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CalendarHelper from '../../shared/calendar-helper';
-import { 
-        fetchSchedulesByEmployee, 
-        fetchSchedulesByDate, 
-        selectSchedulesInState, 
-        extractScheduledTasksForEmployee 
-    } from '../../reducers/schedule/schedule/schedule.actions';
+import {
+    fetchSchedulesByEmployee,
+    fetchSchedulesByDate,
+    selectSchedulesInState,
+    extractScheduledTasksForEmployee
+} from '../../reducers/schedule/schedule/schedule.actions';
 import { connect } from 'react-redux';
 import ScheduleDay from '../../components/schedule/schedule/schedule-day';
 import ScheduleNew from '../../components/schedule/schedule/schedule-new';
@@ -25,17 +25,17 @@ const ScheduleDayContainer = props => {
     const day = +props.match.params.day;
     const year = +props.match.params.year;
     const lastDay = helper.checkDays(year, month);
-    
+
     const departments = props.departments;
     const deptCalled = props.deptCalled;
     const objCalled = props.objCalled;
     const fetchAllDepartments = props.fetchDepartments;
     const fetchObjectivesForDepartment = props.fetchObjectivesByDepartment;
 
-    const setObjectivesToPass = (allObjectives) =>{
+    const setObjectivesToPass = (allObjectives) => {
         let objectivesHold = {}
-        Object.keys(allObjectives).forEach(key=>{
-            if (allObjectives[key].length > 0){
+        Object.keys(allObjectives).forEach(key => {
+            if (allObjectives[key].length > 0) {
                 objectivesHold[key] = allObjectives[key];
             }
         })
@@ -43,19 +43,19 @@ const ScheduleDayContainer = props => {
     }
     const objectivesToPass = setObjectivesToPass(props.objectives);
 
-    useEffect(()=>{
-        if (!deptCalled){
+    useEffect(() => {
+        if (!deptCalled) {
             fetchAllDepartments();
-        } else if (!objCalled && departments.length > 0){
-            departments.forEach(dept =>{
+        } else if (!objCalled && departments.length > 0) {
+            departments.forEach(dept => {
                 fetchObjectivesForDepartment(dept.deptName);
             })
-        } else if (departments.length === 0){
+        } else if (departments.length === 0) {
             setNeededDataState(false);
         }
-    },[
-        departments, 
-        fetchAllDepartments, 
+    }, [
+        departments,
+        fetchAllDepartments,
         fetchObjectivesForDepartment,
         deptCalled,
         objCalled
@@ -68,12 +68,12 @@ const ScheduleDayContainer = props => {
     const selectSchedules = props.selectSchedulesInState;
     const extractSchedules = props.extractScheduledTasksForEmployee;
 
-    useEffect(()=>{
+    useEffect(() => {
         let setFor = year + "/" + month + "/" + day;
-        if (employeeId){
+        if (employeeId) {
             let setForId = employeeId + "/" + setFor;
-            if (!scheduledTasks[setForId]){
-                if (scheduledTasks[setFor]){
+            if (!scheduledTasks[setForId]) {
+                if (scheduledTasks[setFor]) {
                     extractSchedules(setFor, employeeId);
                 } else {
                     fetchSchedulesForEmployee(employeeId, month, day, year);
@@ -81,12 +81,12 @@ const ScheduleDayContainer = props => {
             } else {
                 selectSchedules(setForId);
             }
-        } else if (!scheduledTasks[setFor]){
+        } else if (!scheduledTasks[setFor]) {
             fetchSchedulesForDate(month, day, year);
         } else {
             selectSchedules(setFor);
         }
-    },[
+    }, [
         scheduledTasks,
         fetchSchedulesForEmployee,
         fetchSchedulesForDate,
@@ -103,13 +103,13 @@ const ScheduleDayContainer = props => {
     const fetchEmployees = props.fetchEmployees;
 
 
-    useEffect(()=>{
-        if (!employeeCalled){
+    useEffect(() => {
+        if (!employeeCalled) {
             fetchEmployees();
-        } else if (Object.keys(employeeMap).length === 0){
+        } else if (Object.keys(employeeMap).length === 0) {
             setNeededDataState(false);
         }
-    },[
+    }, [
         fetchEmployees,
         employeeMap,
         employeeCalled
@@ -118,32 +118,32 @@ const ScheduleDayContainer = props => {
 
     const changeDay = (movement) => {
         let route = ""
-        if (movement === 'next'){
-            if (day < lastDay){
+        if (movement === 'next') {
+            if (day < lastDay) {
                 route = month + "/" + (day + 1) + "/" + year;
             } else {
-                if (month < 12){
+                if (month < 12) {
                     route = (month + 1) + "/1/" + year;
                 } else {
                     route = "1/1/" + (year + 1);
                 }
             }
         } else if (movement === 'last') {
-            if (day > 1){
+            if (day > 1) {
                 route = month + "/" + (day - 1) + "/" + year;
             } else {
-                if (month > 1){
-                    let newDay = helper.checkDays(year, month-1);
+                if (month > 1) {
+                    let newDay = helper.checkDays(year, month - 1);
                     route = (month - 1) + "/" + newDay + "/" + year;
                 } else {
-                    route = "12/31/" + (year-1);
+                    route = "12/31/" + (year - 1);
                 }
             }
-        } 
-        if (movement === "back"){
+        }
+        if (movement === "back") {
             route = "/schedule";
         } else {
-            if (employeeId){
+            if (employeeId) {
                 route = employeeId + "/" + route;
             }
             route = "/day/" + route;
@@ -153,14 +153,14 @@ const ScheduleDayContainer = props => {
     }
 
 
-    const showScheduleForm = () =>{
+    const showScheduleForm = () => {
         setAddMode(!addMode);
     }
 
 
-    return(
+    return (
         <div>
-            <ScheduleNew 
+            <ScheduleNew
                 addMode={addMode}
                 action={showScheduleForm}
                 objectives={objectivesToPass}
@@ -169,15 +169,15 @@ const ScheduleDayContainer = props => {
                 month={month}
                 day={day}
                 employeeMap={employeeMap}
-                hasNeededData={hasNeededData}/>
+                hasNeededData={hasNeededData} />
 
             {employeeMap[employeeId] ?
                 <h3 className="centered">{employeeMap[employeeId]}'s Schedule for {month}-{day}-{year}</h3>
-            :
+                :
                 <h3 className="centered">Schedule for {month}-{day}-{year}</h3>
             }
-            <ScheduleDay 
-                scheduledTasks={props.selectedScheduledTasks} 
+            <ScheduleDay
+                scheduledTasks={props.selectedScheduledTasks}
                 action={changeDay}
                 employeeId={employeeId}
                 objectives={objectivesToPass}
@@ -185,12 +185,12 @@ const ScheduleDayContainer = props => {
                 month={month}
                 day={day}
                 employeeMap={employeeMap}
-                hasNeededData={hasNeededData}/>
+                hasNeededData={hasNeededData} />
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchSchedulesByEmployee: (employeeId, month, day, year) => dispatch(fetchSchedulesByEmployee(employeeId, month, day, year)),
         fetchSchedulesByDate: (month, day, year) => dispatch(fetchSchedulesByDate(month, day, year)),

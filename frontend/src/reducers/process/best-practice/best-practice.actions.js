@@ -6,7 +6,7 @@ import helpers from '../../../shared/helpers';
 const http = new rootHttp();
 const helper = new helpers();
 
-export function fetchBestPracticesByStep(deptName, objectiveName, stepNumber){
+export function fetchBestPracticesByStep(deptName, objectiveName, stepNumber) {
     return dispatch => {
         http.fetchAll("bestPractice/byStep/" + deptName + "&" + objectiveName + "&" + stepNumber)
             .then((bestPractices) => {
@@ -16,11 +16,11 @@ export function fetchBestPracticesByStep(deptName, objectiveName, stepNumber){
 }
 //Gets all bestPractices for a specific department
 
-export function addBestPractice(bestPractice, callback){
+export function addBestPractice(bestPractice, callback) {
     bestPractice = prepBestPracticeValues(bestPractice);
-    return dispatch =>{
+    return dispatch => {
         http.addItem("bestPractice", bestPractice)
-            .then(addedBestPractice =>{
+            .then(addedBestPractice => {
                 dispatch(addBestPracticeToState(addedBestPractice.data));
                 callback();
             });
@@ -28,11 +28,11 @@ export function addBestPractice(bestPractice, callback){
 }
 //Posts new bestPractice to API
 
-export function updateBestPractice(bestPractice, callback){
+export function updateBestPractice(bestPractice, callback) {
     bestPractice = prepBestPracticeValues(bestPractice);
-    return dispatch =>{
+    return dispatch => {
         http.updateItemById("bestPractice", bestPractice, bestPractice.id)
-            .then(() =>{
+            .then(() => {
                 dispatch(updateBestPracticesInState(bestPractice));
                 callback();
             });
@@ -40,17 +40,17 @@ export function updateBestPractice(bestPractice, callback){
 }
 //Updates bestPractice in database
 
-export function deleteBestPractice(id){
-    return dispatch =>{
+export function deleteBestPractice(id) {
+    return dispatch => {
         http.deleteItemById("bestPractice", id)
-            .then(()=>{
+            .then(() => {
                 dispatch(deleteBestPracticeFromState(id));
             });
     }
 }
 //Deletes selected bestPractice
 
-export function addBestPracticeToState(bestPractice){
+export function addBestPracticeToState(bestPractice) {
     return {
         type: BestPracticeActionTypes.ADD_BEST_PRACTICE,
         payload: bestPractice
@@ -58,7 +58,7 @@ export function addBestPracticeToState(bestPractice){
 }
 //Adds new bestPractice from post to state
 
-export function setBestPractices(bestPractices){
+export function setBestPractices(bestPractices) {
     return {
         type: BestPracticeActionTypes.SET_BEST_PRACTICES,
         payload: bestPractices
@@ -66,7 +66,7 @@ export function setBestPractices(bestPractices){
 }
 //Sets all bestPractices in state
 
-export function updateBestPracticesInState(bestPractice){
+export function updateBestPracticesInState(bestPractice) {
     return {
         type: BestPracticeActionTypes.UPDATE_BEST_PRACTICES,
         payload: bestPractice
@@ -74,7 +74,7 @@ export function updateBestPracticesInState(bestPractice){
 }
 //Updates function for bestPractice
 
-export function deleteBestPracticeFromState(id){
+export function deleteBestPracticeFromState(id) {
     return {
         type: BestPracticeActionTypes.DELETE_BEST_PRACTICE,
         payload: id
@@ -82,12 +82,12 @@ export function deleteBestPracticeFromState(id){
 }
 //Deletes selected bestPractice
 
-function prepBestPracticeValues(bestPractice){
+function prepBestPracticeValues(bestPractice) {
     bestPractice.practice = helper.capitalizeAll(bestPractice.practice);
-    if (bestPractice.method){
+    if (bestPractice.method) {
         bestPractice.method = helper.capitalize(bestPractice.method);
     }
-    if (bestPractice.purpose){
+    if (bestPractice.purpose) {
         bestPractice.purpose = helper.capitalize(bestPractice.purpose);
     }
 

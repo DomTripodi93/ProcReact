@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const SingleScheduledTask = props => {
     const helper = new helpers();
     const time = helper.timeForDisplay(helper.timeFromDate(props.scheduledTask.date));
-    return(
+    return (
         <div>
             {props.employeeId ?
                 <div className="grid-one-employee">
@@ -20,28 +20,28 @@ const SingleScheduledTask = props => {
                             {props.scheduledTask.deptName}
                         </h5>
                     </div>
-                    <Link 
+                    <Link
                         to={
-                            "/objective/" + 
+                            "/objective/" +
                             props.scheduledTask.deptName + "/" +
                             props.scheduledTask.objectiveName
-                        } 
+                        }
                         className="inner-border-left">
                         <h5 className="grid-text">
                             {props.scheduledTask.objectiveName}
                         </h5>
                     </Link>
                 </div>
-            :
+                :
                 <div className="grid-all-employees">
-                    <Link 
+                    <Link
                         to={
-                            "/day/" + 
-                            props.scheduledTask.employeeId + "/" + 
-                            props.month + "/" + 
-                            props.day + "/" + 
+                            "/day/" +
+                            props.scheduledTask.employeeId + "/" +
+                            props.month + "/" +
+                            props.day + "/" +
                             props.year
-                        } 
+                        }
                         className="inner-border-left">
                         <h5 className="grid-text">
                             {props.scheduledTask.employeeId} - {props.scheduledTask.employeeName}
@@ -57,12 +57,12 @@ const SingleScheduledTask = props => {
                             {props.scheduledTask.deptName}
                         </h5>
                     </div>
-                    <Link 
+                    <Link
                         to={
-                            "/objective/" + 
+                            "/objective/" +
                             props.scheduledTask.deptName + "/" +
                             props.scheduledTask.objectiveName
-                        } 
+                        }
                         className="inner-border-left">
                         <h5 className="grid-text">
                             {props.scheduledTask.objectiveName}

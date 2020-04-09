@@ -14,18 +14,18 @@ const CommonDifficultyContainer = (props) => {
     const objectiveName = props.objectiveName;
     const stepNumber = props.stepNumber;
 
-    useEffect(()=>{
-        if (stepNumber){
+    useEffect(() => {
+        if (stepNumber) {
             fetchCommonDifficulties(deptName, objectiveName, stepNumber);
         }
-    },[fetchCommonDifficulties, deptName, objectiveName, stepNumber]);
+    }, [fetchCommonDifficulties, deptName, objectiveName, stepNumber]);
 
 
-    const showCommonDifficultyForm = () =>{
+    const showCommonDifficultyForm = () => {
         setAddMode(!addMode)
     }
 
-    return(
+    return (
         <div>
             <h3 className='centered'>Common Difficulties</h3>
             <div className="grid100">
@@ -34,21 +34,21 @@ const CommonDifficultyContainer = (props) => {
                     objectiveName={objectiveName}
                     stepNumber={stepNumber}
                     addMode={addMode}
-                    action={showCommonDifficultyForm}/>
+                    action={showCommonDifficultyForm} />
             </div>
             <br />
             {props.commonDifficulties ?
-                <CommonDifficulties 
-                    action={showCommonDifficultyForm} 
-                    commonDifficulties={props.commonDifficulties}/>
-            :
+                <CommonDifficulties
+                    action={showCommonDifficultyForm}
+                    commonDifficulties={props.commonDifficulties} />
+                :
                 null
             }
         </div>
     )
 }
 
-const mapDispatchToProps = dispatch => { 
+const mapDispatchToProps = dispatch => {
     return {
         fetchCommonDifficulties: (deptName, objectiveName, stepNumber) => dispatch(fetchCommonDifficultiesByStep(deptName, objectiveName, stepNumber))
     }

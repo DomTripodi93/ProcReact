@@ -2,23 +2,23 @@ import React from 'react';
 import CustomButton from '../../../shared/elements/button/custom-button.component';
 import EmployeeForm from './employee-form';
 
-const EmployeeNew = (props) =>{
-    return(
+const EmployeeNew = (props) => {
+    return (
         <div>
             {props.addMode ?
                 <div className='border'>
-                    <EmployeeForm 
+                    <EmployeeForm
                         deptOptions={props.deptOptions}
-                        callback={props.action} 
-                        editMode={false}/>
+                        callback={props.action}
+                        editMode={false} />
                 </div>
-            :
+                :
                 <div className='top'>
-                    <CustomButton 
+                    <CustomButton
                         buttonStyle="blue"
                         label="Add Employee"
-                        action={props.action} 
-                        />
+                        action={props.action}
+                    />
                 </div>
             }
         </div>

@@ -18,20 +18,20 @@ const ScheduleDay = props => {
 
     const handleDelete = (task) => {
         if (window.confirm(
-          "Are you sure you want to delete this scheduled task: " + task.objectiveName + "?"
-        )){
+            "Are you sure you want to delete this scheduled task: " + task.objectiveName + "?"
+        )) {
             let date = props.year + "/" + props.month + "/" + props.day
             props.deleteSchedule(task.id, date, task.employeeId);
         }
     }
 
-    return(
+    return (
         <div>
             {editMode ?
                 <div>
                     <div className="border">
                         <ScheduledTaskForm
-                            callback={setEditMode} 
+                            callback={setEditMode}
                             objectives={props.objectives}
                             employeeMap={props.employeeMap}
                             employeeId={props.employeeId}
@@ -44,7 +44,7 @@ const ScheduleDay = props => {
                     </div>
                     <br />
                 </div>
-            :
+                :
                 null
             }
             {props.scheduledTasks.length > 0 ?
@@ -65,8 +65,8 @@ const ScheduleDay = props => {
                                 </div>
                                 <div className="inner-border-right-header"></div>
                             </div>
-                            {props.scheduledTasks.map(scheduledTask=>(
-                                <div 
+                            {props.scheduledTasks.map(scheduledTask => (
+                                <div
                                     key={scheduledTask.id}
                                     className="grid-one-employee-button size-holder middle">
                                     <SingleScheduledTask
@@ -78,20 +78,20 @@ const ScheduleDay = props => {
                                         month={props.month}
                                         day={props.day}
                                         className='sized30' />
-                                        <div className="grid50-colapse inner-border-right">
-                                            <CustomButton 
-                                                buttonStyle="blue small"
-                                                action={()=>{setEditMode(scheduledTask)}}
-                                                label="Edit"/>
-                                            <CustomButton 
-                                                buttonStyle="red small"
-                                                action={()=>{handleDelete(scheduledTask)}}
-                                                label="Delete"/>
-                                        </div>
+                                    <div className="grid50-colapse inner-border-right">
+                                        <CustomButton
+                                            buttonStyle="blue small"
+                                            action={() => { setEditMode(scheduledTask) }}
+                                            label="Edit" />
+                                        <CustomButton
+                                            buttonStyle="red small"
+                                            action={() => { handleDelete(scheduledTask) }}
+                                            label="Delete" />
+                                    </div>
                                 </div>
                             ))}
                         </div>
-                    :
+                        :
                         <div>
                             <div className="grid-all-employees-button size-holder middle">
                                 <div className="grid-all-employees">
@@ -110,8 +110,8 @@ const ScheduleDay = props => {
                                 </div>
                                 <div className="inner-border-right-header"></div>
                             </div>
-                            {props.scheduledTasks.map(scheduledTask=>(
-                                <div 
+                            {props.scheduledTasks.map(scheduledTask => (
+                                <div
                                     key={scheduledTask.id}
                                     className="grid-all-employees-button size-holder middle">
                                     <SingleScheduledTask
@@ -123,18 +123,18 @@ const ScheduleDay = props => {
                                         month={props.month}
                                         day={props.day}
                                         className='sized30' />
-                                        <div className="grid50-colapse inner-border-right">
-                                            <CustomButton 
-                                                buttonStyle="blue small"
-                                                action={()=>{setEditMode(scheduledTask)}}
-                                                label="Edit"/>
-                                            <CustomButton 
-                                                buttonStyle="red small"
-                                                action={()=>{handleDelete(scheduledTask)}}
-                                                label="Delete"/>
-                                        </div>
+                                    <div className="grid50-colapse inner-border-right">
+                                        <CustomButton
+                                            buttonStyle="blue small"
+                                            action={() => { setEditMode(scheduledTask) }}
+                                            label="Edit" />
+                                        <CustomButton
+                                            buttonStyle="red small"
+                                            action={() => { handleDelete(scheduledTask) }}
+                                            label="Delete" />
+                                    </div>
                                 </div>
-                            ))} 
+                            ))}
                         </div>
                     }
                 </div>
@@ -143,23 +143,23 @@ const ScheduleDay = props => {
                     {props.employeeId ?
                         <div className="border centered">
                             <h4 className="spaced">
-                                You currently don't have any scheduled tasks 
+                                You currently don't have any scheduled tasks
                                 for {props.employeeMap[props.employeeId]} on {props.month}
-                                -{props.day}-{props.year}!  
+                                -{props.day}-{props.year}!
                             </h4>
                             <h4 className="spaced">
-                                Add some scheduled tasks using the button above to 
+                                Add some scheduled tasks using the button above to
                                 see them here.
                             </h4>
                         </div>
-                    :
+                        :
                         <div className="border centered">
                             <h4 className="spaced">
-                                You currently don't have any scheduled tasks 
-                                for {props.month}-{props.day}-{props.year}! 
+                                You currently don't have any scheduled tasks
+                                for {props.month}-{props.day}-{props.year}!
                             </h4>
                             <h4 className="spaced">
-                                Add some scheduled tasks using the button above to 
+                                Add some scheduled tasks using the button above to
                                 see them here.
                             </h4>
                         </div>
@@ -169,22 +169,22 @@ const ScheduleDay = props => {
             <br />
             <div className="grid33 size-holder middle">
                 <div className="pull-left mobile-fill">
-                    <CustomButton 
+                    <CustomButton
                         label="&#8656; Previous Day"
                         buttonStyle="soft-green"
-                        action={()=>props.action('last')}/>
+                        action={() => props.action('last')} />
                 </div>
                 <div className="middle">
-                    <CustomButton 
+                    <CustomButton
                         label="&#8662; Calendar &#8663;"
                         buttonStyle="green"
-                        action={()=>props.action('back')}/>
-                </div>                
+                        action={() => props.action('back')} />
+                </div>
                 <div className="pull-right mobile-fill">
-                    <CustomButton 
+                    <CustomButton
                         label="Next Day &#8658;"
                         buttonStyle="soft-green"
-                        action={()=>props.action('next')}/>
+                        action={() => props.action('next')} />
                 </div>
             </div>
         </div>

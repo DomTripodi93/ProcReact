@@ -7,27 +7,27 @@ import FormInput from '../../../shared/elements/form-input/form-input.component'
 
 const DepartmentForm = props => {
     const [departmentInfo, setDepartmentInfo] = useState({
-      deptName: '',
-      funcName: '',
+        deptName: '',
+        funcName: '',
     });
-  
+
     const { deptName, funcName } = departmentInfo;
 
-    useEffect(()=>{
-        if (props.editMode){
-            Object.keys(props.departmentInput).forEach(key =>{
-                if (props.departmentInput[key] !== null){
-                    setDepartmentInfo({[key]: props.departmentInput[key]});
+    useEffect(() => {
+        if (props.editMode) {
+            Object.keys(props.departmentInput).forEach(key => {
+                if (props.departmentInput[key] !== null) {
+                    setDepartmentInfo({ [key]: props.departmentInput[key] });
                 }
             })
             setDepartmentInfo(props.departmentInput);
         }
-    },[props])
+    }, [props])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode){
-            if (departmentInfo !== props.departmentInput){
+        if (props.editMode) {
+            if (departmentInfo !== props.departmentInput) {
                 props.updateDepartment(departmentInfo, props.callback);
             } else {
                 props.callback();
@@ -38,18 +38,18 @@ const DepartmentForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setDepartmentInfo({ ...departmentInfo, [name]: value });
+        const { name, value } = event.target;
+
+        setDepartmentInfo({ ...departmentInfo, [name]: value });
     };
 
     return (
         <div className='middle'>
-            {!props.editMode?
+            {!props.editMode ?
                 <h3 className='centered'>
                     Fill out the form below to add a Department
                 </h3>
-            :
+                :
                 <h3 className='centered'>
                     {props.departmentInput.deptName}
                 </h3>
@@ -58,42 +58,42 @@ const DepartmentForm = props => {
                 {!props.editMode ?
                     <FormInput
                         label='Department Name'
-                        type='deptName' 
+                        type='deptName'
                         name='deptName'
                         value={deptName}
                         onChange={handleChange}
-                        />
-                :
+                    />
+                    :
                     null
                 }
                 <FormInput
                     label='Function'
-                    type='funcName' 
+                    type='funcName'
                     name='funcName'
                     value={funcName}
                     onChange={handleChange}
                     required
-                    />
-                    <div className="grid50">
-                        {!props.editMode ?
-                            <CustomButton
-                                buttonStyle="blue"
-                                type="submit"
-                                label="Add"
-                                />
-                        :
-                            <CustomButton
-                                buttonStyle="blue"
-                                type="submit"
-                                label="Update"
-                                />
-                        }
+                />
+                <div className="grid50">
+                    {!props.editMode ?
                         <CustomButton
-                            buttonStyle="red"
-                            action={props.callback}
-                            label="Cancel"
+                            buttonStyle="blue"
+                            type="submit"
+                            label="Add"
                         />
-                    </div>
+                        :
+                        <CustomButton
+                            buttonStyle="blue"
+                            type="submit"
+                            label="Update"
+                        />
+                    }
+                    <CustomButton
+                        buttonStyle="red"
+                        action={props.callback}
+                        label="Cancel"
+                    />
+                </div>
             </form>
         </div>
     );

@@ -29,17 +29,18 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
         case EmployeeActionTypes.UPDATE_EMPLOYEE:
             mapHold[action.payload.employeeId] = action.payload.name;
             employeeHold = employeeHold
-                .filter((value)=>{
-                    return value.employeeId !== action.payload.employeeId 
+                .filter((value) => {
+                    return value.employeeId !== action.payload.employeeId
                 })
             employeeHold.push(action.payload)
             employeeHold = employeeHold
-                .sort((first, second)=>{
-                    if(first.employeeId > second.employeeId){
+                .sort((first, second) => {
+                    if (first.employeeId > second.employeeId) {
                         return 1
                     } else {
                         return -1
-                    }}
+                    }
+                }
                 )
             return {
                 ...state,
@@ -48,7 +49,7 @@ const employeeReducer = (state = INITIAL_STATE, action) => {
             };
         case EmployeeActionTypes.DELETE_EMPLOYEE:
             employeeHold = employeeHold
-                .filter((value)=>{
+                .filter((value) => {
                     return value.employeeId !== action.payload
                 });
             delete mapHold[action.payload];

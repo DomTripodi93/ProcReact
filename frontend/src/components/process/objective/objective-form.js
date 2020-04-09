@@ -12,23 +12,23 @@ const ObjectiveForm = props => {
         goal: '',
         time: ''
     });
-  
+
     const { objectiveName, goal, time } = objectiveInfo;
 
-    useEffect(()=>{
-        if (props.editMode){
-            Object.keys(props.objectiveInput).forEach(key =>{
-                if (props.objectiveInput[key] !== null){
-                    setObjectiveInfo({[key]: props.objectiveInput[key]});
+    useEffect(() => {
+        if (props.editMode) {
+            Object.keys(props.objectiveInput).forEach(key => {
+                if (props.objectiveInput[key] !== null) {
+                    setObjectiveInfo({ [key]: props.objectiveInput[key] });
                 }
             })
             setObjectiveInfo(props.objectiveInput);
         }
-    },[props])
+    }, [props])
 
     const handleSubmit = async event => {
         event.preventDefault();
-        if (props.editMode && objectiveInfo !== props.objectiveInput){
+        if (props.editMode && objectiveInfo !== props.objectiveInput) {
             if (props.inDept) {
                 props.updateObjective(objectiveInfo, props.callback);
             } else {
@@ -42,18 +42,18 @@ const ObjectiveForm = props => {
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setObjectiveInfo({ ...objectiveInfo, [name]: value });
+        const { name, value } = event.target;
+
+        setObjectiveInfo({ ...objectiveInfo, [name]: value });
     };
 
     return (
         <div className='middle'>
-            {!props.editMode?
+            {!props.editMode ?
                 <h3 className='centered'>
                     Fill out the form below to add a Objective
                 </h3>
-            :
+                :
                 <h3 className='centered'>
                     {props.objectiveInput.objectiveName}
                 </h3>
@@ -62,43 +62,43 @@ const ObjectiveForm = props => {
                 {!props.editMode ?
                     <FormInput
                         label='Objective Name'
-                        type='text' 
+                        type='text'
                         name='objectiveName'
                         value={objectiveName}
                         onChange={handleChange}
-                        />
-                :
+                    />
+                    :
                     null
                 }
                 <FormInput
                     label='Goal'
-                    type='text' 
+                    type='text'
                     name='goal'
                     value={goal}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Time (Hours)'
-                    type='number' 
+                    type='number'
                     name='time'
                     value={time}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="grid50">
                     {!props.editMode ?
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Add"
-                            />
-                    :
+                        />
+                        :
                         <CustomButton
                             buttonStyle="blue"
                             type="submit"
                             label="Update"
-                            />
+                        />
                     }
                     <CustomButton
                         buttonStyle="red"

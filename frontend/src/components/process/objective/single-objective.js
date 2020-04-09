@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const SingleObjective = props =>{
+const SingleObjective = props => {
     const [editMode, updateEditMode] = useState(false);
 
     const setEditMode = () => {
@@ -17,49 +17,49 @@ const SingleObjective = props =>{
 
     const handleDelete = () => {
         if (window.confirm(
-          "Are you sure you want to delete this objective: " + props.objective.objectiveName + "?"
-          )){
+            "Are you sure you want to delete this objective: " + props.objective.objectiveName + "?"
+        )) {
             props.deleteObjective(props.objective.objectiveName, props.deptName);
         }
     }
 
-    return(
+    return (
         <div>
             <div className='border centered'>
                 {!editMode ?
                     <div>
                         {!props.inDept ?
                             <h3>{props.deptName} - {props.objective.objectiveName}</h3>
-                        :
+                            :
                             <h3>{props.objective.objectiveName}</h3>
                         }
                         {props.objective.goal ?
                             <h4>Goal: {props.objective.goal}</h4>
-                        :
+                            :
                             null
                         }
                         {props.objective.time ?
                             <h4>Time: {props.objective.time} Hours</h4>
-                        :
+                            :
                             null
                         }
                         <div className="grid50">
-                            <CustomButton 
-                                action={setEditMode} 
-                                buttonStyle="blue" 
+                            <CustomButton
+                                action={setEditMode}
+                                buttonStyle="blue"
                                 label="Edit" />
-                            <CustomButton 
-                                action={handleDelete} 
-                                buttonStyle="red" 
+                            <CustomButton
+                                action={handleDelete}
+                                buttonStyle="red"
                                 label="Delete" />
                         </div>
                     </div>
-                :
-                    <ObjectiveForm 
-                        deptName={props.deptName} 
+                    :
+                    <ObjectiveForm
+                        deptName={props.deptName}
                         editMode={true}
                         inDept={props.inDept}
-                        objectiveInput={props.objective} 
+                        objectiveInput={props.objective}
                         callback={setEditMode} />
                 }
             </div>
@@ -67,10 +67,10 @@ const SingleObjective = props =>{
                 <div className='size-holder middle'>
                     <StepContainer objectiveName={props.objective.objectiveName} deptName={props.deptName} />
                 </div>
-            :
+                :
                 <Link to={'objective/' + props.deptName + '/' + props.objective.objectiveName} className='grid100 spaced'>
-                    <CustomButton 
-                        buttonStyle='green' 
+                    <CustomButton
+                        buttonStyle='green'
                         label="View Objective" />
                 </Link>
             }

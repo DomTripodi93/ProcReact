@@ -22,24 +22,27 @@ const bestPracticeReducer = (state = INITIAL_STATE, action) => {
                 bestPractices: [
                     action.payload,
                     ...state.bestPractices
-                        .filter((value)=>{
-                            return value.id !== action.payload.id 
-                        })]
-                        .sort((first, second)=>{
-                            if(first.id > second.id){
-                                return 1
-                            } else {
-                                return -1
-                            }}
-                        )
+                        .filter((value) => {
+                            return value.id !== action.payload.id
+                        })
+                ]
+                    .sort((first, second) => {
+                        if (first.id > second.id) {
+                            return 1
+                        } else {
+                            return -1
+                        }
+                    }
+                    )
             };
         case BestPracticeActionTypes.DELETE_BEST_PRACTICE:
             return {
                 ...state,
                 bestPractices: [...state.bestPractices
-                    .filter((value)=>{
+                    .filter((value) => {
                         return value.id !== action.payload
-                    })]
+                    })
+                ]
             };
         case BestPracticeActionTypes.SIGNOUT_USER:
             return {

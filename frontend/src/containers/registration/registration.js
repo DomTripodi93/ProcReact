@@ -9,12 +9,12 @@ import './registration.styles.scss';
 
 const Registration = (props) => {
     const [userCredentials, setUserCredentials] = useState({
-      email: '',
-      name: '',
-      password: '',
-      confirmPassword: ''
+        email: '',
+        name: '',
+        password: '',
+        confirmPassword: ''
     });
-  
+
     const { email, name, password, confirmPassword } = userCredentials;
 
     const handleSubmit = async event => {
@@ -25,61 +25,61 @@ const Registration = (props) => {
             return;
         }
 
-        props.registerUser(userCredentials, ()=>{props.history.push('/signin')});
+        props.registerUser(userCredentials, () => { props.history.push('/signin') });
     };
 
     const handleChange = event => {
-      const { name, value } = event.target;
-  
-      setUserCredentials({ ...userCredentials, [name]: value });
+        const { name, value } = event.target;
+
+        setUserCredentials({ ...userCredentials, [name]: value });
     };
 
     return (
         <div className='size-holder middle'>
             <h3 className='centered'>
-                Fill out the form below to register your Scheduling 
+                Fill out the form below to register your Scheduling
                 and Direction account!
             </h3>
             <br />
             <form onSubmit={handleSubmit}>
                 <FormInput
                     label='Email'
-                    type='email' 
+                    type='email'
                     name='email'
                     value={email}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Name'
-                    type='name' 
+                    type='name'
                     name='name'
                     value={name}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Password'
-                    type='password' 
+                    type='password'
                     name='password'
                     value={password}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <FormInput
                     label='Confirm Password'
-                    type='password' 
+                    type='password'
                     name='confirmPassword'
                     value={confirmPassword}
                     onChange={handleChange}
                     required
-                    />
+                />
                 <div className="input-width">
                     <CustomButton
                         buttonStyle="blue round form-button"
                         type="submit"
                         label="Register"
-                        />
+                    />
                 </div>
             </form>
         </div>
@@ -87,9 +87,9 @@ const Registration = (props) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-        registerUser: (userCredentials, callback) => {
-            dispatch(registerUser(userCredentials, callback))
-        }
+    registerUser: (userCredentials, callback) => {
+        dispatch(registerUser(userCredentials, callback))
+    }
 });
 
 export default connect(null, mapDispatchToProps)(Registration);

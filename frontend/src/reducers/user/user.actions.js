@@ -8,7 +8,7 @@ const ROOT_URL = 'http://localhost:5000/api';
 export const registerUser = (user, callback) => {
     user.name = helper.capitalize(user.name);
 
-    axios.post(`${ROOT_URL}/auth/register`, user).then(()=>callback());
+    axios.post(`${ROOT_URL}/auth/register`, user).then(() => callback());
     return {
         type: UserActionTypes.REGISTER_USER
     }
@@ -17,11 +17,11 @@ export const registerUser = (user, callback) => {
 export const signInUser = (user, callback) => {
     return dispatch => {
         axios.post(`${ROOT_URL}/auth/login`, user)
-            .then( response =>{
-                dispatch(setUserData(response.data)); 
+            .then(response => {
+                dispatch(setUserData(response.data));
                 callback();
             })
-        }
+    }
 };
 
 export const setUserData = (user) => {
@@ -51,18 +51,18 @@ export const checkUser = (id, token) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-        .then(()=>{
-            dispatch(
-                setUserData({
-                    token: token,
-                    id: id
-                })
-            )
-        })
-        .catch(()=>{
-            dispatch(
-                signOutUser(()=>{})
-            )
-        });
+            .then(() => {
+                dispatch(
+                    setUserData({
+                        token: token,
+                        id: id
+                    })
+                )
+            })
+            .catch(() => {
+                dispatch(
+                    signOutUser(() => { })
+                )
+            });
     }
 }
