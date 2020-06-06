@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -10,17 +10,17 @@ import Header from './shared/header/header';
 
 import Home from './containers/home/home';
 
-import Register from './containers/registration/registration';
-import Signin from './containers/registration/signin';
-import Signout from './containers/registration/signout';
+const Register = lazy(() => import('./containers/registration/registration'));
+const Signin = lazy(() => import('./containers/registration/signin'));
+const Signout = lazy(() => import('./containers/registration/signout'));
 
-import DepartmentContainer from './containers/process/department-container';
-import SingleObjectiveContainer from './containers/process/single-objective-container';
-import SingleStepContainer from './containers/process/single-step-container';
+const DepartmentContainer = lazy(() => import('./containers/process/department-container'));
+const SingleObjectiveContainer = lazy(() => import('./containers/process/single-objective-container'));
+const SingleStepContainer = lazy(() => import('./containers/process/single-step-container'));
 
-import EmployeeContainer from './containers/schedule/employee-container';
-import ScheduleDayContainer from './containers/schedule/schedule-day-container';
-import ScheduleContainer from './containers/schedule/schedule-container';
+const EmployeeContainer = lazy(() => import('./containers/schedule/employee-container'));
+const ScheduleDayContainer = lazy(() => import('./containers/schedule/schedule-day-container'));
+const ScheduleContainer = lazy(() => import('./containers/schedule/schedule-container'));
 
 
 const App = (props) => {
@@ -46,26 +46,30 @@ const App = (props) => {
       <Header />
       <div>
         {authValue ?
-          <Switch>
-            <Route exact path='/' component={ScheduleContainer} />
-            <Route exact path='/signout' component={Signout} />
+          <Suspense fallback={()=>{}}>
+            <Switch>
+              <Route exact path='/' component={ScheduleContainer} />
+              <Route exact path='/signout' component={Signout} />
 
-            <Route exact path='/departments' component={DepartmentContainer} />
-            <Route path='/objective/:deptName/:objectiveName' component={SingleObjectiveContainer} />
-            <Route path='/step/:deptName/:objectiveName/:stepNumber' component={SingleStepContainer} />
+              <Route exact path='/departments' component={DepartmentContainer} />
+              <Route path='/objective/:deptName/:objectiveName' component={SingleObjectiveContainer} />
+              <Route path='/step/:deptName/:objectiveName/:stepNumber' component={SingleStepContainer} />
 
-            <Route exact path='/employees' component={EmployeeContainer} />
-            <Route exact path='/schedule' component={ScheduleContainer} />
-            <Route path='/schedule/:employeeId' component={ScheduleContainer} />
-            <Route exact path='/day/:month/:day/:year' component={ScheduleDayContainer} />
-            <Route path='/day/:employeeId/:month/:day/:year' component={ScheduleDayContainer} />
-          </Switch>
+              <Route exact path='/employees' component={EmployeeContainer} />
+              <Route exact path='/schedule' component={ScheduleContainer} />
+              <Route path='/schedule/:employeeId' component={ScheduleContainer} />
+              <Route exact path='/day/:month/:day/:year' component={ScheduleDayContainer} />
+              <Route path='/day/:employeeId/:month/:day/:year' component={ScheduleDayContainer} />
+            </Switch>
+          </Suspense>
           :
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/register' component={Register} />
-            <Route exact path='/signin' component={Signin} />
-          </Switch>
+          <Suspense fallback={()=>{}}>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/register' component={Register} />
+              <Route exact path='/signin' component={Signin} />
+            </Switch>
+          </Suspense>
         }
       </div>
     </div>
