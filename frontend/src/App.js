@@ -7,8 +7,10 @@ import './App.scss';
 import { toggleDropDown } from './reducers/drop-down/drop-down.reducer';
 import { checkUser } from './reducers/user/user.actions';
 import Header from './shared/header/header';
+import Loading from './shared/elements/loading/loading';
 
-import Home from './containers/home/home';
+
+const Home = lazy(() => import('./containers/home/home'));
 
 const Register = lazy(() => import('./containers/registration/registration'));
 const Signin = lazy(() => import('./containers/registration/signin'));
@@ -21,6 +23,7 @@ const SingleStepContainer = lazy(() => import('./containers/process/single-step-
 const EmployeeContainer = lazy(() => import('./containers/schedule/employee-container'));
 const ScheduleDayContainer = lazy(() => import('./containers/schedule/schedule-day-container'));
 const ScheduleContainer = lazy(() => import('./containers/schedule/schedule-container'));
+
 
 
 const App = (props) => {
@@ -46,7 +49,7 @@ const App = (props) => {
       <Header />
       <div>
         {authValue ?
-          <Suspense fallback={()=>{}}>
+          <Suspense fallback={<Loading />}>
             <Switch>
               <Route exact path='/' component={ScheduleContainer} />
               <Route exact path='/signout' component={Signout} />
@@ -63,7 +66,7 @@ const App = (props) => {
             </Switch>
           </Suspense>
           :
-          <Suspense fallback={()=>{}}>
+          <Suspense fallback={<Loading />}>
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/register' component={Register} />
