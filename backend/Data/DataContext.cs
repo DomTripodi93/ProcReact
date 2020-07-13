@@ -14,6 +14,7 @@ namespace backend.Data
         public DbSet<Step> Steps { get; set; }
         public DbSet<Objective> Objectives { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,8 @@ namespace backend.Data
                 .HasKey(s => new {s.userId, s.deptName, s.objectiveName, s.StepNumber});
             modelBuilder.Entity<Objective>()
                 .HasKey(t => new {t.userId, t.deptName, t.ObjectiveName});
+            modelBuilder.Entity<Settings>()
+                .HasKey(s => s.userId);
         }
     }
 }

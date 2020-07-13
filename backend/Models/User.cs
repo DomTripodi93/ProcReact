@@ -12,5 +12,6 @@ namespace backend.Models
         public ICollection<Department> Department { get; set; }
         public ICollection<Employee> Employee { get; set; }
         public int EmployeeIdIncrement { get; set; }
+        public Settings Settings { get; set; }
     }
 }
