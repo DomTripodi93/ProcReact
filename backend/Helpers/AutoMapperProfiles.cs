@@ -27,6 +27,7 @@ namespace backend.Helpers
             CreateMap<CommonDifficulty, CommonDifficultyForReturnDto>();
             CreateMap<BestPracticeForCreationDto, BestPractice>().ReverseMap();
             CreateMap<BestPractice, BestPracticeForReturnDto>();
+            CreateMap<SettingsForCreationDto, Settings>().ReverseMap();
         }
     }
 }
