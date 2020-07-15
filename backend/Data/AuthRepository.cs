@@ -51,6 +51,15 @@ namespace backend.Data
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
+            SettingsForCreationDto settingsForCreation = new SettingsForCreationDto{
+                IsNew = true,
+                InitialEmployeePassword = "Password1!"
+            };
+
+            Settings settings = _mapper.Map<Settings>(settingsForCreation);
+
+            user.Settings = settings;
+
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
