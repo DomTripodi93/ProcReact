@@ -29,7 +29,7 @@ namespace backend.Controllers
             return Ok(returnUser);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("settings/{id}")]
         public async Task<IActionResult> GetUserSettings(int id)
         {
             var userSettings = await _repo.GetUserSettings(id);
