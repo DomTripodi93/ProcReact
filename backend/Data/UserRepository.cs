@@ -39,5 +39,10 @@ namespace backend.Data
             return user;
         }
 
+        public async Task<Settings> GetUserSettings(int id)
+        {
+            var userSettings = await _context.Settings.FirstOrDefaultAsync(u => u.userId == id);
+            return userSettings;
+        }
     }
 }
