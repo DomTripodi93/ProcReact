@@ -28,6 +28,14 @@ namespace backend.Controllers
             var returnUser = _mapper.Map<UserForReturnDto>(user);
             return Ok(returnUser);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUserSettings(int id)
+        {
+            var userSettings = await _repo.GetUserSettings(id);
+            var returnUser = _mapper.Map<SettingsForCreationDto>(userSettings);
+            return Ok(returnUser);
+        }
         
     }
 }
