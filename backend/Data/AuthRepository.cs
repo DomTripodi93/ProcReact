@@ -66,6 +66,29 @@ namespace backend.Data
             return user;
         }
 
+        public async Task<User> RegisterEmployee(User user, string password, int rootId)
+        {
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            SettingsForCreationDto settingsForCreation = new SettingsForCreationDto{
+                IsNew = true,
+                RootId = rootId
+            };
+
+            Settings settings = _mapper.Map<Settings>(settingsForCreation);
+
+            user.Settings = settings;
+
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            return user;
+        }
+
         public async Task InitializeEmployeeIdForIncrement (User user)
         {
 
