@@ -122,5 +122,14 @@ namespace backend.Data
                 return true;
             return false;
         }
+
+        public async Task<bool> UserExistsInOrganization(string email, int rootId)
+        {
+            if (await _context.Users
+                .AnyAsync(x => x.Email == email & x.Settings.RootId == rootId)
+            )
+                return true;
+            return false;
+        }
     }
 }

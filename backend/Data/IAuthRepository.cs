@@ -10,5 +10,6 @@ namespace backend.Data
          Task InitializeEmployeeIdForIncrement(User user);
          Task<User> Login(string email, string password);
          Task<bool> UserExists(string email);
+         Task<bool> UserExistsInOrganization(string email, int rootId);
     }
 }
