@@ -1,3 +1,5 @@
+using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using backend.Data;
@@ -15,10 +17,12 @@ namespace backend.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IUserRepository _repo;
-        public UserController(IMapper mapper, IUserRepository repo)
+        private readonly IAuthRepository _authRepo;
+        public UserController(IMapper mapper, IUserRepository repo, IAuthRepository authRepo)
         {
             _mapper = mapper;
             _repo = repo;
+            _authRepo = authRepo;
         }
 
         [HttpGet("{id}")]
@@ -35,6 +39,26 @@ namespace backend.Controllers
             var userSettings = await _repo.GetUserSettings(id);
             var returnUser = _mapper.Map<SettingsForCreationDto>(userSettings);
             return Ok(returnUser);
+        }
+
+        [HttpPut("rootId/{id}")]
+        public async Task<IActionResult> InitializeRootIdForUser(int id)
+        {
+            if (id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            var user = await _repo.GetUser(id);
+
+            if (user.RootId > 0){
+                throw new Exception("Root ID already exists");                
+            }
+            
+            user.RootId = id;
+
+            if (await _repo.SaveAll())
+                return Ok(user.Name + " Root ID was Updated!");
+            
+            throw new Exception("Update of Rood ID failed on save");
         }
         
     }
