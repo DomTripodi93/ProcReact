@@ -73,10 +73,10 @@ namespace backend.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.RootId = rootId;
 
             SettingsForCreationDto settingsForCreation = new SettingsForCreationDto{
-                IsNew = true,
-                RootId = rootId
+                IsNew = true
             };
 
             Settings settings = _mapper.Map<Settings>(settingsForCreation);
@@ -126,7 +126,7 @@ namespace backend.Data
         public async Task<bool> UserExistsInOrganization(string email, int rootId)
         {
             if (await _context.Users
-                .AnyAsync(x => x.Email == email & x.Settings.RootId == rootId)
+                .AnyAsync(x => x.Email == email & x.RootId == rootId)
             )
                 return true;
             return false;
