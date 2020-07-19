@@ -32,11 +32,11 @@ namespace backend.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Employee> GetEmployee(int userId, int employeeId)
+        public async Task<User> GetEmployee(int userId, int employeeId)
         {
-            var employee = await _context.Employees
-                .Where(e => e.userId == userId)
-                .Where(e => e.EmployeeId == employeeId)
+            var employee = await _context.Users
+                .Where(e => e.RootId == userId)
+                .Where(e => e.Id == employeeId)
                 .FirstOrDefaultAsync();
             
             return employee;
@@ -51,19 +51,19 @@ namespace backend.Data
             return user;
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployees(int userId)
+        public async Task<IEnumerable<User>> GetEmployees(int userId)
         {
-            var employees = await _context.Employees
-                .Where(e => e.userId == userId)
+            var employees = await _context.Users
+                .Where(e => e.RootId == userId)
                 .ToListAsync();
 
             return employees;
         }
 
-        public async Task<IEnumerable<Employee>> GetEmployeesByDepartment(int userId, string deptName)
+        public async Task<IEnumerable<User>> GetEmployeesByDepartment(int userId, string deptName)
         {
-            var employees = await _context.Employees
-                .Where(e => e.userId == userId)
+            var employees = await _context.Users
+                .Where(e => e.RootId == userId)
                 .Where(e => e.deptName == deptName)
                 .ToListAsync();
 

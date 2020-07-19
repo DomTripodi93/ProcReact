@@ -9,7 +9,6 @@ namespace backend.Models
         public string DeptName { get; set; }
         public string FuncName { get; set; }
         public ICollection<Objective> Objective { get; set; }
-        public ICollection<Employee> Employee { get; set; }
         
     }
 }

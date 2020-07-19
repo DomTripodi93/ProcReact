@@ -35,22 +35,17 @@ namespace backend.Controllers
             if (user.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            var employee = _mapper.Map<Employee>(employeeForCreation);
-
-            employee.User = user;
-
-            employee.EmployeeId = user.EmployeeIdIncrement;
-
+            var employee = _mapper.Map<User>(employeeForCreation);
 
             _repo.Add(employee);
 
             if (await _repo.SaveAll())
             {
                 var employeeToReturn = _mapper.Map<EmployeeForReturnDto>(employee);
-                return CreatedAtRoute("GetEmployee", new {employeeId = employee.EmployeeId, userId = userId }, employeeToReturn);
+                return CreatedAtRoute("GetEmployee", new {employeeId = employee.Id, userId = userId }, employeeToReturn);
             }
             
-            throw new Exception("Creation of Employee failed on save");
+            throw new Exception("Creation of User failed on save");
 
         }
 
@@ -74,7 +69,7 @@ namespace backend.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            IEnumerable<Employee> employeesFromRepo = await _repo.GetEmployees(userId);
+            IEnumerable<User> employeesFromRepo = await _repo.GetEmployees(userId);
 
             IEnumerable<EmployeeForReturnDto> employeeForReturn = _mapper.Map<IEnumerable<EmployeeForReturnDto>>(employeesFromRepo);
 
@@ -88,7 +83,7 @@ namespace backend.Controllers
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
-            IEnumerable<Employee> employeesFromRepo = await _repo.GetEmployeesByDepartment(userId, deptName);
+            IEnumerable<User> employeesFromRepo = await _repo.GetEmployeesByDepartment(userId, deptName);
 
             IEnumerable<EmployeeForReturnDto> employeesForReturn = _mapper.Map<IEnumerable<EmployeeForReturnDto>>(employeesFromRepo);
 
@@ -107,7 +102,7 @@ namespace backend.Controllers
             _mapper.Map(employeeForUpdateDto, employeeFromRepo);
 
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetEmployee", new {employeeId = employeeFromRepo.EmployeeId, userId = userId }, employeeFromRepo);
+                return CreatedAtRoute("GetEmployee", new {employeeId = employeeFromRepo.Id, userId = userId }, employeeFromRepo);
 
             throw new Exception($"Updating employee {employeeId} failed on save");
         }
@@ -123,7 +118,7 @@ namespace backend.Controllers
             _repo.Delete(employeeFromRepo);
             
             if (await _repo.SaveAll())
-                return Ok("Employee " + employeeFromRepo.EmployeeId + " was deleted!");
+                return Ok("Employee " + employeeFromRepo.Id + " was deleted!");
         
             throw new Exception($"Deleting employee {employeeId} failed on save");
         }

@@ -17,9 +17,9 @@ namespace backend.Helpers
             CreateMap<ObjectiveForCreationDto, Objective>().ReverseMap();
             CreateMap<ObjectiveForUpdateDto, Objective>().ReverseMap();
             CreateMap<Objective, ObjectiveForReturnDto>();
-            CreateMap<EmployeeForCreationDto, Employee>().ReverseMap();
-            CreateMap<EmployeeForUpdateDto, Employee>().ReverseMap();
-            CreateMap<Employee, EmployeeForReturnDto>();
+            CreateMap<EmployeeForCreationDto, User>().ReverseMap();
+            CreateMap<EmployeeForUpdateDto, User>().ReverseMap();
+            CreateMap<User, EmployeeForReturnDto>();
             CreateMap<DepartmentForCreationDto, Department>().ReverseMap();
             CreateMap<DepartmentForUpdateDto, Department>().ReverseMap();
             CreateMap<Department, DepartmentForCreationDto>();

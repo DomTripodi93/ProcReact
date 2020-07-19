@@ -91,24 +91,6 @@ namespace backend.Data
             return user;
         }
 
-        public async Task InitializeEmployeeIdForIncrement (User user)
-        {
-
-            Employee accountOwner = new Employee
-            {
-                EmployeeId = 1,
-                User = user,
-                userId = user.Id,
-                deptName = null,
-                Name = user.Name,
-                Title = "Owner",
-                CanEdit = true
-            };
-
-            await _context.Employees.AddAsync(accountOwner);
-            await _context.SaveChangesAsync();
-        }
-
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
