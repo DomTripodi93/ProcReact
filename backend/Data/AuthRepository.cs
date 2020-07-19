@@ -50,6 +50,8 @@ namespace backend.Data
 
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
+            user.Title = "owner";
+            user.CanEdit = true;
 
             SettingsForCreationDto settingsForCreation = new SettingsForCreationDto{
                 IsNew = true,
