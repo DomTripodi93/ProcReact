@@ -14,7 +14,6 @@ namespace backend.Models
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public ICollection<Department> Department { get; set; }
-        public int EmployeeIdIncrement { get; set; }
         public Settings Settings { get; set; }
     }
 }

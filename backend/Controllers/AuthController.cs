@@ -45,8 +45,7 @@ namespace backend.Controllers
             var userToCreate = new User
             {
                 Email = userForRegisterDto.Email,
-                Name = userForRegisterDto.Name,
-                EmployeeIdIncrement = 1
+                Name = userForRegisterDto.Name
             };
 
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);

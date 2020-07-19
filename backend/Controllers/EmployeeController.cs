@@ -18,35 +18,31 @@ namespace backend.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IScheduleRepository _repo;
-        private readonly IUserRepository _userRepo;
+        private readonly IAuthRepository _authRepo;
 
-        public EmployeeController(IMapper mapper, IScheduleRepository repo, IUserRepository userRepo){
+        public EmployeeController(IMapper mapper, IScheduleRepository repo, IAuthRepository authRepo){
             _mapper = mapper;
             _repo = repo;
-            _userRepo = userRepo;
+            _authRepo = authRepo;
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEmployee(int userId, EmployeeForCreationDto employeeForCreation)
         {
-            User user = await _repo.GetUserForEmployeeIdIncrement(userId);
-            user.EmployeeIdIncrement = user.EmployeeIdIncrement + 1;
-
-            if (user.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
             var employee = _mapper.Map<User>(employeeForCreation);
 
-            _repo.Add(employee);
+            if (await _authRepo.UserExists(employeeForCreation.Email))
+                return BadRequest("Email already exists");
 
-            if (await _repo.SaveAll())
-            {
-                var employeeToReturn = _mapper.Map<EmployeeForReturnDto>(employee);
-                return CreatedAtRoute("GetEmployee", new {employeeId = employee.Id, userId = userId }, employeeToReturn);
-            }
-            
-            throw new Exception("Creation of User failed on save");
+            if (employeeForCreation.Password != employeeForCreation.ConfirmPassword)
+                return BadRequest("Passwords do not match!");
 
+            await _authRepo.RegisterEmployee(employee, employeeForCreation.Password, userId);
+
+            return StatusCode(201);
         }
 
         [HttpGet("{employeeId}", Name="GetEmployee")]

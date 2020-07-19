@@ -42,15 +42,6 @@ namespace backend.Data
             return employee;
         }
 
-        public async Task<User> GetUserForEmployeeIdIncrement(int userId)
-        {
-            var user = await _context.Users
-                .Where(e => e.Id == userId)
-                .FirstOrDefaultAsync();
-            
-            return user;
-        }
-
         public async Task<IEnumerable<User>> GetEmployees(int userId)
         {
             var employees = await _context.Users
