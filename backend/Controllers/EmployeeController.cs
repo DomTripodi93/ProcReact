@@ -34,7 +34,7 @@ namespace backend.Controllers
 
             var employee = _mapper.Map<User>(employeeForCreation);
 
-            if (await _authRepo.UserExists(employeeForCreation.Email))
+            if (await _authRepo.UserExistsInOrganization(employeeForCreation.Email, userId))
                 return BadRequest("Email already exists");
 
             if (employeeForCreation.Password != employeeForCreation.ConfirmPassword)
