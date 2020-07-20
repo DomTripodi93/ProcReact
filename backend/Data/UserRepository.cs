@@ -35,9 +35,7 @@ namespace backend.Data
 
         public async Task<User> GetUser(int id)
         {
-            var user = await _context.Users
-                .Include(u => u.Settings)
-                .FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 

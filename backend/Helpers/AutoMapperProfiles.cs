@@ -28,6 +28,7 @@ namespace backend.Helpers
             CreateMap<BestPracticeForCreationDto, BestPractice>().ReverseMap();
             CreateMap<BestPractice, BestPracticeForReturnDto>();
             CreateMap<SettingsForCreationDto, Settings>().ReverseMap();
+            CreateMap<SettingsForReturnDto, Settings>().ReverseMap();
         }
     }
 }
