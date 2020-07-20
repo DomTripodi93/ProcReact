@@ -32,6 +32,8 @@ namespace backend.Controllers
             var userSettings = await _repo.GetUserSettings(id);
 
             var returnUser = _mapper.Map<UserForReturnDto>(user);
+            returnUser.Settings = _mapper.Map<SettingsForReturnDto>(userSettings);
+
             return Ok(returnUser);
         }
 
