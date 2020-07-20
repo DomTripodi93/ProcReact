@@ -9,7 +9,7 @@ using backend.Data;
 namespace Backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200401235032_initial")]
+    [Migration("20200720015334_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,39 +130,6 @@ namespace Backend.Migrations
                     b.ToTable("Departments");
                 });
 
-            modelBuilder.Entity("backend.Models.Employee", b =>
-                {
-                    b.Property<int>("userId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("CanEdit")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("DepartmentDeptName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("DepartmentuserId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("deptName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("userId", "EmployeeId");
-
-                    b.HasIndex("DepartmentuserId", "DepartmentDeptName");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("backend.Models.Objective", b =>
                 {
                     b.Property<int>("userId")
@@ -216,6 +183,22 @@ namespace Backend.Migrations
                     b.ToTable("Schedules");
                 });
 
+            modelBuilder.Entity("backend.Models.Settings", b =>
+                {
+                    b.Property<int>("userId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("InitialEmployeePassword")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsNew")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("userId");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("backend.Models.Step", b =>
                 {
                     b.Property<int>("userId")
@@ -247,11 +230,11 @@ namespace Backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("CanEdit")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("EmployeeIdIncrement")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
@@ -261,6 +244,15 @@ namespace Backend.Migrations
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
+
+                    b.Property<int>("RootId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("deptName")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -302,19 +294,6 @@ namespace Backend.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("backend.Models.Employee", b =>
-                {
-                    b.HasOne("backend.Models.User", "User")
-                        .WithMany("Employee")
-                        .HasForeignKey("userId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("backend.Models.Department", null)
-                        .WithMany("Employee")
-                        .HasForeignKey("DepartmentuserId", "DepartmentDeptName");
-                });
-
             modelBuilder.Entity("backend.Models.Objective", b =>
                 {
                     b.HasOne("backend.Models.User", "User")
@@ -335,6 +314,15 @@ namespace Backend.Migrations
                     b.HasOne("backend.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("backend.Models.Settings", b =>
+                {
+                    b.HasOne("backend.Models.User", "User")
+                        .WithOne("Settings")
+                        .HasForeignKey("backend.Models.Settings", "userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

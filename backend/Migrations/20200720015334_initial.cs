@@ -13,11 +13,14 @@ namespace Backend.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    RootId = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
+                    deptName = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    CanEdit = table.Column<bool>(nullable: false),
                     PasswordHash = table.Column<byte[]>(nullable: true),
-                    PasswordSalt = table.Column<byte[]>(nullable: true),
-                    EmployeeIdIncrement = table.Column<int>(nullable: false)
+                    PasswordSalt = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -68,33 +71,22 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Employees",
+                name: "Settings",
                 columns: table => new
                 {
-                    EmployeeId = table.Column<int>(nullable: false),
                     userId = table.Column<int>(nullable: false),
-                    deptName = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    CanEdit = table.Column<bool>(nullable: false),
-                    DepartmentDeptName = table.Column<string>(nullable: true),
-                    DepartmentuserId = table.Column<int>(nullable: true)
+                    IsNew = table.Column<bool>(nullable: false),
+                    InitialEmployeePassword = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employees", x => new { x.userId, x.EmployeeId });
+                    table.PrimaryKey("PK_Settings", x => x.userId);
                     table.ForeignKey(
-                        name: "FK_Employees_Users_userId",
+                        name: "FK_Settings_Users_userId",
                         column: x => x.userId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Employees_Departments_DepartmentuserId_DepartmentDeptName",
-                        columns: x => new { x.DepartmentuserId, x.DepartmentDeptName },
-                        principalTable: "Departments",
-                        principalColumns: new[] { "userId", "DeptName" },
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -249,11 +241,6 @@ namespace Backend.Migrations
                 columns: new[] { "StepuserId", "StepdeptName", "StepobjectiveName", "StepNumber1" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Employees_DepartmentuserId_DepartmentDeptName",
-                table: "Employees",
-                columns: new[] { "DepartmentuserId", "DepartmentDeptName" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Schedules_userId",
                 table: "Schedules",
                 column: "userId");
@@ -268,10 +255,10 @@ namespace Backend.Migrations
                 name: "CommonDifficulties");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Schedules");
 
             migrationBuilder.DropTable(
-                name: "Schedules");
+                name: "Settings");
 
             migrationBuilder.DropTable(
                 name: "Steps");
