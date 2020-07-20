@@ -3,7 +3,8 @@ import UserActionTypes from './user.types';
 const INITIAL_STATE = {
     userToken: null,
     userId: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    settings: {}
 }
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -13,7 +14,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 userToken: action.payload.token,
                 userId: action.payload.id,
-                isAuthenticated: true
+                isAuthenticated: true,
+                settings: action.payload.settings
             };
         case UserActionTypes.SIGNOUT_USER:
             return {

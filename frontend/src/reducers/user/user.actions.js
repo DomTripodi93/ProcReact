@@ -51,11 +51,13 @@ export const checkUser = (id, token) => {
                 'Authorization': `Bearer ${token}`
             }
         })
-            .then(() => {
+            .then((user) => {
+                console.log(user)
                 dispatch(
                     setUserData({
                         token: token,
-                        id: id
+                        id: id,
+                        settings: user.data.settings
                     })
                 )
             })
