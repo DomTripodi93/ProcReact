@@ -31,6 +31,8 @@ namespace backend.Controllers
         {
             var creator = await _userRepo.GetUser(userId);
 
+            Console.WriteLine(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
+
             if (creator.Id != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
 
@@ -47,7 +49,6 @@ namespace backend.Controllers
             }
             
             throw new Exception("Creation of Department failed on save");
-
         }
 
         [HttpGet("{deptName}", Name="GetDepartment")]
